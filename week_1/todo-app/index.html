@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <!-- Form continaer -->
+    <form id="todoForm">
+      <h1>Interactive Todo App</h1>
+      <input type="text" id="title" placeholder="Add a new todo..." />
+      <textarea
+        id="description"
+        placeholder="Write something nice..."
+      ></textarea>
+      <input type="datetime-local" id="dueDate" />
+      <button id="submit-btn" type="submit">Add Todo</button>
+
+      <!-- Error Message -->
+      <p id="errorMessage" class="error-message">hello</p>
+    </form>
+
+    <!-- Sorting Buttons by Due Date -->
+    <div class="sorting-btns">
+      <button id="sort-ascending">Sort by Due Date (Ascending)</button>
+      <button id="sort-descending">Sort by Due Date (Descending)</button>
+    </div>
+
+    <!-- Filters select options  -->
+    <div>
+      <label for="filter-by-status">Filter by status: </label>
+      <select id="filter-by-status">
+        <option value="" disabled>Filter by Status</option>
+        <option value="">All</option>
+        <option value="completed">Completed</option>
+        <option value="uncompleted">Uncompleted</option>
+      </select>
+    </div>
+
+    <!-- Todos Container -->
+    <ul id="todosList"></ul>
+
+    <!-- Footer container -->
+    <footer>
+      <p id="copy"></p>
+    </footer>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
