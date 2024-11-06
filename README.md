@@ -8,4 +8,4 @@ Each week contains a series of exercises designed to reinforce learning objectiv
 
 ## Reviewer
 
-These labs are subject to critiques and constant reviews which shall be reviewed by my technical mentor who is in the name of `Fredrick Yalley`, a Full-Stack Javascript Developer here in `Amalitech`.
+These labs are subject to critiques and constant reviews which shall be reviewed by my technical mentor who is in the person of `Fredrick Yalley`, a Full-Stack Javascript Developer here in `Amalitech`.
