@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3rem;
+  padding-top: 5rem;
+
+  text-align: center;
+}
+
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+}
+
+#gallery img {
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+#gallery img:hover {
+  transform: scale(1.05);
+}
+
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#lightbox.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+#lightbox #lightbox-content {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  text-align: center;
+  color: white;
+}
+
+#full-image {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+#caption {
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #ddd;
+}
+
+/* Close button styling */
+#close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: black;
+  padding: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-align: center;
+  background: white;
+  transition: 0.2s ease;
+}
+
+#close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#prev-btn,
+#next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#prev-btn {
+  left: -10rem;
+}
+
+#next-btn {
+  right: -10rem;
+}
+
+#prev-btn:hover,
+#next-btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 991px) {
+  h1 {
+    font-size: 2rem;
+  }
+  #close-btn {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  #prev-btn,
+  #next-btn {
+    top: 95%;
+  }
+  #prev-btn {
+    left: 4rem;
+  }
+
+  #next-btn {
+    right: 4rem;
+  }
+}
