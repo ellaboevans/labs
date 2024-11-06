@@ -5,11 +5,22 @@ const captionText = document.getElementById("caption");
 const nextButton = document.getElementById("next-btn");
 const prevButton = document.getElementById("prev-btn");
 const closeButton = document.getElementById("close-btn");
+const footer = document.getElementById("footer-container");
 
 // Imports
 import { IMAGES } from "./data.js";
 
 let currentIndex = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+  let copy = new Date().getFullYear();
+  let p = document.createElement("p");
+  p.innerHTML = `&copy; ${copy} | Interactive Image Gallery.`;
+  p.style.fontSize = "20px";
+  p.style.paddingBottom = "25px";
+  p.style.paddingTop = "30px";
+  footer.appendChild(p);
+});
 
 // Create thumbnail elements
 IMAGES.forEach((image, index) => {
