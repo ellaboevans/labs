@@ -14,12 +14,11 @@ let currentIndex = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   let copy = new Date().getFullYear();
-  let p = document.createElement("p");
-  p.innerHTML = `&copy; ${copy} | Interactive Image Gallery.`;
-  p.style.fontSize = "20px";
-  p.style.paddingBottom = "25px";
-  p.style.paddingTop = "30px";
-  footer.appendChild(p);
+  let small = document.createElement("small");
+  small.innerHTML = `&copy; ${copy} | Interactive Image Gallery.`;
+  small.style.paddingBottom = "25px";
+  small.style.paddingTop = "30px";
+  footer.appendChild(small);
 });
 
 // Create thumbnail elements
@@ -27,6 +26,7 @@ IMAGES.forEach((image, index) => {
   const img = document.createElement("img");
   img.src = image.thumbnailUrl;
   img.alt = image.caption;
+
   img.addEventListener("click", () => openLightbox(index));
   galleryContainer.appendChild(img);
 });
@@ -46,30 +46,34 @@ function openLightbox(index) {
   nextButton.disabled = currentIndex === IMAGES.length - 1 ? true : false;
 }
 
-// Enabling users to close lighbox
-// when they press the escape key
-document.addEventListener("keyup", (e) => {
-  if (e.key === "Escape") {
+function closeWithEscKey(event) {
+  if (event.key === "Escape") {
     closeLightBox();
   }
-});
-
+}
 function closeLightBox() {
   lightbox.classList.remove("active");
   document.body.style.overflowY = "auto";
 }
 
-// Event handlers
-closeButton.addEventListener("click", closeLightBox);
-
-nextButton.addEventListener("click", () => {
-  if (currentIndex < IMAGES.length - 1) {
-    openLightbox(currentIndex + 1);
-  }
-});
-
-prevButton.addEventListener("click", () => {
+function prevousItem() {
   if (currentIndex > 0) {
     openLightbox(currentIndex - 1);
   }
-});
+}
+function nextItem() {
+  if (currentIndex < IMAGES.length - 1) {
+    openLightbox(currentIndex + 1);
+  }
+}
+
+// Event handlers
+closeButton.addEventListener("click", closeLightBox);
+
+nextButton.addEventListener("click", nextItem);
+
+prevButton.addEventListener("click", prevousItem);
+
+// Enabling users to close lighbox
+// when they press the escape key
+document.addEventListener("keyup", (e) => closeWithEscKey(e));
