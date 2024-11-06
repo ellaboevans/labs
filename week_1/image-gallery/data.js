@@ -9,7 +9,7 @@ export const IMAGES = [
   {
     thumbnailUrl:
       "https://cdn.pixabay.com/photo/2022/06/07/16/22/drift-7248723_1280.jpg",
-    caption: "Speed, drfit, transport",
+    caption: "Speed, drift, transport",
     imageUrl:
       "https://cdn.pixabay.com/photo/2022/06/07/16/22/drift-7248723_1280.jpg",
   },
