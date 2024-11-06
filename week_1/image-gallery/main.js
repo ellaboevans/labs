@@ -31,20 +31,35 @@ IMAGES.forEach((image, index) => {
   galleryContainer.appendChild(img);
 });
 
+// Functions for opening lightbox
+// and closing lightbox
 function openLightbox(index) {
   currentIndex = index;
   fullImage.src = IMAGES[index].imageUrl;
   captionText.textContent = IMAGES[index].caption;
-  //   lightbox.style.display = "block"; // removed this line to enable smooth transition
   lightbox.classList.add("active");
   document.body.style.overflowY = "hidden";
+
+  // Removing or disabling buttons when
+  // the user clicks on the first or last item in the gallery
+  prevButton.disabled = currentIndex === 0 ? true : false;
+  nextButton.disabled = currentIndex === IMAGES.length - 1 ? true : false;
 }
+
+// Enabling users to close lighbox
+// when they press the escape key
+document.addEventListener("keyup", (e) => {
+  if (e.key === "Escape") {
+    closeLightBox();
+  }
+});
 
 function closeLightBox() {
   lightbox.classList.remove("active");
   document.body.style.overflowY = "auto";
 }
 
+// Event handlers
 closeButton.addEventListener("click", closeLightBox);
 
 nextButton.addEventListener("click", () => {
