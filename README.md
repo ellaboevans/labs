@@ -4,7 +4,7 @@ This repository contains weekly lab exercises, each organized by week. Each week
 
 ## Overview
 
-Each week contains a series of exercises designed to reinforce learning objectives. Exercises are grouped based on the week they were assigned, making it easy to review and find relevant materials by date or topic.
+Each week contains a series of exercises designed to reinforce learning objectives. Exercises are grouped based on the week they were assigned, making it easy to review and find relevant materials by concepts or topic.
 
 ## Reviewer
 
