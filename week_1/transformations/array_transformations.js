@@ -2,14 +2,18 @@ function double(arr) {
   if (!Array.isArray(arr) || arr.length === 0) {
     return [];
   }
-  return arr.map((element) => {
-    if (typeof element === "number") {
-      return element * 2;
+
+  const filteredNum = arr.filter((el) => {
+    if (typeof el === "number") {
+      return el;
     }
+  });
+  return filteredNum.map((num) => {
+    return num * 2;
   });
 }
 
-console.log("Double", double([1, 2, 3]));
+console.log("Double", double([1, 2, 3, "hello world"]));
 
 function filterEven(arr) {
   if (!Array.isArray(arr) || arr.length === 0) {
