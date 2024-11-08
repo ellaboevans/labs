@@ -1,4 +1,3 @@
-// Element Selection
 const todoForm = document.getElementById("todoForm");
 const todosList = document.getElementById("todosList");
 const sortAscending = document.getElementById("sort-ascending");

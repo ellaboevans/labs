@@ -1,13 +1,3 @@
-/*
- * The compose function takes multiple functions as its arguments.
- * It returns a new function that processes an initial input value through the provided functions
- * from right to left.
- *
- * When the returned function is called with an input value, it applies each function in the reverse order
- * of their composition. If any function in the chain returns an object with an `error` property,
- * the composition stops and returns that object immediately.
- */
-
 function compose(...functions) {
   return function (inputValue) {
     return functions.reduceRight((acc, fn) => {
