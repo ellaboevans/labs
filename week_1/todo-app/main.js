@@ -30,11 +30,9 @@ function renderTodos(filter = "") {
 
   if (filteredTodos.length === 0) {
     todosList.innerHTML = `<h2>No todos found.</h2>`;
-    let h2 = todosList.children[0];
+    let h2 = todosList.firstElementChild;
     h2.style.fontSize = "30px";
     h2.style.textAlign = "center";
-
-    return;
   }
 
   filteredTodos.forEach((todo, index) => {
@@ -82,10 +80,8 @@ todoForm.addEventListener("submit", function (e) {
   const description = document.getElementById("description").value.trim();
   const dueDate = document.getElementById("dueDate").value;
 
-  if (title === "" || dueDate === "" || description === "") {
-    showError("All fields are required.");
-    return;
-  }
+  if (title === "" || dueDate === "" || description === "")
+    return showError("All fields are required.");
 
   const newTodo = {
     id: Date.now(),
@@ -107,6 +103,7 @@ todoForm.addEventListener("submit", function (e) {
 function showError(message) {
   errorMessage.textContent = message;
   errorMessage.style.display = "inline-block";
+
   setTimeout(() => (errorMessage.style.display = "none"), 2000);
 }
 
