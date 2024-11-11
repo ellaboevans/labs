@@ -21,9 +21,7 @@ function filterEven(arr) {
   }
 
   return arr.filter((element) => {
-    if (typeof element === "number" && element % 2 === 0) {
-      return element;
-    }
+    return typeof element === "number" && element % 2 === 0;
   });
 }
 
