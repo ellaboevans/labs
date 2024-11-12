@@ -83,6 +83,35 @@ const filteredHero = superheroes.filter((hero) =>
 console.log("filtered hero powers:", filteredHero);
 
 // Battle Simulation
+const hero1Select = document.getElementById("hero1");
+const hero2Select = document.getElementById("hero2");
+const results = document.getElementById("battle-results");
+const button = document.getElementById("battle-btn");
+
+// Populate hero selection dropdowns
+superheroes.forEach((hero) => {
+  const option = document.createElement("option");
+  option.text = hero.name;
+  hero1Select.add(option);
+  hero2Select.add(option.cloneNode(true));
+});
+
+function battle() {
+  const hero1 = superheroes.find((hero) => hero.name === hero1Select.value);
+  const hero2 = superheroes.find((hero) => hero.name === hero2Select.value);
+
+  if (hero1.name === hero2.name) {
+   setTimeout(()=>{
+     results.textContent =
+       "Both heroes have the same name. No battle will occur.";
+
+   },200)
+    return;
+  }
+}
+
+button.addEventListener("click", battle);
+
 function BattleSimulation(firstHero, secondHero) {
   const firstHeroPowerCount = firstHero.powers.length;
   const secondHeroPowerCount = secondHero.powers.length;
