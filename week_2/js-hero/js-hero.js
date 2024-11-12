@@ -99,32 +99,29 @@ superheroes.forEach((hero) => {
 function battle() {
   const hero1 = superheroes.find((hero) => hero.name === hero1Select.value);
   const hero2 = superheroes.find((hero) => hero.name === hero2Select.value);
+  results.textContent = "Both heroes have the same name. No battle will occur.";
 
   if (hero1.name === hero2.name) {
-   setTimeout(()=>{
-     results.textContent =
-       "Both heroes have the same name. No battle will occur.";
-
-   },200)
+    setTimeout(() => {
+      results.textContent = "";
+    }, 2000);
     return;
+  }
+
+  const hero1Power =
+    hero1.powers[Math.floor(Math.random() * hero1.powers.length)];
+  const hero2Power =
+    hero2.powers[Math.floor(Math.random() * hero2.powers.length)];
+
+  results.textContent = `Battle between ${hero1.name} and ${hero2.name}`;
+
+  if (hero1Power > hero2Power) {
+    results.textContent = `${hero1.name} wins the battle!`;
+  } else if (hero1Power < hero2Power) {
+    results.textContent = `${hero2.name} wins the battle!`;
+  } else {
+    results.textContent = `It's a draw! Both ${hero1.name} and ${hero2.name} have the same power now.`;
   }
 }
 
 button.addEventListener("click", battle);
-
-function BattleSimulation(firstHero, secondHero) {
-  const firstHeroPowerCount = firstHero.powers.length;
-  const secondHeroPowerCount = secondHero.powers.length;
-
-  if (firstHeroPowerCount > secondHeroPowerCount) {
-    console.log(`${firstHero.name} wins the battle!`);
-  } else if (firstHeroPowerCount < secondHeroPowerCount) {
-    console.log(`${secondHero.name} wins the battle!`);
-  } else {
-    console.log(
-      `It's a draw! Both ${firstHero.name} and ${secondHero.name} have the same power now.`
-    );
-  }
-}
-
-BattleSimulation(superheroes[0], superheroes[1]);
