@@ -75,6 +75,7 @@ function createTimer(duration, elementId) {
       element.textContent = remainingTime;
     } else {
       clearInterval(timerInterval);
+      console.log("Time is up!");
       element.textContent = "Time is up!";
     }
   }, 1000);
