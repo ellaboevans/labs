@@ -9,20 +9,21 @@
   <body>
     <h1>Superhero Battle Simulator</h1>
 
-    <div class="hero-select">
-      <label for="hero1">Select Hero 1:</label>
-      <select id="hero1"></select>
+    <div class="container">
+      <div class="hero-select">
+        <label for="hero1">Select Hero 1:</label>
+        <select id="hero1"></select>
+      </div>
+
+      <div class="hero-select">
+        <label for="hero2">Select Hero 2:</label>
+        <select id="hero2"></select>
+      </div>
+
+      <button id="battle-btn">Start Battle</button>
+
+      <div id="battle-results"></div>
     </div>
-
-    <div class="hero-select">
-      <label for="hero2">Select Hero 2:</label>
-      <select id="hero2"></select>
-    </div>
-
-    <button id="battle-btn">Start Battle!</button>
-
-    <div id="battle-results"></div>
-
     <script defer src="./js-hero.js"></script>
   </body>
 </html>
