@@ -47,7 +47,7 @@ function createCounter() {
   return {
     increment() {
       _count++;
-      console.log(this._count); //undefined because of the `this` keyword
+      console.log(this._count); //undefined because of `this` keyword
     },
     getCount() {
       return _count;
@@ -60,6 +60,7 @@ counter.increment();
 
 console.log(counter.getCount()); // returns 1
 
+// countdown timer function
 function createTimer(duration, elementId) {
   let remainingTime = duration;
   let element = document.createElement("div");
