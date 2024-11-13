@@ -9,18 +9,16 @@ const Person = {
 };
 
 // direct call
-Person.greet();
+// Person.greet();
 
 // using the call()
-const anotherPersion = { name: "David Elabo", age: 27 };
-
-Person.greet.call(anotherPersion);
+Person.greet.call(Person);
 
 // using apply()
-Person.greet.apply(anotherPersion);
+Person.greet.apply(Person);
 
 // using bind()
-const greetPerson = Person.greet.bind(anotherPersion);
+const greetPerson = Person.greet.bind(Person);
 greetPerson();
 
 // Event handlers
@@ -36,7 +34,7 @@ function handleClick() {
 }
 
 // using function declaration
-// button.addEventListener("click", handleClick);
+button.addEventListener("click", handleClick); // returns values as expected
 
 // using arrow function
 button.addEventListener("click", () => {
@@ -49,7 +47,7 @@ function createCounter() {
   return {
     increment() {
       _count++;
-      console.log(_count); // corrected to log the private variable _count
+      console.log(this._count); //undefined because of the `this` keyword
     },
     getCount() {
       return _count;
