@@ -4,10 +4,13 @@ const toggleButton = document.getElementById("toggle-button");
 
 const alarmTimeInput = document.getElementById("alarm-time");
 
-const alarmSound = document.getElementById("alarm-sound");
+// const alarmSound = document.getElementById("alarm-sound");
 const timeDisplay = document.getElementById("time-display");
+const message = document.getElementById("message");
 
 const currentTime = new Date();
+
+const audio = new Audio("./audio/audio.mp3");
 
 // Object Oriented Clock
 function Clock() {
@@ -17,7 +20,7 @@ function Clock() {
   this.display12HourFormat = false;
   this.alarmTime = null;
   this.alarmSet = false;
-  this.alarmSound = alarmSound;
+  // this.alarmSound = alarmSound;
 }
 
 // Time Formatting
@@ -35,11 +38,10 @@ Clock.prototype.get12HourTime = function () {
 
   return `${hours.toString().padStart(2, "0")}:${this.minutes
     .toString()
-    .padStart(2, "0")} ${amPm}`;
+    .padStart(2, "0")}:${this.seconds.toString().padStart(2, "0")} ${amPm}`;
 };
 
 // Display
-
 Clock.prototype.updateClock = function () {
   timeDisplay.textContent = this.display12HourFormat
     ? this.get12HourTime()
@@ -50,19 +52,22 @@ Clock.prototype.updateClock = function () {
 Clock.prototype.setAlarm = function (hours, minutes) {
   this.alarmTime = { hours, minutes };
   this.alarmSet = true;
-  alert(`Your alarm is set to ${hours}:${minutes}`);
+  message.textContent = `Your alarm is set to play at ${hours}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
 };
 
 Clock.prototype.cancelAlarm = function () {
   this.alarmTime = null;
   this.alarmSet = false;
+  alarmTimeInput.value = null;
   this.stopAlarmSound();
-  alert("Alarm cancelled");
+  message.textContent = "You have successfully cancelled you alarm.";
 };
 
 Clock.prototype.stopAlarmSound = function () {
-  this.alarmSound.pause();
-  this.alarmSound.currentTime = 0;
+  audio.pause();
+  audio.currentTime = 0;
 };
 
 // Alarm check
@@ -72,7 +77,7 @@ Clock.prototype.triggerAlarmSound = function () {
       this.hours === this.alarmTime.hours &&
       this.minutes === this.alarmTime.minutes
     )
-      this.alarmSound.play();
+      audio.play();
   }
 };
 
@@ -92,6 +97,9 @@ setInterval(() => {
 // Customization
 Clock.prototype.toggleFormat = function () {
   this.display12HourFormat = !this.display12HourFormat;
+  toggleButton.textContent = this.display12HourFormat
+    ? "In 12 Hours"
+    : "In 24 hours";
   this.updateClock();
 };
 
@@ -107,7 +115,7 @@ setAlarmButton.addEventListener("click", () => {
     const minutes = parseInt(alarmTime[1]);
     clock.setAlarm(hours, minutes);
   } else {
-    alert("Please enter a valid time.");
+    message.textContent = "Please enter a valid time.";
   }
 });
 
