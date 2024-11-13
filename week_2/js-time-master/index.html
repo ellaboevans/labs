@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Time Master</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div>
+    <div class="container">
       <h1 id="time-display">Loading...</h1>
 
-      <button id="toggle-button">Toggle Time Format</button>
+      <button id="toggle-button">Toggle 12 / 24 hrs</button>
+
+      <div class="form-input">
+        <input type="time" id="alarm-time" />
+        <button id="set-alarm-button">Set Alarm</button>
+        <button id="clear-alarm-button">Clear Alarm</button>
+      </div>
+
+      <!-- Message -->
+      <div id="message"></div>
+
+      <!-- <audio id="alarm-sound" src="audio/audio.mp3" preload="auto"></audio> -->
     </div>
 
-    <div>
-      <input type="time" id="alarm-time" />
-      <button id="set-alarm-button">Set Alarm</button>
-      <button id="clear-alarm-button">Clear Alarm</button>
-    </div>
-
-    <audio id="alarm-sound" src="audio/audio.mp3" preload="auto"></audio>
     <script defer src="./main.js"></script>
   </body>
 </html>
