@@ -1,4 +1,12 @@
+// Initial setup and HTML element references
+const hero1Select = document.getElementById("hero1");
+const hero2Select = document.getElementById("hero2");
+const results = document.getElementById("battle-results");
+const button = document.getElementById("battle-btn");
+
+// module imports
 import { BattleSimulator } from "./battleSimulator.js";
+import { makePlaceholder } from "./makePlaceholder.js";
 
 const superhero = {
   name: "Superman",
@@ -17,9 +25,9 @@ const superhero = {
   weakness: "Kryptonite",
 
   usePower(powerName) {
-    if (this["powers"].includes(powerName))
+    if (this.powers.includes(powerName))
       console.log(`${this.name} is using ${powerName}`);
-    else console.log(`${this.name} does have ${powerName} power`);
+    else console.log(`${this.name} does not have ${powerName} power`);
   },
 
   revealIdentity() {
@@ -39,9 +47,9 @@ function Superhero(name, secretIdentity, powers, weakness) {
 }
 
 Superhero.prototype.usePower = function (powerName) {
-  if (this["powers"].includes(powerName))
+  if (this.powers.includes(powerName))
     console.log(`${this.name} is using ${powerName}`);
-  else console.log(`${this.name} does have ${powerName} power`);
+  else console.log(`${this.name} does not have ${powerName} power`);
 };
 
 Superhero.prototype.revealIdentity = function () {
@@ -80,32 +88,31 @@ superheroes.forEach((hero) => hero.revealIdentity());
 
 // using map to create a new array with all superheroes' powers
 const allHeroPowers = superheroes.map((hero) => hero.powers);
-console.log("All hero powers:", allHeroPowers);
+console.log(allHeroPowers);
 
 // using filter to find superheroes with superhuman powers
 const filteredHero = superheroes.filter((hero) =>
   hero["powers"].includes("Agility")
 );
-console.log("filtered hero powers:", filteredHero);
+console.log(filteredHero);
 
-// Battle Simulation
-const hero1Select = document.getElementById("hero1");
-const hero2Select = document.getElementById("hero2");
-const results = document.getElementById("battle-results");
-const button = document.getElementById("battle-btn");
+// Set placeholder options for hero selection dropdowns
+makePlaceholder(hero1Select, "Please choose a character");
+makePlaceholder(hero2Select, "Please choose a character");
 
 // Populate hero selection dropdowns
 superheroes.forEach((hero) => {
   const option = document.createElement("option");
   option.text = hero.name;
-  hero1Select.add(option);
-  hero2Select.add(option.cloneNode(true));
+  hero1Select.append(option);
+  hero2Select.append(option.cloneNode(true));
 });
 
-// event listener to the button to start the battle
-button.addEventListener("click", () => {
+// Event listener for battle button
+function handleBattle() {
   const hero1 = superheroes.find((hero) => hero.name === hero1Select.value);
   const hero2 = superheroes.find((hero) => hero.name === hero2Select.value);
 
   BattleSimulator.battle(hero1, hero2, results);
-});
+}
+button.addEventListener("click", handleBattle);
