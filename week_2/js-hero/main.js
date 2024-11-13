@@ -1,6 +1,8 @@
+import { BattleSimulator } from "./battleSimulator.js";
+
 const superhero = {
   name: "Superman",
-  secretIdentiy: "Clark Kent",
+  secretIdentity: "Clark Kent",
   powers: [
     "Superhuman strength",
     "Invulnerability to radiation",
@@ -15,11 +17,13 @@ const superhero = {
   weakness: "Kryptonite",
 
   usePower(powerName) {
-    console.log(`${this.name} is using ${powerName}`);
+    if (this["powers"].includes(powerName))
+      console.log(`${this.name} is using ${powerName}`);
+    else console.log(`${this.name} does have ${powerName} power`);
   },
 
   revealIdentity() {
-    console.log(`${this.name}'s secret identity is ${this.secretIdentiy}\n`);
+    console.log(`${this.name}'s secret identity is ${this.secretIdentity}\n`);
   },
 };
 
@@ -27,19 +31,21 @@ superhero.usePower("Flight");
 superhero.revealIdentity();
 
 // Object constructor
-function Superhero(name, secretIdentiy, powers, weakness) {
+function Superhero(name, secretIdentity, powers, weakness) {
   this.name = name;
-  this.secretIdentiy = secretIdentiy;
+  this.secretIdentity = secretIdentity;
   this.powers = powers;
   this.weakness = weakness;
 }
 
 Superhero.prototype.usePower = function (powerName) {
-  console.log(`${this.name} is using ${powerName}`);
+  if (this["powers"].includes(powerName))
+    console.log("hello", `${this.name} is using ${powerName}`);
+  else console.log(`${this.name} does have ${powerName} power`);
 };
 
 Superhero.prototype.revealIdentity = function () {
-  console.log(`${this.name}'s secret identity is ${this.secretIdentiy}\n`);
+  console.log(`${this.name}'s secret identity is ${this.secretIdentity}\n`);
 };
 
 const batman = new Superhero(
@@ -49,7 +55,7 @@ const batman = new Superhero(
   "Joker"
 );
 
-batman.usePower("Superhuman strength");
+batman.usePower("Agility");
 batman.revealIdentity();
 
 // Iterations and transformations
@@ -96,32 +102,10 @@ superheroes.forEach((hero) => {
   hero2Select.add(option.cloneNode(true));
 });
 
-function battle() {
+// event listener to the button to start the battle
+button.addEventListener("click", () => {
   const hero1 = superheroes.find((hero) => hero.name === hero1Select.value);
   const hero2 = superheroes.find((hero) => hero.name === hero2Select.value);
-  results.textContent = "Both heroes have the same name. No battle will occur.";
 
-  if (hero1.name === hero2.name) {
-    setTimeout(() => {
-      results.textContent = "";
-    }, 2000);
-    return;
-  }
-
-  const hero1Power =
-    hero1.powers[Math.floor(Math.random() * hero1.powers.length)];
-  const hero2Power =
-    hero2.powers[Math.floor(Math.random() * hero2.powers.length)];
-
-  results.textContent = `Battle between ${hero1.name} and ${hero2.name}`;
-
-  if (hero1Power > hero2Power) {
-    results.textContent = `${hero1.name} wins the battle!`;
-  } else if (hero1Power < hero2Power) {
-    results.textContent = `${hero2.name} wins the battle!`;
-  } else {
-    results.textContent = `It's a draw! Both ${hero1.name} and ${hero2.name} have the same power now.`;
-  }
-}
-
-button.addEventListener("click", battle);
+  BattleSimulator.battle(hero1, hero2, results);
+});
