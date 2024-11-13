@@ -8,16 +8,16 @@ const alarmTimeInput = document.getElementById("alarm-time");
 const timeDisplay = document.getElementById("time-display");
 const message = document.getElementById("message");
 
-const currentTime = new Date();
-
 const audio = new Audio("./audio/audio.mp3");
 
 // Object Oriented Clock
 function Clock() {
+  const currentTime = new Date();
+
   this.hours = currentTime.getHours();
   this.minutes = currentTime.getMinutes();
   this.seconds = currentTime.getSeconds();
-  this.display12HourFormat = false;
+  this.displayFormat = false;
   this.alarmTime = null;
   this.alarmSet = false;
   // this.alarmSound = alarmSound;
@@ -41,14 +41,14 @@ Clock.prototype.get12HourTime = function () {
     .padStart(2, "0")}:${this.seconds.toString().padStart(2, "0")} ${amPm}`;
 };
 
-// Display
+// Updates the current time in the webpage
 Clock.prototype.updateClock = function () {
-  timeDisplay.textContent = this.display12HourFormat
+  timeDisplay.textContent = this.displayFormat
     ? this.get12HourTime()
     : this.getFormattedTime();
 };
 
-// Alarm methods
+// Sets alarm to user selected schedules
 Clock.prototype.setAlarm = function (hours, minutes) {
   this.alarmTime = { hours, minutes };
   this.alarmSet = true;
@@ -96,10 +96,8 @@ setInterval(() => {
 
 // Customization
 Clock.prototype.toggleFormat = function () {
-  this.display12HourFormat = !this.display12HourFormat;
-  toggleButton.textContent = this.display12HourFormat
-    ? "In 12 Hours"
-    : "In 24 hours";
+  this.displayFormat = !this.displayFormat;
+  toggleButton.textContent = this.displayFormat ? "In 12 Hours" : "In 24 hours";
   this.updateClock();
 };
 
