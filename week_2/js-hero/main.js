@@ -40,7 +40,7 @@ function Superhero(name, secretIdentity, powers, weakness) {
 
 Superhero.prototype.usePower = function (powerName) {
   if (this["powers"].includes(powerName))
-    console.log("hello", `${this.name} is using ${powerName}`);
+    console.log(`${this.name} is using ${powerName}`);
   else console.log(`${this.name} does have ${powerName} power`);
 };
 
