@@ -67,23 +67,31 @@ console.log(counter.getCount()); // returns 1
 
 // countdown timer function
 function createTimer(duration, elementId) {
-  let remainingTime = duration;
-  let element = document.createElement("div");
+  // Create a Timer object for encapsulation
+  function Timer(duration, elementId) {
+    this.remainingTime = duration;
+    this.element = document.createElement("div");
 
-  element.setAttribute("id", elementId);
-  document.body.appendChild(element);
+    this.element.setAttribute("id", elementId);
+    document.body.appendChild(this.element);
 
-  const timerInterval = setInterval(() => {
-    if (remainingTime > 0) {
-      remainingTime--;
-      element.textContent = remainingTime;
-    } else {
-      clearInterval(timerInterval);
-      console.log("Time is up!");
-      element.textContent = "Time is up!";
-    }
-  }, 1000);
+    // Start the timer with setInterval
+    const timerInterval = setInterval(() => {
+      if (this.remainingTime > 0) {
+        this.remainingTime--;
+        this.element.textContent = this.remainingTime;
+      } else {
+        clearInterval(timerInterval);
+        console.log("Time is up!");
+        this.element.textContent = "Time is up!";
+      }
+    }, 1000);
+  }
+
+  // Create a new instance of Timer
+  return new Timer(duration, elementId);
 }
 
+// Create two timers with different durations and IDs
 createTimer(20, "timerElement");
 createTimer(50, "countDownTimer");
