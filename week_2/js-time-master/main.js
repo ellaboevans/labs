@@ -8,7 +8,7 @@ const alarmTimeInput = document.getElementById("alarm-time");
 const timeDisplay = document.getElementById("time-display");
 const message = document.getElementById("message");
 
-const audio = new Audio("./audio/audio.mp3");
+const audio = new Audio("./audio/alarm.mp3");
 
 // Object Oriented Clock
 function Clock() {
