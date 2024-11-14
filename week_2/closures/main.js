@@ -11,20 +11,15 @@ const Person = {
 // direct call
 // Person.greet();
 
-const anotherPerson = {
-  name: "David Elabo",
-  age: 25,
-};
-
 // using the call()
-Person.greet.call(anotherPerson);
+Person.greet.call(Person);
 
 // using apply()
-Person.greet.apply(anotherPerson);
+Person.greet.apply(Person);
 
 // using bind()
-const greetAnotherPerson = Person.greet.bind(anotherPerson);
-greetAnotherPerson();
+const greetPerson = Person.greet.bind(Person);
+greetPerson();
 
 // Event handlers
 const button = document.createElement("button");
