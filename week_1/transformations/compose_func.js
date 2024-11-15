@@ -1,4 +1,3 @@
-// TODO: Remove console.log functions and function calls after final review
 function compose(...functions) {
   return function (inputValue) {
     return functions.reduceRight((acc, fn) => {
@@ -30,8 +29,3 @@ function filterEven(arr) {
 
   return arr.filter((element) => element % 2 === 0);
 }
-
-const doubleEven = compose(double, filterEven);
-console.log(`doubleEven`, doubleEven([1, 2, 3, 4, 5, "hello world"]));
-console.log(`doubleEven`, doubleEven([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
-console.log(`doubleEven`, doubleEven({ a: 1, b: 2 }));

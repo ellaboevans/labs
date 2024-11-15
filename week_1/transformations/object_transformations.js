@@ -1,4 +1,3 @@
-// TODO: Remove console.log functions and function calls after final review
 function fullName(person) {
   if (typeof person !== "object") return "Invalid input value";
 
@@ -7,9 +6,6 @@ function fullName(person) {
   return `${person.firstName} ${person.lastName}`;
 }
 
-const person = { firstName: "Evans", lastName: "Elabo" };
-console.log("Full name", fullName(person));
-
 function isAdult(person) {
   if (typeof person !== "object") return "Invalid input value";
 
@@ -17,9 +13,6 @@ function isAdult(person) {
 
   return person.age >= 18;
 }
-
-const person2 = { age: 17 };
-console.log("isAdult", isAdult(person2));
 
 function filterByAge(people, minAge = 18) {
   if (!Array.isArray(people) || typeof minAge !== "number")
@@ -35,18 +28,3 @@ function filterByAge(people, minAge = 18) {
 
   return people.filter((person) => person.age >= minAge);
 }
-
-const people = [
-  {
-    firstName: "Evans",
-    lastName: "Elabo",
-    age: 18,
-  },
-  {
-    firstName: "David",
-    lastName: "Elabo",
-    age: 20,
-  },
-];
-
-console.log("Filter", filterByAge(people, 17));
