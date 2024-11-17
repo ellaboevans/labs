@@ -4,7 +4,6 @@ const toggleButton = document.getElementById("toggle-button");
 
 const alarmTimeInput = document.getElementById("alarm-time");
 
-// const alarmSound = document.getElementById("alarm-sound");
 const timeDisplay = document.getElementById("time-display");
 const message = document.getElementById("message");
 
@@ -20,7 +19,6 @@ function Clock() {
   this.displayFormat = false;
   this.alarmTime = null;
   this.alarmSet = false;
-  // this.alarmSound = alarmSound;
 }
 
 // Time Formatting
@@ -34,11 +32,13 @@ Clock.prototype.getFormattedTime = function () {
 
 Clock.prototype.get12HourTime = function () {
   const hours = this.hours % 12;
-  const amPm = this.hours >= 12 ? "PM" : "AM";
+  const timeSuffix = this.hours >= 12 ? "PM" : "AM";
 
   return `${hours.toString().padStart(2, "0")}:${this.minutes
     .toString()
-    .padStart(2, "0")}:${this.seconds.toString().padStart(2, "0")} ${amPm}`;
+    .padStart(2, "0")}:${this.seconds
+    .toString()
+    .padStart(2, "0")} ${timeSuffix}`;
 };
 
 // Updates the current time in the webpage
