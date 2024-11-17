@@ -68,6 +68,7 @@ batman.revealIdentity();
 
 // Iterations and transformations
 const superheroes = [
+  superhero,
   batman,
   new Superhero(
     "Spiderman",
