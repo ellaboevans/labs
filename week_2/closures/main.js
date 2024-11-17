@@ -8,9 +8,6 @@ const Person = {
   },
 };
 
-// direct call
-// Person.greet();
-
 // using the call()
 Person.greet.call(Person);
 
