@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Frontend Mentor | Password generator app</title>
+  </head>
+  <body>
+    <!-- Password Generator Character Length Include Uppercase Letters
+    Include Lowercase Letters Include Numbers Include Symbols Strength Generate -->
+    <div id="password__generator">
+      <h2>Password Generator</h2>
+      <!-- Password display card -->
+      <div id="password__display">
+        <h3 id="result">P4$5W0rD!</h3>
+        <img src="./assets/images/icon-copy.svg" alt="copy" id="copy" />
+      </div>
+      <!-- Main Card with settings -->
+      <div id="main__card">
+        <div class="count__container">
+          <span>Character length</span>
+          <span id="count">10</span>
+        </div>
+
+        <!-- Slider -->
+        <input type="range" min="8" max="20" value="0" id="slider" />
+        <!-- Checkboxes-->
+        <div class="checkbox__container">
+          <input
+            type="checkbox"
+            name="options"
+            id="uppercase"
+            value="uppercase"
+          />
+          <label for="uppercase">Include Uppercase Letters</label>
+        </div>
+        <div class="checkbox__container">
+          <input
+            type="checkbox"
+            name="options"
+            id="lowercase"
+            value="lowercase"
+          />
+          <label for="lowercase">Include Lowercase Letters</label>
+        </div>
+        <div class="checkbox__container">
+          <input type="checkbox" name="options" id="numbers" value="numbers" />
+          <label for="numbers">Include Numbers</label>
+        </div>
+        <div class="checkbox__container">
+          <input type="checkbox" name="options" id="symbols" value="symbols" />
+          <label for="symbols">Include Symbols</label>
+        </div>
+
+        <!-- Strength Check -->
+        <div id="password-strength">
+          <h3>strength</h3>
+          <p class="password-strength__state">TOO WEAK!</p>
+          <div class="password-strength__indicator">
+            <div class="weak"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <button id="generate__button">
+          Generate
+          <img src="./assets/images/icon-arrow-right.svg" alt="arrow" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+@import url("../fonts/JetBrainsMono-Italic-VariableFont_wght.ttf");
+@import url("../fonts/JetBrainsMono-Italic-VariableFont_wght.ttf");
+body {
+  font-family: "JetBrains Mono", monospace;
+  background-color: #18171f;
+  height: 100vh;
+  display: flex;
+  padding: 0 2rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#password__generator {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e6e5ea;
+  width: 30rem;
+}
+#password__generator h2 {
+  color: #817d92;
+  font-size: 18px;
+}
+
+#password__display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #24232c;
+  padding: 0rem 1rem;
+}
+
+#main__card {
+  background-color: #24232c;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+#main__card .count__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  color: #e6e5ea;
+}
+#main__card .count__container #count {
+  color: #a4ffaf;
+  font-size: 24px;
+}
+#main__card input[type=range] {
+  width: 100%;
+  margin: 2rem 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #18171f;
+  border: none;
+  cursor: pointer;
+  height: 0.5rem;
+}
+#main__card input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: #e6e5ea;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+#main__card input[type=range]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px #a4ffaf;
+  background-color: #18171f;
+  border: 1px solid #a4ffaf;
+}
+#main__card .checkbox__container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  font-weight: bold;
+}
+#main__card .checkbox__container input[type=checkbox] {
+  display: none;
+}
+#main__card .checkbox__container label {
+  position: relative;
+  padding-left: 2rem;
+  cursor: pointer;
+  color: #e6e5ea;
+}
+#main__card .checkbox__container label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid #e6e5ea;
+  background: transparent no-repeat center;
+  transition: all 0.3s ease;
+  background-size: 70%;
+}
+#main__card .checkbox__container input[type=checkbox]:checked + label:before {
+  background-color: #a4ffaf;
+  border-color: #a4ffaf;
+  background-image: url("../assets/images/icon-check.svg");
+}
+#main__card .checkbox__container input[type=checkbox]:not(:checked) + label:hover:before {
+  border-color: #a4ffaf;
+}
+#main__card #password-strength {
+  background-color: #18171f;
+  padding: 0.12rem 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#main__card #password-strength h3 {
+  text-transform: uppercase;
+  color: #817d92;
+  font-size: 1rem;
+}
+#main__card .password-strength__state {
+  margin-left: auto;
+  text-transform: uppercase;
+  color: #e6e5ea;
+}
+#main__card .password-strength__indicator {
+  display: flex;
+  gap: 0.5rem;
+}
+#main__card .password-strength__indicator > * {
+  width: 10px;
+  height: 28px;
+  border: 2px solid #e6e5ea;
+}
+#main__card .password-strength__indicator > *:first-child {
+  border: 2px solid #18171f;
+}
+#main__card .weak {
+  background-color: #fb7c58;
+}
+#main__card #generate__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #a4ffaf;
+  color: #24232c;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#main__card #generate__button:hover {
+  background-color: transparent !important;
+  border: 1px solid #a4ffaf;
+  color: #a4ffaf;
+}
+#main__card #generate__button {
+  display: flex;
+  align-items: center;
+}
+#main__card #generate__button img {
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  transition: filter 0.3s ease;
+}
+#main__card #generate__button:hover img {
+  filter: invert(90%) sepia(50%) saturate(296%) hue-rotate(90deg) brightness(100%) contrast(100%);
+}/*# sourceMappingURL=style.css.map */
