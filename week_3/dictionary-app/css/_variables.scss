@@ -1,0 +1,33 @@
+// Fonts
+@import url("./assets/fonts/inconsolata/static/Inconsolata-Regular.ttf");
+@import url("../assets/fonts/inter/Inter-VariableFont_slnt_wght.ttf");
+@import url("../assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf");
+@import url("../assets/fonts/lora/Lora-VariableFont_wght.ttf");
+
+$inconsolata-regular: "Inconsolata", monospace;
+$inter-regular: "Inter", sans-serif;
+$lora-regular: "Lora", serif;
+
+// colors
+$error-color: #ff5252;
+$text-body: #2d2d2d;
+$accent-color: #a445ed;
+$muted-text: #757575;
+$border-color: #e9e9e9;
+$text-secondary: #ffffff;
+$input-bg-color: #f4f4f4;
+$disc-color: #8f19e8;
+
+// Theme colors
+$light-theme: #ffffff;
+$dark-theme: #050505;
+
+// border
+$radius: 16px;
+
+// Typography
+$text-heading-lg: 64px;
+$text-heading-md: 24px;
+$text-heading-sm: 18px;
+$text-body-md: 18px;
+$text-body-sm: 14px;

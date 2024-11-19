@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>Dictionary web app</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header__container">
+      <!-- logo -->
+      <img src="./assets/images/logo.svg" alt="logo" />
+
+      <!-- items container -->
+      <div id="header-items__container">
+        <!-- Dropdown Container -->
+        <div class="dropdown">
+          <div class="dropdown__selected">
+            <span>Sans Serif</span>
+            <span class="dropdown__icon">
+              <img src="./assets/images/icon-arrow-down.svg" alt="" />
+            </span>
+          </div>
+          <div class="dropdown__menu">
+            <div class="dropdown__option">Sans Serif</div>
+            <div class="dropdown__option">Serif</div>
+            <div class="dropdown__option">Mono</div>
+          </div>
+        </div>
+
+        <!-- seperator -->
+        <div class="seperator"></div>
+
+        <!-- checkbox for toggler -->
+        <div class="theme-toggler">
+          <!-- Checkbox for the toggler -->
+          <input type="checkbox" id="toggle__menu" />
+          <label for="toggle__menu" class="toggle__menu__icon">
+            <span class="slider"></span>
+          </label>
+          <!-- Moon icon (replace with the correct image path if necessary) -->
+          <img
+            src="./assets/images/icon-moon.svg"
+            alt="moon-icon"
+            class="moon-icon"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- Search bar -->
+    <div id="search__bar">
+      <input
+        id="search-bar__input"
+        type="text"
+        name="search"
+        placeholder="Search for any word..."
+      />
+      <!-- icon -->
+      <img
+        src="./assets/images/icon-search.svg"
+        id="search__icon"
+        alt="search-icon"
+      />
+    </div>
+
+    <!-- Main Container for Search Results -->
+    <section id="main__container">
+      <!-- Searched word -->
+      <div id="searched-word__container">
+        <div>
+          <h1 id="searched__word">Keyboard</h1>
+          <!-- phonetic structure -->
+          <p id="phonetic__structure">/ˈkiːbɔːd/</p>
+        </div>
+        <!-- Play button -->
+        <button id="play__button">
+          <img src="./assets/images/icon-play.svg" alt="play-icon" />
+        </button>
+      </div>
+
+      <!-- searched word category -->
+      <div id="searched-word__category">
+        <h2>Noun</h2>
+        <div class="border-line"></div>
+      </div>
+
+      <!-- Meanings -->
+      <div id="meanings__container">
+        <h3>Meaning</h3>
+        <ul id="meanings__list">
+          <!-- Meaning list items -->
+          <li class="meaning-list__item">
+            (etc.) A set of keys used to operate a typewriter, computer etc.
+          </li>
+          <li class="meaning-list__item">
+            A component of many instruments including the piano, organ, and
+            harpsichord consisting of usually black and white keys that cause
+            different tones to be produced when struck.
+          </li>
+          <li class="meaning-list__item">
+            A device with keys of a musical keyboard, used to control electronic
+            sound-producing devices which may be built into or separate from the
+            keyboard device.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Synonyms -->
+      <div id="synonyms__container">
+        <h3>Synonyms</h3>
+        <ul id="synonyms__list">
+          <!-- Synonym list items -->
+          <li class="synonym-list__item">electronic</li>
+          <li class="synonym-list__item">keyboard</li>
+        </ul>
+      </div>
+
+      <!-- Antonyms -->
+      <!-- <div id="antonyms__container">
+        <h3>Antonyms</h3>
+        <ul id="antonyms__list">
+          <li class="antonym-list__item">typewriter</li>
+          <li class="antonym-list__item">typewriter keyboard</li>
+          <li class="antonym-list__item">keyboard</li>
+        </ul>
+      </div> -->
+      <div id="searched-word__category">
+        <h2>Verb</h2>
+        <div class="border-line"></div>
+      </div>
+      <div id="meanings__container">
+        <h3>Meaning</h3>
+        <ul id="meanings__list">
+          <!-- Meaning list items -->
+          <div>
+            <li class="meaning-list__item">To type on a computer keyboard.</li>
+            <p>“Keyboarding is the part of this job I hate the most.”</p>
+          </div>
+        </ul>
+      </div>
+
+      <div class="border-line"></div>
+      <div id="footer">
+        <span id="source">source</span>
+        <span id="link">
+          <a
+            href="https://en.wiktionary.org/wiki/keyboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            >https://en.wiktionary.org/wiki/keyboard</a
+          >
+          <img src="./assets/images/icon-new-window.svg" alt="link-icon" />
+        </span>
+      </div>
+    </section>
+    <script src="./scripts/main.js" type="module" defer></script>
+  </body>
+</html>
