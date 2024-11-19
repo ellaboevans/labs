@@ -16,6 +16,7 @@ body {
   margin: 6rem auto;
   font-family: "Inter", sans-serif;
   padding: 0 2rem;
+  background-color: #ffffff;
 }
 
 .border-line {
@@ -202,6 +203,25 @@ body {
   border-radius: 16px;
   cursor: pointer;
 }
+#searched-word__container button .play-icon {
+  width: 7.9vh;
+  height: 7.9vh;
+  border-radius: 50%;
+  fill: #a445ed;
+}
+#searched-word__container button .play-icon circle:hover {
+  opacity: 1;
+}
+#searched-word__container button .play-icon:hover {
+  cursor: pointer;
+  fill: #2d2d2d;
+}
+#searched-word__container button .play-icon:hover path {
+  fill: #ffffff;
+}
+#searched-word__container button .play-icon:hover circle {
+  opacity: 1;
+}
 
 #searched-word__category {
   display: flex;
@@ -249,7 +269,7 @@ body {
   margin-bottom: 3rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 #synonyms__container h3 {
   font-size: 18px;
