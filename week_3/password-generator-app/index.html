@@ -12,14 +12,15 @@
     />
     <link rel="stylesheet" href="css/style.css" />
 
-    <title>Frontend Mentor | Password generator app</title>
+    <title>Password generator app</title>
   </head>
   <body>
     <div id="password__generator">
       <h2>Password Generator</h2>
       <div id="password__display">
-        <h3 id="result">P4$5W0rD!</h3>
-        <button id="copy-btn">
+        <h3 id="result"></h3>
+        <button id="copy__btn">
+          <span id="copied" aria-live="polite">COPIED</span>
           <img src="./assets/images/icon-copy.svg" alt="copy" />
         </button>
       </div>
@@ -39,6 +40,7 @@
             name="options"
             id="uppercase"
             value="uppercase"
+            aria-label="include only uppercase characters"
           />
           <label for="uppercase">Include Uppercase Letters</label>
         </div>
@@ -48,22 +50,35 @@
             name="options"
             id="lowercase"
             value="lowercase"
+            aria-label="include only lowercase characters"
           />
           <label for="lowercase">Include Lowercase Letters</label>
         </div>
         <div class="checkbox__container">
-          <input type="checkbox" name="options" id="numbers" value="numbers" />
+          <input
+            type="checkbox"
+            name="options"
+            id="numbers"
+            value="numbers"
+            aria-label="include only numbers"
+          />
           <label for="numbers">Include Numbers</label>
         </div>
         <div class="checkbox__container">
-          <input type="checkbox" name="options" id="symbols" value="symbols" />
+          <input
+            type="checkbox"
+            name="options"
+            id="symbols"
+            value="symbols"
+            aria-label="include only symbols"
+          />
           <label for="symbols">Include Symbols</label>
         </div>
 
         <!-- Strength Check -->
-        <div id="password-strength">
+        <div id="password__strength">
           <h3>strength</h3>
-          <p id="strength-indicator" class="password-strength__state"></p>
+          <p id="password-strength__state"></p>
           <div class="password-strength__indicator">
             <div></div>
             <div></div>
