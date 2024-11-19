@@ -3,9 +3,10 @@ import { PasswordGenerator } from "./passwordGenerator.js";
 
 // Element References
 const passwordDisplay = document.getElementById("result");
-const strengthIndicator = document.getElementById("strength-indicator");
+const strengthIndicator = document.getElementById("password-strength__state");
 const generateButton = document.getElementById("generate__button");
-const copyButton = document.getElementById("copy-btn");
+const copyButton = document.getElementById("copy__btn");
+const copiedText = document.getElementById("copied");
 const slider = document.getElementById("slider");
 const countDisplay = document.getElementById("count");
 const upperCase = document.getElementById("uppercase");
@@ -27,6 +28,11 @@ slider.addEventListener("input", updateButtonState);
 checkboxes.forEach((checkbox) =>
   checkbox.addEventListener("change", updateButtonState)
 );
+
+document.addEventListener("DOMContentLoaded", () => {
+  passwordDisplay.textContent = "P4$5W0rD!";
+  passwordDisplay.style.color = "#817d92";
+});
 
 // Functions
 function handlePasswordGenerate() {
@@ -75,22 +81,15 @@ function updateSliderBackground() {
 
   countDisplay.textContent = slider.value;
 
-  passwordDisplay.textContent = "P4$5W0rD!";
-  passwordDisplay.style.color = "#817d92";
-
   slider.style.background = `linear-gradient(to right, #a4ffaf ${percentage}%, #1a1a1a ${percentage}%)`;
 }
 
 function handlePasswordCopy() {
   navigator.clipboard.writeText(passwordDisplay.textContent);
-  copyButton.textContent = "COPIED";
+  copiedText.style.visibility = "visible";
 
   setTimeout(() => {
-    copyButton.textContent = "";
-    let img = document.createElement("img");
-    img.src = "./assets/images/icon-copy.svg";
-    img.alt = "icon-copy";
-    copyButton.appendChild(img);
+    copiedText.style.visibility = "hidden";
   }, 2000);
 }
 
@@ -109,7 +108,5 @@ function handleCountDisplay() {
 
 // Initial loading state
 updateButtonState();
-
-handlePasswordGenerate();
 
 updateSliderBackground();
