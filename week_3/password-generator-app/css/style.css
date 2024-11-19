@@ -5,7 +5,6 @@ body {
   background-color: #18171f;
   height: 100vh;
   display: flex;
-  padding: 0 2rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -30,14 +29,27 @@ body {
   padding: 0rem 1rem;
 }
 
-#copy-btn {
-  cursor: pointer;
+#copy__btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   border: none;
   background-color: transparent;
   color: #a4ffaf;
   font-size: 18px;
   font-family: "JetBrains Mono", monospace;
-  letter-spacing: 2px;
+  cursor: pointer;
+}
+#copy__btn #copied {
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+  font-size: 18px;
+}
+#copy__btn img {
+  transition: filter;
+}
+#copy__btn:hover img {
+  filter: brightness(0) invert(2);
 }
 
 #main__card {
@@ -119,7 +131,7 @@ body {
 #main__card .checkbox__container input[type=checkbox]:not(:checked) + label:hover:before {
   border-color: #a4ffaf;
 }
-#main__card #password-strength {
+#main__card #password__strength {
   background-color: #18171f;
   padding: 0.12rem 1.5rem;
   margin-top: 2rem;
@@ -127,39 +139,41 @@ body {
   align-items: center;
   gap: 1rem;
 }
-#main__card #password-strength h3 {
+#main__card #password__strength h3 {
   text-transform: uppercase;
   color: #817d92;
   font-size: 1rem;
 }
-#main__card #password-strength .password-strength__state {
+#main__card #password__strength #password-strength__state {
   margin-left: auto;
   text-transform: uppercase;
   color: #e6e5ea;
 }
-#main__card #password-strength .password-strength__indicator {
+#main__card #password__strength .password-strength__indicator {
   display: flex;
   gap: 0.5rem;
 }
-#main__card #password-strength .password-strength__indicator > * {
+#main__card #password__strength .password-strength__indicator > * {
   width: 10px;
   height: 28px;
-  border: 2px solid #e6e5ea;
+  border: 1px solid #e6e5ea;
   background-color: transparent;
 }
-#main__card #password-strength .password-strength__indicator .too-weak {
+#main__card #password__strength .password-strength__indicator .too-weak {
   background-color: #f64a4a;
   border: none;
+  width: 10px;
+  height: 28px;
 }
-#main__card #password-strength .password-strength__indicator .weak {
+#main__card #password__strength .password-strength__indicator .weak {
   background-color: #fb7c58;
   border: none;
 }
-#main__card #password-strength .password-strength__indicator .medium {
+#main__card #password__strength .password-strength__indicator .medium {
   background-color: #f8cd65;
   border: none;
 }
-#main__card #password-strength .password-strength__indicator .strong {
+#main__card #password__strength .password-strength__indicator .strong {
   background-color: #a4ffaf;
   border: none;
 }
@@ -167,14 +181,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.8rem;
   margin-top: 1rem;
   width: 100%;
   background-color: #a4ffaf;
   color: #24232c;
   padding: 1rem 2rem;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 1px;
   text-transform: uppercase;
   border: none;
   cursor: pointer;

@@ -5,7 +5,6 @@ body {
   background-color: $bg-color;
   height: 100vh;
   display: flex;
-  padding: 0 2rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -31,14 +30,30 @@ body {
   padding: 0rem 1rem;
 }
 
-#copy-btn {
-  cursor: pointer;
+#copy__btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   border: none;
   background-color: transparent;
   color: $primary-color;
   font-size: $text-sm;
   font-family: $fonts;
-  letter-spacing: 2px;
+  cursor: pointer;
+
+  #copied {
+    visibility: hidden;
+    transition: visibility 0.3s ease;
+    font-size: $text-sm;
+  }
+
+  img {
+    transition: filter;
+  }
+
+  &:hover img {
+    filter: brightness(0) invert(2);
+  }
 }
 
 #main__card {
@@ -71,7 +86,6 @@ body {
       #1a1a1a 0%,
       #1a1a1a 100%
     );
-    // border-radius: 0.25rem;
     cursor: pointer;
 
     &::-webkit-slider-thumb {
@@ -134,7 +148,7 @@ body {
     }
   }
 
-  #password-strength {
+  #password__strength {
     background-color: $bg-color;
     padding: 0.12rem 1.5rem;
     margin-top: 2rem;
@@ -148,7 +162,7 @@ body {
       font-size: 1rem;
     }
 
-    .password-strength__state {
+    #password-strength__state {
       margin-left: auto;
       text-transform: uppercase;
       color: $text;
@@ -161,13 +175,15 @@ body {
       > * {
         width: 10px;
         height: 28px;
-        border: 2px solid $text;
+        border: 1px solid $text;
         background-color: transparent;
       }
 
       .too-weak {
         background-color: $too-weak-bar-color;
         border: none;
+        width: 10px;
+        height: 28px;
       }
 
       .weak {
@@ -191,14 +207,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.8rem;
     margin-top: 1rem;
     width: 100%;
     background-color: $primary-color;
     color: $card-bg-color;
     padding: 1rem 2rem;
-    font-size: 16px;
+    font-size: $text-sm;
     font-weight: 700;
+    font-family: $fonts;
+    letter-spacing: 1px;
     text-transform: uppercase;
     border: none;
     cursor: pointer;
