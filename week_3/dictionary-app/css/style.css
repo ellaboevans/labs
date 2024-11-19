@@ -321,6 +321,9 @@ body.dark-theme {
   background-color: #050505;
   color: #ffffff;
 }
+body.dark-theme .border-line {
+  background-color: #3a3a3a;
+}
 body.dark-theme #searched__word {
   color: #fff;
 }
@@ -349,7 +352,7 @@ body.dark-theme #header__container .dropdown.active .dropdown__menu {
   color: #fff;
   border-radius: 16px;
   border: none;
-  box-shadow: 0px 2px 20px rgba(215, 83, 255, 0.884);
+  box-shadow: 0px 2px 20px rgb(164, 69, 237);
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   transition: background-color 0.3s ease;

@@ -348,6 +348,10 @@ body.dark-theme {
   background-color: $dark-theme;
   color: $text-secondary;
 
+  .border-line {
+    background-color: $border-dark-color;
+  }
+
   #searched__word {
     color: #fff;
   }
@@ -378,7 +382,7 @@ body.dark-theme {
     color: #fff;
     border-radius: $radius;
     border: none;
-    box-shadow: 0px 2px 20px rgba(215, 83, 255, 0.884);
+    box-shadow: 0px 2px 20px rgb(164, 69, 237);
     backdrop-filter: blur(10px);
     transition: background-color 0.3s ease;
 
