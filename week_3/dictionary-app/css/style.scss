@@ -151,6 +151,11 @@ body {
     height: 20px;
     opacity: 0.7;
   }
+
+  #toggle__menu:checked ~ .moon-icon {
+    filter: invert(5003%) sepia(1000%) saturate(450%) hue-rotate(222deg)
+      brightness(100%);
+  }
 }
 
 #search__bar {
@@ -179,6 +184,7 @@ body {
   border-radius: $radius;
   border: none;
 }
+
 #search-bar__input::placeholder {
   color: $muted-text;
   font-weight: 5600;
@@ -302,6 +308,10 @@ body {
     font-weight: 600;
     list-style-type: none;
     gap: 0.5rem;
+
+    li {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -331,5 +341,53 @@ body {
   #link a {
     color: $text-body;
     transition: color 0.3s ease;
+  }
+}
+
+body.dark-theme {
+  background-color: $dark-theme;
+  color: $text-secondary;
+
+  #searched__word {
+    color: #fff;
+  }
+
+  #search-bar__input {
+    background-color: $dark-color;
+    color: #fff;
+  }
+  #search-bar__input::placeholder,
+  .meaning-list__item {
+    color: #fff;
+  }
+
+  #searched-word__category h2 {
+    color: #fff;
+  }
+
+  #footer > #link > a {
+    color: #fff;
+  }
+
+  #value {
+    color: #fff;
+  }
+
+  #header__container .dropdown.active .dropdown__menu {
+    background-color: $dark-color;
+    color: #fff;
+    border-radius: $radius;
+    border: none;
+    box-shadow: 0px 2px 20px rgba(215, 83, 255, 0.884);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+
+    .dropdown__option {
+      color: #fff;
+    }
+
+    .dropdown__option:hover {
+      color: $accent-color;
+    }
   }
 }
