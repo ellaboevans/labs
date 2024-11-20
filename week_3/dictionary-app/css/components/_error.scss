@@ -1,0 +1,29 @@
+#error__message {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 2rem;
+
+  h2 {
+    font-size: $text-heading-sm;
+  }
+
+  p {
+    font-size: $text-body-md;
+    color: $muted-text;
+    margin-top: 0.5rem;
+  }
+
+  .emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+#input-error {
+  color: $error-color;
+  visibility: hidden;
+}

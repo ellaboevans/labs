@@ -1,0 +1,102 @@
+.theme-toggler {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #toggle__menu {
+    display: none;
+  }
+
+  .toggle__menu__icon {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    padding: 0.5rem;
+    background-color: $muted-text;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toggle__menu__icon .slider {
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+
+  #toggle__menu:checked + .toggle__menu__icon {
+    background-color: $accent-color;
+  }
+
+  #toggle__menu:checked + .toggle__menu__icon .slider {
+    transform: translateX(20px);
+  }
+
+  .moon-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+  }
+
+  #toggle__menu:checked ~ .moon-icon {
+    filter: invert(5003%) sepia(1000%) saturate(450%) hue-rotate(222deg)
+      brightness(100%);
+  }
+
+  body.dark-theme {
+  background-color: $dark-theme;
+  color: $text-secondary;
+
+  .border-line {
+    background-color: $border-dark-color;
+  }
+
+  #searched__word {
+    color: #fff;
+  }
+
+  #search-bar__input {
+    background-color: $dark-color;
+    color: #fff;
+  }
+  #search-bar__input::placeholder,
+  .meaning-list__item {
+    color: #fff;
+  }
+
+  .searched-word__category h2 {
+    color: #fff;
+  }
+
+  #footer > #link > a {
+    color: #fff;
+  }
+
+  #value {
+    color: #fff;
+  }
+
+  #header__container .dropdown.active .dropdown__menu {
+    background-color: $dark-color;
+    color: #fff;
+    border-radius: $radius;
+    border: none;
+    box-shadow: 0px 2px 20px rgb(164, 69, 237);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+
+    .dropdown__option {
+      color: #fff;
+    }
+
+    .dropdown__option:hover {
+      color: $accent-color;
+    }
+  }
+}

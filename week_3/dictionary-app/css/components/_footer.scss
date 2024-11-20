@@ -1,0 +1,29 @@
+#footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0 4rem 0;
+  color: $muted-text;
+  border-radius: $radius;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: $text-body-sm;
+
+  #source {
+    color: $muted-text;
+    text-transform: capitalize;
+    text-decoration: underline;
+  }
+
+  #link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #link a {
+    color: $text-body;
+    transition: color 0.3s ease;
+  }
+}
