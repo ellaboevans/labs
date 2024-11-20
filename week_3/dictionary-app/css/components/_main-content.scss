@@ -13,6 +13,7 @@
 
   p {
     font-size: $text-heading-md;
+    font-family: $inter-regular !important;
     margin-top: 0.5rem;
     color: $accent-color;
   }
@@ -53,6 +54,7 @@
 .searched-word__category {
   h2 {
     font-size: $text-heading-sm;
+    font-family: $inter-regular !important;
     font-weight: 600;
     color: $text-body;
     text-transform: lowercase;
