@@ -1,8 +1,5 @@
 // Fonts
-@import url("./assets/fonts/inconsolata/static/Inconsolata-Regular.ttf");
-@import url("../assets/fonts/inter/Inter-VariableFont_slnt_wght.ttf");
-@import url("../assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf");
-@import url("../assets/fonts/lora/Lora-VariableFont_wght.ttf");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 $inconsolata-regular: "Inconsolata", monospace;
 $inter-regular: "Inter", sans-serif;
