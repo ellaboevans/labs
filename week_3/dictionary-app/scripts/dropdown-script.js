@@ -4,12 +4,15 @@ const selected = document.querySelector(".dropdown__selected span");
 const options = document.querySelectorAll(".dropdown__option");
 const dropdownMenu = document.querySelector(".dropdown__menu");
 const inputField = document.querySelector("#search-bar__input");
-const selectedFont = document.querySelector(".dropdown__selected");
+const contentContainer = document.body;
 
+// Toggle dropdown menu on click
 dropdown.addEventListener("click", () => {
   dropdown.classList.toggle("active");
+  dropdownMenu.classList.toggle("active");
 });
 
+// Update selected option in dropdown
 options.forEach((option) => {
   option.addEventListener("click", (e) => {
     selected.textContent = e.target.textContent;
@@ -21,15 +24,11 @@ document.addEventListener("click", (e) => {
   if (!dropdown.contains(e.target)) dropdown.classList.remove("active");
 });
 
-// Get the body or main content container
-const contentContainer = document.body;
-
-// Listen for clicks on the dropdown options
+// Change font family for content container based on selected option
 dropdownMenu.addEventListener("click", (event) => {
   contentContainer.classList.remove("sans-serif", "serif", "mono");
 
   const selectedFont = event.target.textContent.trim();
-
   if (selectedFont === "Sans Serif") {
     contentContainer.classList.add("sans-serif");
   } else if (selectedFont === "Serif") {
@@ -39,17 +38,16 @@ dropdownMenu.addEventListener("click", (event) => {
   }
 });
 
-// Function to change font
+// Function to change font for input field
 function changeFont(fontFamily) {
   inputField.style.fontFamily = fontFamily;
-
   inputField.placeholder = inputField.placeholder;
 }
 
+// Update input field font based on selected option
 options.forEach((option) => {
-  option.addEventListener("click", function () {
+  option.addEventListener("click", () => {
     const selectedFontName = option.textContent.trim();
-
     if (selectedFontName === "Sans Serif") {
       changeFont("Inter, sans-serif");
     } else if (selectedFontName === "Serif") {
@@ -58,8 +56,4 @@ options.forEach((option) => {
       changeFont("Inconsolata, monospace");
     }
   });
-});
-
-dropdown.addEventListener("click", () => {
-  dropdownMenu.classList.toggle("active");
 });
