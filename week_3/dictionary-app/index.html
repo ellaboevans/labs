@@ -58,19 +58,22 @@
     </header>
 
     <!-- Search bar -->
-    <div id="search__bar">
-      <input
-        id="search-bar__input"
-        type="text"
-        name="search"
-        placeholder="Search for any word..."
-      />
-      <!-- icon -->
-      <img
-        src="./assets/images/icon-search.svg"
-        id="search__icon"
-        alt="search-icon"
-      />
+    <div class="search-bar__wrapper">
+      <div id="search__bar">
+        <input
+          id="search-bar__input"
+          type="text"
+          name="search"
+          placeholder="Search for any word..."
+        />
+        <!-- icon -->
+        <img
+          src="./assets/images/icon-search.svg"
+          id="search__icon"
+          alt="search-icon"
+        />
+      </div>
+      <div id="input-error">Whoops, can't be empty...</div>
     </div>
 
     <!-- Main Container for Search Results -->
@@ -99,8 +102,6 @@
         </button>
       </div>
 
-      <!-- searched word category -->
-
       <!-- Meanings -->
       <div id="meanings__container">
         <div id="meanings__list"></div>
@@ -126,6 +127,17 @@
           <img src="./assets/images/icon-new-window.svg" alt="link-icon" />
         </span>
       </div>
+    </section>
+
+    <!-- Error Message -->
+    <section id="error__message">
+      <span class="emoji">😕</span>
+      <h2>No Definitions Found</h2>
+      <p>
+        Sorry pal, we couldn't find definitions for the word you were looking
+        for. You can try the search again at later time or head to the web
+        instead.
+      </p>
     </section>
     <script src="./scripts/main.js" type="module" defer></script>
   </body>
