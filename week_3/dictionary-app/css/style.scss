@@ -10,9 +10,9 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  //   width: 60%;
+  transition: background-color 0.4s ease, color 0.4s ease;
   max-width: 800px;
-  margin: 6rem auto;
+  margin: 4rem auto;
   font-family: $inter-regular;
   padding: 0 2rem;
   background-color: $light-theme;
@@ -105,7 +105,6 @@ body {
     display: flex;
   }
 
-  /* Container for the theme toggler */
   .theme-toggler {
     display: flex;
     align-items: center;
@@ -242,11 +241,12 @@ body {
   }
 }
 
-#searched-word__category {
+.class--heading {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-
+}
+.searched-word__category {
   h2 {
     font-size: $text-heading-sm;
     font-weight: 600;
@@ -273,7 +273,6 @@ body {
   #meanings__list {
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
     color: $text-body;
     gap: 1rem;
 
@@ -289,8 +288,8 @@ body {
   }
 }
 
-#synonyms__container {
-  margin-bottom: 3rem;
+.varations__container {
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -365,7 +364,7 @@ body.dark-theme {
     color: #fff;
   }
 
-  #searched-word__category h2 {
+  .searched-word__category h2 {
     color: #fff;
   }
 
@@ -392,6 +391,41 @@ body.dark-theme {
 
     .dropdown__option:hover {
       color: $accent-color;
+    }
+  }
+}
+
+#meanings__list {
+  padding: 0 1rem;
+}
+
+.sans-serif,
+.dropdown__option.sans-serif-option {
+  font-family: $inter-regular;
+}
+
+.serif,
+.dropdown__option.serif-option {
+  font-family: $lora-regular;
+}
+
+.mono,
+.dropdown__option.mono-option {
+  font-family: $inconsolata-regular;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 1rem;
+  }
+
+  #header__container img {
+    width: 20px;
+  }
+
+  #searched-word__container {
+    h1 {
+      font-size: 2rem;
     }
   }
 }

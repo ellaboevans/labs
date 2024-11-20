@@ -12,8 +12,9 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
   max-width: 800px;
-  margin: 6rem auto;
+  margin: 4rem auto;
   font-family: "Inter", sans-serif;
   padding: 0 2rem;
   background-color: #ffffff;
@@ -31,7 +32,6 @@ body {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 1rem;
-  /* Container for the theme toggler */
 }
 #header__container img {
   width: 30px;
@@ -226,12 +226,13 @@ body {
   opacity: 1;
 }
 
-#searched-word__category {
+.class--heading {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
-#searched-word__category h2 {
+
+.searched-word__category h2 {
   font-size: 18px;
   font-weight: 600;
   color: #2d2d2d;
@@ -255,7 +256,6 @@ body {
 #meanings__container #meanings__list {
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
   color: #2d2d2d;
   gap: 1rem;
 }
@@ -268,26 +268,26 @@ body {
   margin-top: 0.5rem;
 }
 
-#synonyms__container {
-  margin-bottom: 3rem;
+.varations__container {
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-#synonyms__container h3 {
+.varations__container h3 {
   font-size: 18px;
   font-weight: 400;
   color: #757575;
   text-transform: capitalize;
 }
-#synonyms__container ul {
+.varations__container ul {
   display: flex;
   color: #a445ed;
   font-weight: 600;
   list-style-type: none;
   gap: 0.5rem;
 }
-#synonyms__container ul li {
+.varations__container ul li {
   text-decoration: underline;
 }
 
@@ -338,7 +338,7 @@ body.dark-theme #search-bar__input::placeholder,
 body.dark-theme .meaning-list__item {
   color: #fff;
 }
-body.dark-theme #searched-word__category h2 {
+body.dark-theme .searched-word__category h2 {
   color: #fff;
 }
 body.dark-theme #footer > #link > a {
@@ -362,4 +362,35 @@ body.dark-theme #header__container .dropdown.active .dropdown__menu .dropdown__o
 }
 body.dark-theme #header__container .dropdown.active .dropdown__menu .dropdown__option:hover {
   color: #a445ed;
+}
+
+#meanings__list {
+  padding: 0 1rem;
+}
+
+.sans-serif,
+.dropdown__option.sans-serif-option {
+  font-family: "Inter", sans-serif;
+}
+
+.serif,
+.dropdown__option.serif-option {
+  font-family: "Lora", serif;
+}
+
+.mono,
+.dropdown__option.mono-option {
+  font-family: "Inconsolata", monospace;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 1rem;
+  }
+  #header__container img {
+    width: 20px;
+  }
+  #searched-word__container h1 {
+    font-size: 2rem;
+  }
 }/*# sourceMappingURL=style.css.map */
