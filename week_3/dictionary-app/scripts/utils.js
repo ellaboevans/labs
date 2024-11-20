@@ -1,9 +1,11 @@
+// Select HTML elements
 const antonymsHeading = document.querySelector("#antonyms--heading");
 const synonymsHeading = document.querySelector("#synonyms--heading");
 const synonymsList = document.getElementById("synonyms__list");
 const antonymsList = document.getElementById("antonyms__list");
 const link = document.getElementById("link__text");
 
+// Display synonyms in the UI
 export function displaySynonyms(meanings) {
   synonymsList.innerHTML = "";
   const synonyms = meanings.flatMap((meaning) => meaning.synonyms);
@@ -20,6 +22,7 @@ export function displaySynonyms(meanings) {
   }
 }
 
+// Display antonyms in the UI
 export function displayAntonyms(meanings) {
   antonymsList.innerHTML = "";
   const antonyms = meanings.flatMap((meaning) => meaning.antonyms);
@@ -36,7 +39,7 @@ export function displayAntonyms(meanings) {
   }
 }
 
-// Display source URLs
+// Display source URLs in the UI
 export function displaySourceUrls(sourceUrls) {
   sourceUrls.forEach((source) => {
     link.href = source;
@@ -46,9 +49,11 @@ export function displaySourceUrls(sourceUrls) {
   });
 }
 
-// Enable user to interact with enter key
-export function enterSearch(event, searchInput, fn) {
+// Enable user to search with the Enter key
+export function enterSearch(event, searchInput, findWord, displayError) {
   if (event.key === "Enter" && searchInput.value.trim()) {
-    fn(searchInput.value);
+    findWord(searchInput.value);
   }
+
+  if (event.key === "Enter" && searchInput.value.length === 0) displayError();
 }
