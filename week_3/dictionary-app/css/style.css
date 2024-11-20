@@ -355,6 +355,7 @@ body.dark-theme #header__container .dropdown.active .dropdown__menu .dropdown__o
 }
 .varations__container ul li:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #error__message {
