@@ -5,8 +5,11 @@ const wordElement = document.getElementById("searched__word");
 const phoneticElement = document.getElementById("phonetic__structure");
 const meaningsList = document.getElementById("meanings__list");
 const playButton = document.querySelector("#play__button");
+const errorMessage = document.querySelector("#error__message");
+const mainContainer = document.querySelector("#main__container");
+const inputErrorMessage = document.querySelector("#input-error");
 
-// import modules
+// Import modules
 import "./dropdown-script.js";
 import "./theme.js";
 import {
@@ -27,13 +30,21 @@ async function fetchDefinition(word = "keyboard") {
     const data = await response.json();
     displayDefinition(data[0]);
   } catch (error) {
-    console.error(error.message);
-    alert("Word not found, please try another search.");
+    displayErrorMessage();
   }
 }
 
-// Display data in the UI
+// Display error message
+function displayErrorMessage() {
+  errorMessage.style.display = "flex";
+  mainContainer.style.display = "none";
+}
+
+// Display dictionary data in the UI
 function displayDefinition(data) {
+  errorMessage.style.display = "none";
+  mainContainer.style.display = "block";
+
   // Display the searched word and its phonetic structure
   wordElement.textContent = data.word;
   phoneticElement.textContent = data.phonetics[0].text;
@@ -78,24 +89,40 @@ function displayDefinition(data) {
     meaningsList.appendChild(meaningItem);
   });
 
+  // Display synonyms, antonyms, and source URLs
   displaySynonyms(data.meanings);
-
   displayAntonyms(data.meanings);
-
   displaySourceUrls(data.sourceUrls);
 }
 
-// Event listener for search button click
+// Handle input error
+function inputError() {
+  if (searchInput.value.length === 0) {
+    searchInput.style.outline = "1px solid red";
+    inputErrorMessage.style.visibility = "visible";
+    mainContainer.style.display = "none";
+    errorMessage.style.display = "none";
+  }
+
+  setTimeout(() => {
+    searchInput.style.outline = "";
+    inputErrorMessage.style.visibility = "hidden";
+  }, 2000);
+}
+
+// Event listeners
 searchButton.addEventListener("click", () => {
   const word = searchInput.value.trim();
-  if (word) fetchDefinition(word);
+  if (word) {
+    fetchDefinition(word);
+  }
+  inputError();
 });
 
 document.addEventListener("keydown", (event) => {
-  enterSearch(event, searchInput, fetchDefinition);
+  enterSearch(event, searchInput, fetchDefinition, inputError);
 });
 
-// Fetch initial word definition on page load
 document.addEventListener("DOMContentLoaded", () => {
   fetchDefinition();
 });
