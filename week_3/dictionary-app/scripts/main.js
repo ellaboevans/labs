@@ -8,6 +8,8 @@ const playButton = document.querySelector("#play__button");
 const errorMessage = document.querySelector("#error__message");
 const mainContainer = document.querySelector("#main__container");
 const inputErrorMessage = document.querySelector("#input__error");
+const loader = document.querySelector("#loader");
+const overlay = document.querySelector("#overlay");
 
 // Import modules
 import "./dropdown-script.js";
@@ -19,9 +21,27 @@ import {
   enterSearch,
 } from "./utils.js";
 
+function removeInitialMessage() {
+  const initialMessage = document.getElementById("initial__message");
+  if (initialMessage) return initialMessage.remove();
+}
+
 // Fetch dictionary data from API
 async function fetchDefinition(word) {
+  if (word.length <= 1) {
+    inputErrorMessage.style.visibility = "visible";
+    inputErrorMessage.textContent = "Please enter a valid word";
+    searchInput.style.outline = "1px solid red";
+    setTimeout(() => {
+      inputErrorMessage.style.visibility = "hidden";
+      searchInput.style.outline = "";
+    }, 2000);
+    return;
+  }
   try {
+    removeInitialMessage();
+    loader.style.display = "block";
+    overlay.style.display = "block";
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     );
@@ -31,7 +51,21 @@ async function fetchDefinition(word) {
     displayDefinition(data[0]);
   } catch (error) {
     displayErrorMessage();
+  } finally {
+    loader.style.display = "none";
+    overlay.style.display = "none";
   }
+}
+
+function displayInitialMessage() {
+  let p = document.createElement("p");
+  p.textContent = "Discover the definition of any word";
+  p.id = "initial__message";
+  p.style.textAlign = "center";
+  p.style.fontSize = "1.3rem";
+  p.style.color = "#A445ED";
+  document.body.appendChild(p);
+  mainContainer.style.display = "none";
 }
 
 // Display error message
@@ -96,9 +130,10 @@ function displayDefinition(data) {
 }
 
 // Handle input error
-function inputError() {
+function inputError(message) {
   if (searchInput.value.length === 0) {
     searchInput.style.outline = "1px solid red";
+    inputErrorMessage.textContent = message;
     inputErrorMessage.style.visibility = "visible";
     mainContainer.style.display = "none";
     errorMessage.style.display = "none";
@@ -113,10 +148,9 @@ function inputError() {
 // Event listeners
 searchButton.addEventListener("click", () => {
   const word = searchInput.value.trim();
-  if (word) {
-    fetchDefinition(word);
-  }
-  inputError();
+  if (word) fetchDefinition(word);
+
+  inputError("Whoops, can't be empty...");
 });
 
 document.addEventListener("keydown", (event) => {
@@ -124,5 +158,5 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchDefinition();
+  displayInitialMessage();
 });

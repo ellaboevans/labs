@@ -55,5 +55,6 @@ export function enterSearch(event, searchInput, findWord, displayError) {
     findWord(searchInput.value);
   }
 
-  if (event.key === "Enter" && searchInput.value.length === 0) displayError();
+  if (event.key === "Enter" && searchInput.value.length === 0)
+    displayError("Whoops, can't be empty...");
 }
