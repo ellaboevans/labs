@@ -51,16 +51,16 @@
   color: $accent-color;
 }
 
-.dropdown.active .dropdown__menu {
+.dropdown__active .dropdown__menu {
   display: flex;
 }
 
 .serif,
-.dropdown__option.serif-option {
+.dropdown__option__serif__option {
   font-family: $lora-regular;
 }
 
 .mono,
-.dropdown__option.mono-option {
+.dropdown__option__mono__option {
   font-family: $inconsolata-regular;
 }
