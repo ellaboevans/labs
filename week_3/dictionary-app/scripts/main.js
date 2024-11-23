@@ -1,5 +1,5 @@
 // Select HTML elements
-const searchInput = document.getElementById("search-bar__input");
+const searchInput = document.getElementById("search__bar__input");
 const searchButton = document.getElementById("search__icon");
 const wordElement = document.getElementById("searched__word");
 const phoneticElement = document.getElementById("phonetic__structure");
@@ -7,7 +7,7 @@ const meaningsList = document.getElementById("meanings__list");
 const playButton = document.querySelector("#play__button");
 const errorMessage = document.querySelector("#error__message");
 const mainContainer = document.querySelector("#main__container");
-const inputErrorMessage = document.querySelector("#input-error");
+const inputErrorMessage = document.querySelector("#input__error");
 
 // Import modules
 import "./dropdown-script.js";
@@ -20,7 +20,7 @@ import {
 } from "./utils.js";
 
 // Fetch dictionary data from API
-async function fetchDefinition(word = "keyboard") {
+async function fetchDefinition(word) {
   try {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
@@ -62,13 +62,13 @@ function displayDefinition(data) {
   meaningsList.innerHTML = "";
   data.meanings.forEach((meaning) => {
     const meaningItem = document.createElement("div");
-    meaningItem.classList.add("searched-word__category");
+    meaningItem.classList.add("searched__word__category");
 
     // Display part of speech and meanings
     meaningItem.innerHTML = `
-      <div class="class--heading">
-        <h2 class="search-word__class">${meaning.partOfSpeech}</h2>
-        <div class="border-line"></div>
+      <div class="class__heading">
+        <h2 class="search__word__class">${meaning.partOfSpeech}</h2>
+        <div class="border__line"></div>
       </div>
       <div id="meanings__container">
         <h3>Meaning</h3>
@@ -76,7 +76,7 @@ function displayDefinition(data) {
           ${meaning.definitions
             .map(
               (def) => `
-                <li class="meaning-list__item">
+                <li class="meaning__list__item">
                   ${def.definition}
                   ${def.example ? `<p> "${def.example}"</p>` : ""}
                 </li>
