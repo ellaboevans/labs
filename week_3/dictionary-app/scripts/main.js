@@ -58,12 +58,12 @@ async function fetchDefinition(word) {
 }
 
 function displayInitialMessage() {
-  let p = document.createElement("p");
-  p.textContent = "Discover the definition of any word";
-  p.id = "initial__message";
-  p.style.textAlign = "center";
-  p.style.fontSize = "1.3rem";
-  p.style.color = "#A445ED";
+  let paragraph = document.createElement("p");
+  paragraph.textContent = "Discover the definition of any word";
+  paragraph.id = "initial__message";
+  paragraph.style.textAlign = "center";
+  paragraph.style.fontSize = "1.3rem";
+  paragraph.style.color = "#A445ED";
   document.body.appendChild(p);
   mainContainer.style.display = "none";
 }
