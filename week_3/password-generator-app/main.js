@@ -1,7 +1,5 @@
-// import module
 import { PasswordGenerator } from "./passwordGenerator.js";
 
-// Element References
 const passwordDisplay = document.getElementById("result");
 const strengthIndicator = document.getElementById("password-strength__state");
 const generateButton = document.getElementById("generate__button");
@@ -15,10 +13,8 @@ const numbers = document.getElementById("numbers");
 const symbols = document.getElementById("symbols");
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-// Instance of PasswordGenerator
 const passwordGenerator = new PasswordGenerator();
 
-// Event Listeners
 generateButton.addEventListener("click", handlePasswordGenerate);
 slider.addEventListener("input", handleCountDisplay);
 slider.addEventListener("input", updateSliderBackground);
@@ -34,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   passwordDisplay.style.color = "#817d92";
 });
 
-// Functions
 function handlePasswordGenerate() {
   passwordGenerator.length = slider.value;
   passwordGenerator.includeUppercase = upperCase.checked;
@@ -48,7 +43,6 @@ function handlePasswordGenerate() {
 
   const strength = passwordGenerator.calculateStrength(password);
 
-  // Select all strength indicator divs
   const strengthBars = document.querySelectorAll(
     ".password-strength__indicator div"
   );
