@@ -474,7 +474,7 @@ body {
   background-color: #ffffff;
 }
 
-.border-line {
+.border__line {
   width: 100%;
   height: 1px;
   background-color: #e9e9e9;
@@ -491,7 +491,7 @@ body {
   #header__container img {
     width: 20px;
   }
-  #searched-word__container h1 {
+  #searched__word__container h1 {
     font-size: 2rem;
   }
 }/*# sourceMappingURL=style.css.map */

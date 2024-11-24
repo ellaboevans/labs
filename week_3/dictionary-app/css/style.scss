@@ -21,7 +21,7 @@ body {
   background-color: $light-theme;
 }
 
-.border-line {
+.border__line {
   width: 100%;
   height: 1px;
   background-color: $border-color;
@@ -40,7 +40,7 @@ body {
     width: 20px;
   }
 
-  #searched-word__container {
+  #searched__word__container {
     h1 {
       font-size: 2rem;
     }
