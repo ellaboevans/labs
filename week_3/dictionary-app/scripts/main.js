@@ -64,7 +64,7 @@ function displayInitialMessage() {
   paragraph.style.textAlign = "center";
   paragraph.style.fontSize = "1.3rem";
   paragraph.style.color = "#A445ED";
-  document.body.appendChild(p);
+  document.body.appendChild(paragraph);
   mainContainer.style.display = "none";
 }
 
