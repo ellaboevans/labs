@@ -1,0 +1,123 @@
+.theme__toggler {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#toggle__menu {
+  display: none;
+}
+
+.toggle__menu__icon {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  padding: 0.5rem;
+  background-color: $muted-text;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle__menu__icon .slider {
+  position: absolute;
+  top: 2.5px;
+  left: 2.5px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+#toggle__menu:checked + .toggle__menu__icon {
+  background-color: $accent-color;
+}
+
+#toggle__menu:checked + .toggle__menu__icon .slider {
+  transform: translateX(20px);
+}
+
+.moon__icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+#toggle__menu:checked ~ .moon__icon {
+  filter: invert(5003%) sepia(1000%) saturate(450%) hue-rotate(222deg)
+    brightness(100%);
+}
+
+body.dark__theme {
+  background-color: $dark-theme;
+  color: $text-secondary;
+
+  .border__line {
+    background-color: $border-dark-color;
+  }
+
+  #searched__word {
+    color: #fff;
+  }
+
+  #search__bar__input {
+    background-color: $dark-color;
+    color: #fff;
+  }
+
+  #search__bar__input::placeholder,
+  .meaning__list__item {
+    color: #fff;
+  }
+
+  .searched__word__category h2 {
+    color: #fff;
+  }
+
+  #footer > #link > a {
+    color: #fff;
+  }
+
+  #value {
+    color: #fff;
+  }
+
+  #header__container .dropdown__active .dropdown__menu {
+    background-color: $dark-color;
+    color: #fff;
+    border-radius: $radius;
+    border: none;
+    box-shadow: 0px 2px 20px rgb(164, 69, 237);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+
+    .dropdown__option {
+      color: #fff;
+    }
+
+    .dropdown__option:hover {
+      color: $accent-color;
+    }
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background-color: $accent-color;
+  width: 5rem;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.theme__toggler:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

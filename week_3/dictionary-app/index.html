@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>Dictionary web app</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header__container">
+      <!-- logo -->
+      <img src="./assets/images/logo.svg" alt="logo" />
+
+      <!-- Loader -->
+      <div id="overlay"></div>
+      <div id="loader"></div>
+
+      <!-- items container -->
+      <div id="header__items__container">
+        <!-- Dropdown Container -->
+        <div
+          class="dropdown"
+          role="menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <div
+            class="dropdown__selected"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span id="value">Sans Serif</span>
+            <span class="dropdown__icon">
+              <img src="./assets/images/icon-arrow-down.svg" alt="arrow-down" />
+            </span>
+          </div>
+          <div class="dropdown__menu" role="menu">
+            <div class="dropdown__option sans__serif__option" role="menuitem">
+              Sans Serif
+            </div>
+            <div class="dropdown__option serif__option" role="menuitem">
+              Serif
+            </div>
+            <div class="dropdown__option mono__option" role="menuitem">
+              Mono
+            </div>
+          </div>
+        </div>
+
+        <!-- seperator -->
+        <div class="seperator"></div>
+
+        <!-- checkbox for toggler -->
+        <div class="theme__toggler">
+          <!-- Checkbox for the toggler -->
+          <input type="checkbox" id="toggle__menu" aria-label="Toggle theme" />
+          <label for="toggle__menu" class="toggle__menu__icon">
+            <span class="slider"></span>
+            <span id="theme__tooltip" class="tooltip"></span>
+          </label>
+          <img
+            src="./assets/images/icon-moon.svg"
+            alt="moon-icon"
+            class="moon__icon"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- Search bar -->
+    <div class="search__bar__wrapper">
+      <div id="search__bar">
+        <input
+          id="search__bar__input"
+          type="text"
+          name="search"
+          placeholder="Search for any word..."
+          aria-describedby="input__error"
+        />
+        <!-- icon -->
+        <img
+          src="./assets/images/icon-search.svg"
+          id="search__icon"
+          alt="search-icon"
+        />
+      </div>
+      <div id="input__error" aria-live="assertive"></div>
+    </div>
+
+    <!-- Main Container for Search Results -->
+    <section id="main__container">
+      <!-- Searched word -->
+      <div id="searched__word__container">
+        <div>
+          <h1 id="searched__word" aria-live="polite"></h1>
+          <!-- phonetic structure -->
+          <p id="phonetic__structure" aria-live="polite"></p>
+        </div>
+        <!-- Play button -->
+        <button id="play__button" aria-label="Play pronunciation">
+          <svg
+            class="play__icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="75"
+            height="75"
+            viewBox="0 0 75 75"
+          >
+            <g fill="#A445ED" fill-rule="evenodd">
+              <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" />
+              <path d="M29 27v21l21-10.5z" />
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Meanings -->
+      <div id="meanings__container">
+        <div id="meanings__list"></div>
+      </div>
+
+      <!-- Synonyms -->
+      <div class="varations__container">
+        <h3 id="synonyms__heading">Synonyms</h3>
+        <ul id="synonyms__list" aria-live="polite">
+          <!-- Synonym list items -->
+        </ul>
+      </div>
+      <div class="varations__container">
+        <h3 id="antonyms__heading">Antonyms</h3>
+        <ul id="antonyms__list" aria-live="polite"></ul>
+      </div>
+
+      <div class="border__line"></div>
+      <div id="footer">
+        <span id="source">source</span>
+        <span id="link">
+          <a id="link__text" aria-live="polite"></a>
+          <img src="./assets/images/icon-new-window.svg" alt="link-icon" />
+        </span>
+      </div>
+    </section>
+
+    <!-- Error Message -->
+    <section id="error__message" aria-hidden="true">
+      <span class="emoji">😕</span>
+      <h2>No Definitions Found</h2>
+      <p>
+        Sorry pal, we couldn't find definitions for the word you were looking
+        for. You can try the search again at later time or head to the web
+        instead.
+      </p>
+    </section>
+    <script src="./scripts/main.js" type="module" defer></script>
+  </body>
+</html>

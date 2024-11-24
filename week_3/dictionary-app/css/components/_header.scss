@@ -1,0 +1,24 @@
+#header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  img {
+    width: 30px;
+  }
+
+  #header__items__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .seperator {
+      width: 1px;
+      height: 30px;
+      margin-right: 1rem;
+      background-color: $border-color;
+    }
+  }
+}
