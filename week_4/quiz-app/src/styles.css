@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #313e51;
+  font-family: "Rubik", sans-serif;
+}
+body.dark-mode {
+  background-color: #313e51;
+  color: #f9f9f9;
+}
+body.dark-mode .hero__text {
+  color: #f9f9f9;
+}
+body.dark-mode .hero__text p {
+  color: #abc1e1 !important;
+}
+body.dark-mode .subject__list .subject__card {
+  background-color: #3b4d66;
+}
+body.dark-mode .subject__list .subject__card .text {
+  color: white;
+}
+
+.circle__1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20rem;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.circle__2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 20rem;
+  opacity: 0.6;
+  z-index: -1;
+}/*# sourceMappingURL=styles.css.map */

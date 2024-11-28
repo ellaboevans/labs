@@ -1,0 +1,32 @@
+<main>
+  <header class="header__wrapper">
+    <!-- Quiz Title Container -->
+    <div class="header__logo">
+      @if(selectedSubject){
+      <img [src]="selectedSubject.icon" />
+      <h2>{{ selectedSubject.title }}</h2>
+      }
+    </div>
+    <!-- Theme Switch -->
+    <nav class="theme__switch">
+      <img src="./assets/sun.svg" alt="sun-icon" class="sun__icon" />
+      <input
+        type="checkbox"
+        id="toggle__menu"
+        (change)="onThemeToggle()"
+        [checked]="isDarkMode"
+        aria-label="Toggle theme"
+      />
+      <label for="toggle__menu" class="toggle__menu__icon">
+        <span class="slider"></span>
+        <!-- <span id="theme__tooltip" class="tooltip"></span> -->
+      </label>
+      <img src="./assets/moon.svg" alt="moon-icon" class="moon__icon" />
+    </nav>
+  </header>
+  <!-- Ellipses -->
+  <div class="circles">
+    <img src="./assets/Ellipse-white-1.svg" alt="" class="circle__1" />
+    <img src="./assets/Ellipse-white-2.svg" alt="" class="circle__2" />
+  </div>
+</main>

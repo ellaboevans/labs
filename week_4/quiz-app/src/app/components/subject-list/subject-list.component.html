@@ -1,0 +1,10 @@
+<section class="subject__list">
+  <div
+    class="subject__card"
+    *ngFor="let subject of subjects"
+    (click)="selectSubject(subject)"
+  >
+    <img class="icon" [src]="subject.icon" alt="{{ subject.title }}'s icon" />
+    <span class="text">{{ subject.title }}</span>
+  </div>
+</section>

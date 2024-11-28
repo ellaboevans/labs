@@ -1,0 +1,26 @@
+@import "../../../styles/variables";
+
+.hero__text {
+  color: $color-dark;
+  font-weight: normal;
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    width: 25rem;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 2rem;
+    font-style: italic;
+    color: $color-dark-secondary;
+  }
+}

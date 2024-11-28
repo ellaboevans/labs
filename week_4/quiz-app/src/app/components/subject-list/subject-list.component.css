@@ -1,0 +1,27 @@
+.subject__list {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.subject__list .subject__card {
+  display: flex;
+  align-items: center;
+  width: 30rem;
+  padding: 0.5rem 1rem;
+  gap: 2.5rem;
+  border-radius: 8px;
+  background-color: card-dark-bg;
+  box-shadow: 0 2px 20px 5px rgba(196, 196, 196, 0.11);
+  color: #313e51;
+}
+.subject__list .subject__card:hover {
+  color: #313e51;
+}
+.subject__list .subject__card .icon {
+  width: 3rem;
+}
+.subject__list .subject__card .text {
+  font-weight: 600;
+}/*# sourceMappingURL=subject-list.component.css.map */

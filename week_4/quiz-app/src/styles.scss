@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./styles/_variables";
+@import "./styles/_mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: map-get($light-mode, bg-color);
+  color: map-get($light-mode, text-color);
+  font-family: $font-rubik;
+
+  &.dark-mode {
+    background-color: map-get($dark-mode, bg-color);
+    color: map-get($dark-mode, text-color);
+
+    .hero__text {
+      color: map-get($dark-mode, text-color);
+
+      p {
+        color: $color-light-bluish !important;
+      }
+    }
+
+    .subject__list {
+      .subject__card {
+        background-color: $card-dark-bg;
+
+        .text {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.circle__1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20rem;
+  opacity: 0.6;
+  z-index: -1;
+}
+.circle__2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 20rem;
+  opacity: 0.6;
+  z-index: -1;
+}

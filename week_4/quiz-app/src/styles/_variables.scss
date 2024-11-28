@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+// use fonts
+$font-size-base: 16px;
+$font-size-h1: 36px;
+$font-size-h2: 28px;
+$font-size-h3: 24px;
+$font-size-h4: 20px;
+
+$color-light: #f9f9f9;
+$color-light-bluish: #abc1e1;
+$color-dark: #313e51;
+$card-dark-bg: #3b4d66;
+$color-dark-secondary: #626c7f;
+$success-color: #26d782;
+$error-color: #ee5454;
+$primary-color: #a729f5;
+
+// Fonts
+$font-rubik: "Rubik", sans-serif;
+
+// Spacing
+$spacing-unit: 16px;
+
+// Media Queries
+$breakpoint-mobile: 600px;
+
+// Mode-specific
+$light-mode: (
+  bg-color: $color-light,
+  text-color: $color-dark,
+);
+$dark-mode: (
+  bg-color: $color-dark,
+  text-color: $color-light,
+);

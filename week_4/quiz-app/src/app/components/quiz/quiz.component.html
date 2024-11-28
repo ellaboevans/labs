@@ -1,0 +1,49 @@
+<section *ngIf="subject">
+  <article class="quiz__container">
+    <!-- Display current question index -->
+    <p>Question: {{ currentIndex + 1 }} of {{ questions.length }}</p>
+
+    <!-- Question -->
+    <h2>{{ questions[currentIndex]?.question }}</h2>
+
+    <!-- Progress Bar -->
+    <div class="progress__bar">
+      <div
+        class="progress-bar__fill"
+        [style.width]="((currentIndex + 1) / questions.length) * 100 + '%'"
+      ></div>
+    </div>
+  </article>
+
+  <!-- Answer Options Container -->
+  <article class="answer__options">
+    <button
+      *ngFor="
+        let option of questions[currentIndex]?.options;
+        let optionIndex = index
+      "
+      (click)="checkAnswer(option, questions[currentIndex]?.answer)"
+    >
+      <span class="option-letter"> {{ getOptionLetter(optionIndex) }}</span>
+      <span class="option-text"> {{ option }}</span>
+    </button>
+  </article>
+</section>
+<!-- Navigation Buttons -->
+<div *ngIf="subject">
+  <button (click)="goToPreviousQuestion()" [disabled]="currentIndex === 0">
+    Previous
+  </button>
+  <button
+    (click)="goToNextQuestion()"
+    [disabled]="currentIndex === questions.length - 1"
+  >
+    Next
+  </button>
+  <button (click)="goBack()">Back to Subjects</button>
+</div>
+
+<div class="message__container" *ngIf="!subject">
+  <app-welcome-text></app-welcome-text>
+  <app-subject-list></app-subject-list>
+</div>
