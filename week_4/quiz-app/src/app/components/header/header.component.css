@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 main {
-  padding: 2rem;
+  padding: 4rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .header__wrapper {
@@ -8,7 +10,6 @@ main {
   margin-bottom: 4rem;
   align-items: center;
   gap: 20px;
-  width: 90dvw;
   margin: 0 auto;
 }
 .header__wrapper .header__logo {
