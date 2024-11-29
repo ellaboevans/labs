@@ -1,4 +1,4 @@
-<section *ngIf="subject">
+<section *ngIf="subject && !showResult">
   <article class="quiz__container">
     <!-- Display current question index -->
     <p>Question: {{ currentIndex + 1 }} of {{ questions.length }}</p>
@@ -53,12 +53,14 @@
       />
     </button>
     <!-- Submit Button -->
-    <button
-      class="submit__btn"
-      (click)="selectedOption ? goToNextQuestion() : null"
-      [disabled]="!selectedOption"
-    >
-      {{ selectedOption ? "Next Question" : "Submit Answer" }}
+    <button class="submit__btn" (click)="handleSubmitOrShowResults()">
+      {{
+        isLastQuestion
+          ? "See Scores"
+          : selectedOption
+          ? "Next Question"
+          : "Submit Answer"
+      }}
     </button>
     <div *ngIf="showErrorMessage" class="error__message">
       <img src="./assets/crossmark.svg" alt="crossmark" />
@@ -66,23 +68,15 @@
     </div>
   </article>
 </section>
-<!-- Navigation Buttons -->
-<!-- <div *ngIf="subject">
-  <button (click)="goToPreviousQuestion()" [disabled]="currentIndex === 0">
-    Previous
-  </button>
-  <button
-    (click)="goToNextQuestion()"
-    [disabled]="currentIndex === questions.length - 1"
-  >
-    Next
-  </button>
-  <button (click)="goBack()">Back to Subjects</button>
-</div> -->
-
-<!-- Error Message -->
 
 <div class="message__container" *ngIf="!subject">
   <app-welcome-text></app-welcome-text>
   <app-subject-list></app-subject-list>
 </div>
+
+<section>
+  <app-results
+    [score]="userScore"
+    [outOfTotal]="questions.length"
+  ></app-results>
+</section>
