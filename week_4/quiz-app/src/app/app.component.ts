@@ -36,8 +36,6 @@ export class AppComponent implements OnInit {
     const savedTheme = localStorage.getItem('theme') || 'light-mode';
     document.body.className = savedTheme;
     this.isDarkMode = savedTheme === 'dark-mode';
-
-    console.log(this.selectedSubject);
   }
 
   resetTitle(): void {
