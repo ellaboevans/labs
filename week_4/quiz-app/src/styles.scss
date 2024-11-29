@@ -12,6 +12,8 @@ body {
   background-color: map-get($light-mode, bg-color);
   color: map-get($light-mode, text-color);
   font-family: $font-rubik;
+  width: 80vw;
+  margin: 0 auto;
 
   &.dark-mode {
     background-color: map-get($dark-mode, bg-color);
