@@ -15,6 +15,11 @@ export class QuizComponent implements OnInit {
   subject: any = null;
   questions: any[] = [];
   currentIndex: number = 0;
+  selectedOptionIndex: number | null = null;
+  correctOptionIndex: number | null = null;
+  wrongOptionIndex: number | null = null;
+  selectedOption: boolean = false;
+  showErrorMessage: boolean = false;
 
   constructor(private quizService: QuizService) {}
 
@@ -30,11 +35,20 @@ export class QuizComponent implements OnInit {
     localStorage.removeItem('selectedSubject');
   }
 
-  checkAnswer(option: string, correctAnswer: string) {
+  checkAnswer(option: string, correctAnswer: string, optionIndex: number) {
+    this.selectedOptionIndex = optionIndex;
+
+    this.selectedOption = true;
+
     if (option === correctAnswer) {
-      alert('Correct!');
+      this.correctOptionIndex = optionIndex;
+      this.wrongOptionIndex = null;
+      console.log('Correct answer selected');
     } else {
-      alert('Incorrect!');
+      this.wrongOptionIndex = optionIndex;
+      this.correctOptionIndex = this.questions[
+        this.currentIndex
+      ].options.findIndex((opt: string) => opt === correctAnswer);
     }
   }
 
@@ -42,7 +56,15 @@ export class QuizComponent implements OnInit {
   goToNextQuestion(): void {
     if (this.currentIndex < this.questions.length - 1) {
       this.currentIndex++;
+      this.resetState();
     }
+  }
+
+  resetState(): void {
+    this.selectedOptionIndex = null;
+    this.correctOptionIndex = null;
+    this.wrongOptionIndex = null;
+    this.selectedOption = false;
   }
 
   // Navigate to the previous question
@@ -52,8 +74,7 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  // Map index to letters (A, B, C, D...)
   getOptionLetter(index: number): string {
-    return String.fromCharCode(65 + index); // ASCII code for 'A' is 65
+    return String.fromCharCode(65 + index);
   }
 }

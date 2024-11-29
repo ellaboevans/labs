@@ -22,15 +22,52 @@
         let option of questions[currentIndex]?.options;
         let optionIndex = index
       "
-      (click)="checkAnswer(option, questions[currentIndex]?.answer)"
+      [class.selected]="selectedOptionIndex === optionIndex"
+      (click)="
+        checkAnswer(option, questions[currentIndex]?.answer, optionIndex)
+      "
+      [class.correct]="correctOptionIndex === optionIndex"
+      [class.wrong]="wrongOptionIndex === optionIndex"
+      [disabled]="correctOptionIndex !== null || wrongOptionIndex !== null"
     >
-      <span class="option-letter"> {{ getOptionLetter(optionIndex) }}</span>
-      <span class="option-text"> {{ option }}</span>
+      <span
+        class="option__letter"
+        [class.selected-letter]="selectedOptionIndex === optionIndex"
+        [class.correct-letter]="
+          correctOptionIndex === optionIndex || wrongOptionIndex === optionIndex
+        "
+        [class.wrong-letter]="wrongOptionIndex === optionIndex"
+      >
+        {{ getOptionLetter(optionIndex) }}</span
+      >
+      <span class="option__text"> {{ option }}</span>
+      <img
+        *ngIf="correctOptionIndex === optionIndex"
+        src="./assets/checkmark.svg"
+        alt=""
+      />
+      <img
+        *ngIf="wrongOptionIndex === optionIndex"
+        src="./assets/crossmark.svg"
+        alt=""
+      />
     </button>
+    <!-- Submit Button -->
+    <button
+      class="submit__btn"
+      (click)="selectedOption ? goToNextQuestion() : null"
+      [disabled]="!selectedOption"
+    >
+      {{ selectedOption ? "Next Question" : "Submit Answer" }}
+    </button>
+    <div *ngIf="showErrorMessage" class="error__message">
+      <img src="./assets/crossmark.svg" alt="crossmark" />
+      Please select an answer
+    </div>
   </article>
 </section>
 <!-- Navigation Buttons -->
-<div *ngIf="subject">
+<!-- <div *ngIf="subject">
   <button (click)="goToPreviousQuestion()" [disabled]="currentIndex === 0">
     Previous
   </button>
@@ -41,7 +78,9 @@
     Next
   </button>
   <button (click)="goBack()">Back to Subjects</button>
-</div>
+</div> -->
+
+<!-- Error Message -->
 
 <div class="message__container" *ngIf="!subject">
   <app-welcome-text></app-welcome-text>
