@@ -20,7 +20,6 @@ export class SubjectListComponent implements OnInit {
   }
   selectSubject(subject: any) {
     this.quizService.setSubject(subject);
-    console.log(`Selected subject`, subject);
   }
 
   resetSelectedSubject(): void {
