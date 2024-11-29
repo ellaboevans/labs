@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SubjectType } from '../../interface/quiz';
 
 @Component({
   selector: 'app-results',
@@ -10,6 +11,11 @@ import { Component, Input } from '@angular/core';
 export class ResultsComponent {
   @Input() score!: number;
   @Input() outOfTotal!: number;
+  @Input() selectedSubject!: SubjectType;
+
+  constructor() {
+    this.selectedSubject = JSON.parse(localStorage.getItem('selectedSubject')!);
+  }
 
   playAgain() {
     localStorage.removeItem('selectedSubject');

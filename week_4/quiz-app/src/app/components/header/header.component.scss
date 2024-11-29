@@ -1,8 +1,7 @@
 @import "../../../styles/variables";
 
 main {
-  padding: 4rem;
-  width: 80%;
+  padding: 4rem 0;
   margin: 0 auto;
 }
 
@@ -47,7 +46,7 @@ main {
 
   .toggle__menu__icon .slider {
     position: absolute;
-    top: 2.5px;
+    top: 3.5px;
     left: 2.5px;
     width: 14px;
     height: 14px;
@@ -76,5 +75,70 @@ main {
 
   body.dark__theme {
     background-color: black;
+  }
+}
+
+@media (max-width: 768px) {
+  .header__wrapper {
+    gap: 15px;
+    text-align: center;
+    padding: 0 1rem;
+
+    .header__logo {
+      justify-content: center;
+    }
+
+    .theme__switch {
+      justify-content: center;
+    }
+  }
+
+  .circles {
+    .circle__1,
+    .circle__2 {
+      width: 100px;
+    }
+  }
+}
+
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  main {
+    padding: 2rem 0;
+  }
+
+  .header__wrapper {
+    gap: 10px;
+
+    .header__logo img {
+      width: 30px;
+    }
+
+    .header__logo h2 {
+      font-size: 1.2rem;
+    }
+
+    .toggle__menu__icon .slider {
+      top: 2px;
+    }
+
+    .theme__switch .toggle__menu__icon {
+      height: 15px;
+
+      .slider {
+        width: 12px;
+        height: 12px;
+      }
+
+      #toggle__menu:checked + & .slider {
+        transform: translateX(15px);
+      }
+    }
+
+    .moon__icon,
+    .sun__icon {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

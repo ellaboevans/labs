@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles, importing variables, and mixins */
 @import "./styles/_variables";
 @import "./styles/_mixins";
 
@@ -12,8 +12,13 @@ body {
   background-color: map-get($light-mode, bg-color);
   color: map-get($light-mode, text-color);
   font-family: $font-rubik;
-  width: 80vw;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  flex-direction: column;
 
   &.dark-mode {
     background-color: map-get($dark-mode, bg-color);
@@ -29,29 +34,106 @@ body {
 
     .subject__list {
       .subject__card {
-        background-color: $card-dark-bg;
+        background-color: $card-dark-bg !important;
+        box-shadow: $shadow-dark !important;
 
         .text {
           color: white;
         }
       }
     }
+
+    .quiz {
+      .answer__option {
+        background-color: $card-dark-bg !important;
+        box-shadow: $shadow-dark !important;
+      }
+      .option__text {
+        color: $color-light !important;
+      }
+
+      p {
+        color: $color-light-bluish !important;
+      }
+    }
+
+    .results__board__containers {
+      .results__board {
+        background-color: $card-dark-bg !important;
+        box-shadow: $shadow-dark !important;
+        .results__score {
+          color: $color-light !important;
+        }
+        p {
+          color: $color-light-bluish !important;
+        }
+      }
+    }
   }
 }
 
-.circle__1 {
+.circle__1,
+.circle__2 {
   position: absolute;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.circle__1 {
   left: 0;
   top: 0;
   width: 20rem;
-  opacity: 0.6;
-  z-index: -1;
 }
+
 .circle__2 {
-  position: absolute;
   right: 0;
   bottom: 0;
   width: 20rem;
-  opacity: 0.6;
-  z-index: -1;
+}
+
+/* Media Queries for responsiveness */
+
+/* Small Devices (Mobile) */
+@media (max-width: 600px) {
+  .circle__1,
+  .circle__2 {
+    width: 15rem;
+  }
+
+  body {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .hero__text p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Medium Devices (Tablets and small desktops) */
+@media (max-width: 768px) {
+  .circle__1,
+  .circle__2 {
+    width: 18rem;
+  }
+
+  .hero__text p {
+    font-size: 1.5rem;
+  }
+}
+
+/* Large Devices (Desktops) */
+@media (min-width: 1024px) {
+  .circle__1,
+  .circle__2 {
+    width: 25rem;
+  }
+}
+
+/* Extra Large Devices (Large desktops and wide screens) */
+@media (min-width: 1440px) {
+  .circle__1,
+  .circle__2 {
+    width: 30rem;
+  }
 }

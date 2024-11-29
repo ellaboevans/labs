@@ -1,12 +1,9 @@
-<section *ngIf="subject && !showResult">
+<section class="quiz" *ngIf="subject && !showResult">
   <article class="quiz__container">
-    <!-- Display current question index -->
     <p>Question: {{ currentIndex + 1 }} of {{ questions.length }}</p>
 
-    <!-- Question -->
     <h2>{{ questions[currentIndex]?.question }}</h2>
 
-    <!-- Progress Bar -->
     <div class="progress__bar">
       <div
         class="progress-bar__fill"
@@ -15,44 +12,51 @@
     </div>
   </article>
 
-  <!-- Answer Options Container -->
   <article class="answer__options">
     <button
+      class="answer__option"
       *ngFor="
         let option of questions[currentIndex]?.options;
         let optionIndex = index
       "
-      [class.selected]="selectedOptionIndex === optionIndex"
       (click)="
         checkAnswer(option, questions[currentIndex]?.answer, optionIndex)
       "
-      [class.correct]="correctOptionIndex === optionIndex"
-      [class.wrong]="wrongOptionIndex === optionIndex"
+      [ngClass]="{
+        selected: selectedOptionIndex === optionIndex,
+        correct: correctOptionIndex === optionIndex,
+        wrong: wrongOptionIndex === optionIndex
+      }"
       [disabled]="correctOptionIndex !== null || wrongOptionIndex !== null"
     >
       <span
         class="option__letter"
-        [class.selected-letter]="selectedOptionIndex === optionIndex"
-        [class.correct-letter]="
-          correctOptionIndex === optionIndex || wrongOptionIndex === optionIndex
-        "
-        [class.wrong-letter]="wrongOptionIndex === optionIndex"
+        [ngClass]="{
+          selected__letter: selectedOptionIndex === optionIndex,
+          correct__letter:
+            correctOptionIndex === optionIndex ||
+            wrongOptionIndex === optionIndex,
+          wrong__letter: wrongOptionIndex === optionIndex
+        }"
       >
-        {{ getOptionLetter(optionIndex) }}</span
-      >
-      <span class="option__text"> {{ option }}</span>
+        {{ getOptionLetter(optionIndex) }}
+      </span>
+
+      <span class="option__text">{{ option }}</span>
+
       <img
         *ngIf="correctOptionIndex === optionIndex"
         src="./assets/checkmark.svg"
-        alt=""
+        alt="Correct Answer"
       />
+
       <img
         *ngIf="wrongOptionIndex === optionIndex"
         src="./assets/crossmark.svg"
-        alt=""
+        alt="Wrong Answer"
       />
     </button>
-    <!-- Submit Button -->
+
     <button class="submit__btn" (click)="handleSubmitOrShowResults()">
       {{
         isLastQuestion
@@ -62,20 +66,23 @@
           : "Submit Answer"
       }}
     </button>
+
     <div *ngIf="showErrorMessage" class="error__message">
-      <img src="./assets/crossmark.svg" alt="crossmark" />
+      <img src="./assets/crossmark.svg" alt="Error" />
       Please select an answer
     </div>
   </article>
 </section>
 
-<div class="message__container" *ngIf="!subject">
+<section class="message__container" *ngIf="!subject">
   <app-welcome-text></app-welcome-text>
   <app-subject-list></app-subject-list>
-</div>
+</section>
 
-<section>
+<!-- Results Section -->
+<section *ngIf="showResult">
   <app-results
+    [selectedSubject]="subject"
     [score]="userScore"
     [outOfTotal]="questions.length"
   ></app-results>

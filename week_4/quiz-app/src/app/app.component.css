@@ -1,1 +1,18 @@
-/*# sourceMappingURL=app.component.css.map */
+.app-container {
+  width: 60dvw;
+  margin: 0 auto;
+}
+
+/* Tablet Screens (991px and below) */
+@media (max-width: 991px) {
+  .app-container {
+    width: 90dvw;
+  }
+}
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  .app-container {
+    width: 95dvw;
+    padding: 0 1rem;
+  }
+}/*# sourceMappingURL=app.component.css.map */

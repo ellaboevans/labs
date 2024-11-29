@@ -1,1 +1,62 @@
-/*# sourceMappingURL=results.component.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+.results__container {
+  display: flex;
+  justify-content: space-between;
+}
+.results__container .results__header h2 {
+  font-size: 3.5rem;
+  font-weight: 300;
+}
+.results__container .results__header p {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.results__container .results__board__containers {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+.results__container .results__board__containers button {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background-color: #a729f5;
+  color: #f9f9f9;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+.results__container .results__board__containers button:hover {
+  background-color: #c76eff;
+}
+.results__container .results__board__containers .results__board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #f9f9f9;
+  width: 30rem;
+  border-radius: 15px;
+  box-shadow: 0 16px 40px 0px rgba(143, 160, 193, 0.1725490196);
+  padding: 4rem;
+}
+.results__container .results__board__containers .results__board .results__board__subject {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.results__container .results__board__containers .results__board .results__score {
+  font-size: 6rem !important;
+  font-weight: bold;
+  color: #313e51;
+}
+.results__container .results__board__containers .results__board .results__board__total {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.results__container .results__board__containers .results__board p {
+  font-size: 1.2rem;
+  color: #626c7f;
+}/*# sourceMappingURL=results.component.css.map */

@@ -1,6 +1,17 @@
-<!-- ResultsComponent.html -->
-<div class="results-container">
-  <h2>Quiz Completed</h2>
-  <p>You scored {{ score }} out of {{ outOfTotal }}</p>
-  <button (click)="playAgain()">Play Again</button>
-</div>
+<section class="results__container">
+  <article class="results__header">
+    <h2>Quiz Completed</h2>
+    <p>You scored...</p>
+  </article>
+  <article class="results__board__containers">
+    <div class="results__board">
+      <div class="results__board__subject">
+        <img [src]="selectedSubject.icon" alt="" />
+        <h3>{{ selectedSubject.title }}</h3>
+      </div>
+      <p class="results__score">{{ score }}</p>
+      <p>out of {{ outOfTotal }}</p>
+    </div>
+    <button (click)="playAgain()">Play Again</button>
+  </article>
+</section>
