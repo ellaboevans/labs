@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 main {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   margin: 0 auto;
 }
 
@@ -71,9 +71,6 @@ main {
     gap: 15px;
     text-align: center;
     padding: 0 1rem;
-  }
-  .header__wrapper .header__logo {
-    justify-content: center;
   }
   .header__wrapper .theme__switch {
     justify-content: center;

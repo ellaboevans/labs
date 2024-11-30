@@ -1,5 +1,7 @@
 .app-container {
-  width: 60dvw;
+  width: 100dvw;
+  max-width: 1350px;
+  padding: 0 4rem;
   margin: 0 auto;
 }
 
@@ -13,6 +15,6 @@
 @media (max-width: 576px) {
   .app-container {
     width: 95dvw;
-    padding: 0 1rem;
+    padding: 0;
   }
 }/*# sourceMappingURL=app.component.css.map */
