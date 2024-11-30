@@ -13,10 +13,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100dvh;
-  width: 100%;
+  width: 100dvw;
   overflow: hidden;
   flex-direction: column;
+  transition: background-color 0.2s ease-in-out;
 }
 body.dark-mode {
   background-color: #313e51;
@@ -45,6 +45,9 @@ body.dark-mode .quiz .option__text {
 body.dark-mode .quiz p {
   color: #abc1e1 !important;
 }
+body.dark-mode .error__message {
+  color: #f9f9f9 !important;
+}
 body.dark-mode .results__board__containers .results__board {
   background-color: #3b4d66 !important;
   box-shadow: 0 16px 40px 0px #313e51 !important;
@@ -55,11 +58,15 @@ body.dark-mode .results__board__containers .results__board .results__score {
 body.dark-mode .results__board__containers .results__board p {
   color: #abc1e1 !important;
 }
+body.dark-mode .circle__1,
+body.dark-mode .circle__2 {
+  filter: invert(1) opacity(0.09);
+}
 
 .circle__1,
 .circle__2 {
   position: absolute;
-  opacity: 0.2;
+  opacity: 1;
   z-index: -1;
 }
 
@@ -75,8 +82,6 @@ body.dark-mode .results__board__containers .results__board p {
   width: 20rem;
 }
 
-/* Media Queries for responsiveness */
-/* Small Devices (Mobile) */
 @media (max-width: 600px) {
   .circle__1,
   .circle__2 {
@@ -90,7 +95,6 @@ body.dark-mode .results__board__containers .results__board p {
     font-size: 1.2rem;
   }
 }
-/* Medium Devices (Tablets and small desktops) */
 @media (max-width: 768px) {
   .circle__1,
   .circle__2 {
@@ -100,14 +104,12 @@ body.dark-mode .results__board__containers .results__board p {
     font-size: 1.5rem;
   }
 }
-/* Large Devices (Desktops) */
 @media (min-width: 1024px) {
   .circle__1,
   .circle__2 {
     width: 25rem;
   }
 }
-/* Extra Large Devices (Large desktops and wide screens) */
 @media (min-width: 1440px) {
   .circle__1,
   .circle__2 {
