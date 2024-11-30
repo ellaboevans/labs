@@ -22,10 +22,6 @@ export class SubjectListComponent implements OnInit {
     this.quizService.setSubject(subject);
   }
 
-  resetSelectedSubject(): void {
-    this.quizService.clearSubject();
-  }
-
   ngOnInit(): void {
     this.getSubject();
   }
