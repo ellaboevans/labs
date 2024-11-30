@@ -6,15 +6,16 @@ import { SubjectType } from '../../interface/quiz';
   standalone: true,
   imports: [],
   templateUrl: './results.component.html',
-  styleUrl: './results.component.scss',
+  styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent {
   @Input() score!: number;
   @Input() outOfTotal!: number;
-  @Input() selectedSubject!: SubjectType;
+  @Input() selectedSubject!: SubjectType | null;
 
   constructor() {
-    this.selectedSubject = JSON.parse(localStorage.getItem('selectedSubject')!);
+    const subject = localStorage.getItem('selectedSubject');
+    this.selectedSubject = subject ? JSON.parse(subject) : null;
   }
 
   playAgain() {

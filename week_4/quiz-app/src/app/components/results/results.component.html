@@ -6,8 +6,8 @@
   <article class="results__board__containers">
     <div class="results__board">
       <div class="results__board__subject">
-        <img [src]="selectedSubject.icon" alt="" />
-        <h3>{{ selectedSubject.title }}</h3>
+        <img [src]="selectedSubject?.icon" alt="" />
+        <h3>{{ selectedSubject?.title }}</h3>
       </div>
       <p class="results__score">{{ score }}</p>
       <p>out of {{ outOfTotal }}</p>
