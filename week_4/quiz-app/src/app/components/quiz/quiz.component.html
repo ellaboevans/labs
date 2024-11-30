@@ -1,9 +1,7 @@
 <section class="quiz" *ngIf="subject && !showResult">
   <article class="quiz__container">
     <p>Question: {{ currentIndex + 1 }} of {{ questions.length }}</p>
-
-    <h2>{{ questions[currentIndex]?.question }}</h2>
-
+    <h2>{{ questions[currentIndex].question }}</h2>
     <div class="progress__bar">
       <div
         class="progress-bar__fill"
@@ -19,12 +17,12 @@
         let option of questions[currentIndex]?.options;
         let optionIndex = index
       "
-      (click)="
-        checkAnswer(option, questions[currentIndex]?.answer, optionIndex)
-      "
+      (click)="selectOption(optionIndex)"
       [ngClass]="{
         selected: selectedOptionIndex === optionIndex,
-        correct: correctOptionIndex === optionIndex,
+        correct:
+          correctOptionIndex === optionIndex &&
+          selectedOptionIndex === optionIndex,
         wrong: wrongOptionIndex === optionIndex
       }"
       [disabled]="correctOptionIndex !== null || wrongOptionIndex !== null"
@@ -34,36 +32,34 @@
         [ngClass]="{
           selected__letter: selectedOptionIndex === optionIndex,
           correct__letter:
-            correctOptionIndex === optionIndex ||
-            wrongOptionIndex === optionIndex,
+            correctOptionIndex === optionIndex &&
+            selectedOptionIndex === optionIndex,
           wrong__letter: wrongOptionIndex === optionIndex
         }"
       >
         {{ getOptionLetter(optionIndex) }}
       </span>
-
       <span class="option__text">{{ option }}</span>
-
       <img
         *ngIf="correctOptionIndex === optionIndex"
         src="./assets/checkmark.svg"
         alt="Correct Answer"
       />
-
       <img
         *ngIf="wrongOptionIndex === optionIndex"
         src="./assets/crossmark.svg"
         alt="Wrong Answer"
       />
     </button>
-
-    <button class="submit__btn" (click)="handleSubmitOrShowResults()">
+    <button class="submit__btn" (click)="handleSubmit()">
       {{
-        isLastQuestion
+        currentIndex === questions.length - 1 &&
+        correctOptionIndex !== null &&
+        wrongOptionIndex !== null
           ? "See Scores"
-          : selectedOption
-          ? "Next Question"
-          : "Submit Answer"
+          : correctOptionIndex === null && wrongOptionIndex === null
+          ? "Submit Answer"
+          : "Next Question"
       }}
     </button>
 

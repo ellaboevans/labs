@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WelcomeTextComponent } from '../welcome-text/welcome-text.component';
 import { SubjectListComponent } from '../subject-list/subject-list.component';
 import { ResultsComponent } from '../results/results.component';
+import { Question, SubjectType } from '../../interface/quiz';
 
 interface QuizState {
   subjectId: string | null;
@@ -21,11 +22,11 @@ interface QuizState {
     ResultsComponent,
   ],
   templateUrl: './quiz.component.html',
-  styleUrl: './quiz.component.scss',
+  styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent implements OnInit {
-  subject: any = null;
-  questions: any[] = [];
+  subject: SubjectType | null = null;
+  questions: Question[] = [];
   currentIndex: number = 0;
   selectedOptionIndex: number | null = null;
   correctOptionIndex: number | null = null;
@@ -36,7 +37,6 @@ export class QuizComponent implements OnInit {
   isLastQuestion: boolean = false;
   selectedOptionIndices: number[] = [];
   userScore: number = 0;
-  hasSubmittedLastQuestion: boolean = false;
 
   constructor(private quizService: QuizService) {}
 
@@ -48,20 +48,56 @@ export class QuizComponent implements OnInit {
       this.questions = subject ? subject.questions : [];
 
       if (this.selectedOptionIndices.length > 0) {
-        if (this.selectedOptionIndices[this.currentIndex] !== undefined) {
-          const restoredOptionIndex =
-            this.selectedOptionIndices[this.currentIndex];
-          const restoredOption =
-            this.questions[this.currentIndex].options[restoredOptionIndex];
-          const correctAnswer = this.questions[this.currentIndex].answer;
-
-          this.checkAnswer(restoredOption, correctAnswer, restoredOptionIndex);
-        }
+        const restoredOptionIndex =
+          this.selectedOptionIndices[this.currentIndex];
+        this.selectedOptionIndex = restoredOptionIndex;
       }
     });
   }
 
-  // Save current quiz state to localStorage
+  restoreQuizState() {
+    const savedState = localStorage.getItem('quizState');
+    if (savedState) {
+      const parsedState: QuizState = JSON.parse(savedState);
+      this.currentIndex = parsedState.currentIndex || 0;
+      this.selectedOptionIndices = parsedState.selectedOptionIndices || [];
+      this.userScore = this.calculateScore(this.selectedOptionIndices);
+      this.restoreCurrentQuestionState();
+    }
+  }
+
+  calculateScore(selectedOptionIndices: number[]): number {
+    return selectedOptionIndices.reduce((score, selectedIndex, index) => {
+      const question = this.questions[index];
+      const correctAnswer = question?.answer;
+      return question?.options[selectedIndex] === correctAnswer
+        ? score + 1
+        : score;
+    }, 0);
+  }
+
+  restoreCurrentQuestionState() {
+    const restoredOptionIndex = this.selectedOptionIndices[this.currentIndex];
+    if (restoredOptionIndex !== undefined) {
+      this.selectedOptionIndex = restoredOptionIndex;
+
+      const question = this.questions[this.currentIndex];
+      if (question) {
+        const correctAnswer = question.answer;
+
+        if (question.options[restoredOptionIndex] === correctAnswer) {
+          this.correctOptionIndex = restoredOptionIndex;
+          this.wrongOptionIndex = null;
+        } else {
+          this.wrongOptionIndex = restoredOptionIndex;
+          this.correctOptionIndex = question.options.findIndex(
+            (opt: string) => opt === correctAnswer
+          );
+        }
+      }
+    }
+  }
+
   saveQuizState() {
     if (!this.subject) return;
 
@@ -74,38 +110,34 @@ export class QuizComponent implements OnInit {
     localStorage.setItem('quizState', JSON.stringify(quizState));
   }
 
-  // Restore quiz state from localStorage
-  restoreQuizState() {
-    const savedState = localStorage.getItem('quizState');
-    if (savedState) {
-      const parsedState: QuizState = JSON.parse(savedState);
-      this.currentIndex = parsedState.currentIndex;
-      this.selectedOptionIndices = parsedState.selectedOptionIndices || [];
-    }
-  }
-
-  checkAnswer(option: string, correctAnswer: string, optionIndex: number) {
+  selectOption(optionIndex: number) {
     this.selectedOptionIndex = optionIndex;
+    this.selectedOptionIndices[this.currentIndex] = optionIndex; // Save per question
+    this.saveQuizState();
     this.selectedOption = true;
     this.showErrorMessage = false;
+  }
 
-    // Store the selected option for this question
-    this.selectedOptionIndices[this.currentIndex] = optionIndex;
-    this.saveQuizState();
+  checkAnswer() {
+    if (this.selectedOptionIndex === null) return;
 
-    if (option === correctAnswer) {
-      this.correctOptionIndex = optionIndex;
+    const selectedOption =
+      this.questions[this.currentIndex].options[this.selectedOptionIndex];
+    const correctAnswer = this.questions[this.currentIndex].answer;
+
+    if (selectedOption === correctAnswer) {
+      this.correctOptionIndex = this.selectedOptionIndex;
       this.wrongOptionIndex = null;
       this.userScore++;
     } else {
-      this.wrongOptionIndex = optionIndex;
+      this.wrongOptionIndex = this.selectedOptionIndex;
       this.correctOptionIndex = this.questions[
         this.currentIndex
       ].options.findIndex((opt: string) => opt === correctAnswer);
     }
   }
 
-  goToNextQuestion(): void {
+  goToNextQuestion() {
     if (!this.selectedOption) {
       this.showErrorMessage = true;
       return;
@@ -120,41 +152,40 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  resetState(): void {
+  resetState() {
     this.selectedOptionIndex = null;
     this.correctOptionIndex = null;
     this.wrongOptionIndex = null;
     this.selectedOption = false;
     this.showErrorMessage = false;
 
-    // Restore the selected option for the new current question if it exists
     if (this.selectedOptionIndices[this.currentIndex] !== undefined) {
       const restoredOptionIndex = this.selectedOptionIndices[this.currentIndex];
-      const restoredOption =
-        this.questions[this.currentIndex].options[restoredOptionIndex];
-      const correctAnswer = this.questions[this.currentIndex].answer;
-
-      this.checkAnswer(restoredOption, correctAnswer, restoredOptionIndex);
+      this.selectedOptionIndex = restoredOptionIndex;
     }
-
-    // if (this.currentIndex === this.questions.length - 1) {
-    //   this.showResult = true;
-    // }
   }
 
   getOptionLetter(index: number): string {
     return String.fromCharCode(65 + index);
   }
 
-  handleSubmitOrShowResults() {
-    if (this.currentIndex === this.questions.length - 1) {
-      if (this.selectedOption) {
-        this.showResult = true;
-      } else {
-        this.showErrorMessage = true;
+  handleSubmit() {
+    if (this.selectedOptionIndex === null) {
+      this.showErrorMessage = true;
+      return;
+    }
+
+    if (this.correctOptionIndex === null && this.wrongOptionIndex === null) {
+      this.checkAnswer();
+      if (this.currentIndex === this.questions.length - 1) {
+        this.isLastQuestion = true;
       }
     } else {
-      this.goToNextQuestion();
+      if (this.isLastQuestion) {
+        this.showResult = true;
+      } else {
+        this.goToNextQuestion();
+      }
     }
   }
 }
