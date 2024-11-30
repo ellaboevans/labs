@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 
 main {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   margin: 0 auto;
 }
 
@@ -83,10 +83,6 @@ main {
     gap: 15px;
     text-align: center;
     padding: 0 1rem;
-
-    .header__logo {
-      justify-content: center;
-    }
 
     .theme__switch {
       justify-content: center;
