@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100dvw;
-  overflow: hidden;
+  overflow-x: hidden;
   flex-direction: column;
   transition: background-color 0.2s ease-in-out;
 
