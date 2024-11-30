@@ -1,19 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Quiz, SubjectType } from '../interface/quiz';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  private _url = 'http://localhost:3000/quizzes';
+  private _url = 'assets/data/data.json';
   private selectedSubject$ = new BehaviorSubject<Quiz | null>(null);
 
   constructor(private http: HttpClient) {
     const savedSubject = localStorage.getItem('selectedSubject');
     if (savedSubject) {
-      this.selectedSubject$.next(JSON.parse(savedSubject));
+      try {
+        const parsedSubject = JSON.parse(savedSubject);
+        this.selectedSubject$.next(parsedSubject);
+      } catch (error) {
+        console.error(
+          'Error parsing selectedSubject from local storage',
+          error
+        );
+        localStorage.removeItem('selectedSubject');
+      }
     }
   }
 
@@ -27,11 +37,21 @@ export class QuizService {
   }
 
   getSubjects(): Observable<SubjectType[]> {
-    return this.http.get<SubjectType[]>(this._url);
+    return this.http
+      .get<{ quizzes: Quiz[] }>(`${this._url}`)
+      .pipe(map((data) => data.quizzes))
+      .pipe(catchError(this.handleError));
   }
 
   clearSubject(): void {
     this.selectedSubject$.next(null);
     localStorage.removeItem('selectedSubject');
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('HTTP error occurred:', error);
+    return throwError(
+      () => new Error('Something went wrong; please try again later.')
+    );
   }
 }
