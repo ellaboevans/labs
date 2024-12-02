@@ -1,6 +1,6 @@
 export interface Quiz {
   title: string;
-  icon: string | null;
+  icon?: string;
   id: string;
   questions: Question[];
 }
@@ -17,4 +17,4 @@ export interface QuizState {
   selectedOptionIndices: number[];
 }
 
-export type SubjectType = Pick<Quiz, 'id' | 'title' | 'icon'>;
+export type SubjectType = Pick<Quiz, 'id' | 'title' | 'icon' | 'questions'>;
