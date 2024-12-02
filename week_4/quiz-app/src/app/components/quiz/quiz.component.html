@@ -1,6 +1,6 @@
 <section class="quiz" *ngIf="subject && !showResult">
   <article class="quiz__container">
-    <p>Question: {{ currentIndex + 1 }} of {{ questions.length }}</p>
+    <p>Question: {{ currentQuestionNumber }} of {{ questions.length }}</p>
     <h2>{{ questions[currentIndex].question }}</h2>
     <div class="progress__bar">
       <div
