@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Quiz, SubjectType } from '../interface/quiz';
+import QuizzesData from '../../../public/assets/data/data.json';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,7 @@ export class QuizService {
   private _url = 'assets/data/data.json';
   private selectedSubject$ = new BehaviorSubject<Quiz | null>(null);
 
-  constructor(private http: HttpClient) {
+  constructor() {
     const savedSubject = localStorage.getItem('selectedSubject');
     if (savedSubject) {
       try {
@@ -37,21 +36,13 @@ export class QuizService {
   }
 
   getSubjects(): Observable<SubjectType[]> {
-    return this.http
-      .get<{ quizzes: Quiz[] }>(`${this._url}`)
-      .pipe(map((data) => data.quizzes))
-      .pipe(catchError(this.handleError));
+    return new BehaviorSubject(
+      QuizzesData.quizzes as SubjectType[]
+    ).asObservable();
   }
 
   clearSubject(): void {
     this.selectedSubject$.next(null);
     localStorage.removeItem('selectedSubject');
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error('HTTP error occurred:', error);
-    return throwError(
-      () => new Error('Something went wrong; please try again later.')
-    );
   }
 }
