@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SubjectType } from '../../interface/quiz';
 
 @Component({
@@ -7,6 +7,7 @@ import { SubjectType } from '../../interface/quiz';
   imports: [],
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultsComponent {
   @Input() score!: number;
