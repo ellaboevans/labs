@@ -4,13 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WelcomeTextComponent } from '../welcome-text/welcome-text.component';
 import { SubjectListComponent } from '../subject-list/subject-list.component';
 import { ResultsComponent } from '../results/results.component';
-import { Question, SubjectType } from '../../interface/quiz';
-
-interface QuizState {
-  subjectId: string | null;
-  currentIndex: number;
-  selectedOptionIndices: number[];
-}
+import { Question, QuizState, SubjectType } from '../../interface/quiz';
 
 @Component({
   selector: 'app-quiz',
