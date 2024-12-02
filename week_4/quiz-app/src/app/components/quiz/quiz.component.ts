@@ -48,6 +48,10 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  get currentQuestionNumber(): number {
+    return this.currentIndex + 1;
+  }
+
   restoreQuizState() {
     const savedState = localStorage.getItem('quizState');
     if (savedState) {
