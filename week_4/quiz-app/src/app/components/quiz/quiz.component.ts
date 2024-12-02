@@ -42,9 +42,8 @@ export class QuizComponent implements OnInit {
       this.questions = subject ? subject.questions : [];
 
       if (this.selectedOptionIndices.length > 0) {
-        const restoredOptionIndex =
+        this.selectedOptionIndex =
           this.selectedOptionIndices[this.currentIndex];
-        this.selectedOptionIndex = restoredOptionIndex;
       }
     });
   }
@@ -85,7 +84,7 @@ export class QuizComponent implements OnInit {
         } else {
           this.wrongOptionIndex = restoredOptionIndex;
           this.correctOptionIndex = question.options.findIndex(
-            (opt: string) => opt === correctAnswer
+            (option: string) => option === correctAnswer
           );
         }
       }
@@ -127,7 +126,7 @@ export class QuizComponent implements OnInit {
       this.wrongOptionIndex = this.selectedOptionIndex;
       this.correctOptionIndex = this.questions[
         this.currentIndex
-      ].options.findIndex((opt: string) => opt === correctAnswer);
+      ].options.findIndex((option: string) => option === correctAnswer);
     }
   }
 
@@ -154,8 +153,7 @@ export class QuizComponent implements OnInit {
     this.showErrorMessage = false;
 
     if (this.selectedOptionIndices[this.currentIndex] !== undefined) {
-      const restoredOptionIndex = this.selectedOptionIndices[this.currentIndex];
-      this.selectedOptionIndex = restoredOptionIndex;
+      this.selectedOptionIndex = this.selectedOptionIndices[this.currentIndex];
     }
   }
 
