@@ -41,6 +41,6 @@ export class AppComponent implements OnInit {
   resetTitle(): void {
     this.quizService.clearSubject();
     this.selectedSubject.title = '';
-    this.selectedSubject.icon = null;
+    if (this.selectedSubject) this.selectedSubject.icon = '';
   }
 }
