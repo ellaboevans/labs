@@ -18,7 +18,7 @@ export class SubjectListComponent implements OnInit {
   getSubject(): void {
     this.quizService.getSubjects().subscribe((quiz) => (this.subjects = quiz));
   }
-  selectSubject(subject: any) {
+  selectSubject(subject: SubjectType) {
     this.quizService.setSubject(subject);
   }
 
