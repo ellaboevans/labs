@@ -7,7 +7,6 @@ import QuizzesData from '../../../public/assets/data/data.json';
   providedIn: 'root',
 })
 export class QuizService {
-  private _url = 'assets/data/data.json';
   private selectedSubject$ = new BehaviorSubject<Quiz | null>(null);
 
   constructor() {
