@@ -1,10 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@font-face {
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+}
 .quiz {
   display: flex;
   align-items: start;
   justify-content: center;
   gap: 5rem;
   flex-direction: column;
+  padding-top: 1.5rem;
 }
 .quiz .quiz__container {
   width: 100%;
@@ -80,6 +84,7 @@
   background-color: #f9f9f9;
   transition: outline 0.06s ease-in-out;
   outline: none;
+  font-family: "Rubik", sans-serif;
 }
 .quiz .answer__options .answer__option:hover .option__letter {
   color: #a729f5;
@@ -120,7 +125,7 @@
   color: #f9f9f9;
 }
 .quiz .answer__options .answer__option .option__letter.correct__letter {
-  background-color: #26d782; /* Change background to green for correct answers */
+  background-color: #26d782;
   color: #f9f9f9;
 }
 .quiz .answer__options .answer__option .option__letter.wrong__letter {
@@ -129,7 +134,8 @@
 }
 .quiz .answer__options .answer__option .option__text {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
   margin-right: auto !important;
   color: #626c7f;
 }
@@ -149,6 +155,7 @@
   border-radius: 15px;
   border: none;
   transition: background-color 0.3s ease-in-out;
+  font-family: "Rubik", sans-serif;
 }
 .quiz .answer__options .submit__btn:hover {
   background-color: #c76eff;

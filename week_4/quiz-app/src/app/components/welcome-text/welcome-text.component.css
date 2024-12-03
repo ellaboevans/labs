@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@font-face {
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+}
 .hero__text {
   color: #313e51;
   font-weight: normal;
@@ -11,10 +14,10 @@
   width: 25rem;
 }
 .hero__text h1 span {
-  font-weight: 500;
+  font-weight: 600;
 }
 .hero__text p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   margin-top: 2rem;
   font-style: italic;

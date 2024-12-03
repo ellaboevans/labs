@@ -1,5 +1,8 @@
 /* Global styles, importing variables, and mixins */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@font-face {
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+}
 * {
   margin: 0;
   padding: 0;
@@ -14,52 +17,53 @@ body {
   align-items: center;
   justify-content: center;
   width: 100dvw;
-  overflow: hidden;
+  overflow-x: hidden;
   flex-direction: column;
   transition: background-color 0.2s ease-in-out;
 }
-body.dark-mode {
+
+.dark-mode {
   background-color: #313e51;
   color: #f9f9f9;
 }
-body.dark-mode .hero__text {
+.dark-mode .hero__text h1 {
   color: #f9f9f9;
 }
-body.dark-mode .hero__text p {
+.dark-mode .hero__text p {
   color: #abc1e1 !important;
 }
-body.dark-mode .subject__list .subject__card {
+.dark-mode .subject__list .subject__card {
   background-color: #3b4d66 !important;
   box-shadow: 0 16px 40px 0px #313e51 !important;
 }
-body.dark-mode .subject__list .subject__card .text {
-  color: white;
+.dark-mode .subject__list .subject__card .text {
+  color: #f9f9f9;
 }
-body.dark-mode .quiz .answer__option {
+.dark-mode .quiz .answer__option {
   background-color: #3b4d66 !important;
   box-shadow: 0 16px 40px 0px #313e51 !important;
 }
-body.dark-mode .quiz .option__text {
+.dark-mode .quiz .option__text {
   color: #f9f9f9 !important;
 }
-body.dark-mode .quiz p {
+.dark-mode .quiz p {
   color: #abc1e1 !important;
 }
-body.dark-mode .error__message {
+.dark-mode .error__message {
   color: #f9f9f9 !important;
 }
-body.dark-mode .results__board__containers .results__board {
+.dark-mode .results__board__containers .results__board {
   background-color: #3b4d66 !important;
   box-shadow: 0 16px 40px 0px #313e51 !important;
 }
-body.dark-mode .results__board__containers .results__board .results__score {
+.dark-mode .results__board__containers .results__board .results__score {
   color: #f9f9f9 !important;
 }
-body.dark-mode .results__board__containers .results__board p {
+.dark-mode .results__board__containers .results__board p {
   color: #abc1e1 !important;
 }
-body.dark-mode .circle__1,
-body.dark-mode .circle__2 {
+.dark-mode .circle__1,
+.dark-mode .circle__2 {
   filter: invert(1) opacity(0.09);
 }
 

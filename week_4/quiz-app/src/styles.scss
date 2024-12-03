@@ -18,65 +18,67 @@ body {
   overflow-x: hidden;
   flex-direction: column;
   transition: background-color 0.2s ease-in-out;
+}
 
-  &.dark-mode {
-    background-color: map-get($dark-mode, bg-color);
-    color: map-get($dark-mode, text-color);
+.dark-mode {
+  background-color: map-get($dark-mode, bg-color);
+  color: map-get($dark-mode, text-color);
 
-    .hero__text {
+  .hero__text {
+    h1 {
       color: map-get($dark-mode, text-color);
-
-      p {
-        color: $color-light-bluish !important;
-      }
     }
 
-    .subject__list {
-      .subject__card {
-        background-color: $card-dark-bg !important;
-        box-shadow: $shadow-dark !important;
+    p {
+      color: $color-light-bluish !important;
+    }
+  }
 
-        .text {
-          color: white;
-        }
+  .subject__list {
+    .subject__card {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
+
+      .text {
+        color: $color-light;
       }
     }
+  }
 
-    .quiz {
-      .answer__option {
-        background-color: $card-dark-bg !important;
-        box-shadow: $shadow-dark !important;
-      }
-      .option__text {
-        color: $color-light !important;
-      }
-
-      p {
-        color: $color-light-bluish !important;
-      }
+  .quiz {
+    .answer__option {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
     }
-
-    .error__message {
+    .option__text {
       color: $color-light !important;
     }
 
-    .results__board__containers {
-      .results__board {
-        background-color: $card-dark-bg !important;
-        box-shadow: $shadow-dark !important;
-        .results__score {
-          color: $color-light !important;
-        }
-        p {
-          color: $color-light-bluish !important;
-        }
+    p {
+      color: $color-light-bluish !important;
+    }
+  }
+
+  .error__message {
+    color: $color-light !important;
+  }
+
+  .results__board__containers {
+    .results__board {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
+      .results__score {
+        color: $color-light !important;
+      }
+      p {
+        color: $color-light-bluish !important;
       }
     }
+  }
 
-    .circle__1,
-    .circle__2 {
-      filter: invert(1) opacity(0.09);
-    }
+  .circle__1,
+  .circle__2 {
+    filter: invert(1) opacity(0.09);
   }
 }
 
