@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  /* Color Palette */
+  --bg: #eff5ff;
+  --border-color: #d6d9e6;
+  --white: #ffffff;
+  --grey: #9699aa;
+  --very-light-grey: #f8f9ff;
+  --blue: #483eff;
+  --light-blue: #abbcff;
+  --sky-blue: #bee2fd;
+  --denim: #022959;
+  --error: #ee374a;
+
+  /* Typography */
+  --font-family: "Ubuntu", sans-serif;
+  --font-Heading: 32px;
+  --font-Large: 16px;
+  --font-medium: 14px;
+  --font-small: 12px;
+  --line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg);
+  color: var(--grey);
+}
