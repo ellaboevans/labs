@@ -30,6 +30,8 @@ export class QuizComponent implements OnInit {
   showResult: boolean = false;
   isLastQuestion: boolean = false;
   selectedOptionIndices: number[] = [];
+  correctOptionIndices: (number | null)[] = [];
+  wrongOptionIndices: (number | null)[] = [];
   userScore: number = 0;
 
   constructor(private quizService: QuizService) {}
@@ -58,6 +60,8 @@ export class QuizComponent implements OnInit {
       const parsedState: QuizState = JSON.parse(savedState);
       this.currentIndex = parsedState.currentIndex || 0;
       this.selectedOptionIndices = parsedState.selectedOptionIndices || [];
+      this.correctOptionIndices = parsedState.correctOptionIndices || [];
+      this.wrongOptionIndices = parsedState.wrongOptionIndices || [];
       this.userScore = this.calculateScore(this.selectedOptionIndices);
       this.restoreCurrentQuestionState();
     }
@@ -77,21 +81,8 @@ export class QuizComponent implements OnInit {
     const restoredOptionIndex = this.selectedOptionIndices[this.currentIndex];
     if (restoredOptionIndex !== undefined) {
       this.selectedOptionIndex = restoredOptionIndex;
-
-      const question = this.questions[this.currentIndex];
-      if (question) {
-        const correctAnswer = question.answer;
-
-        if (question.options[restoredOptionIndex] === correctAnswer) {
-          this.correctOptionIndex = restoredOptionIndex;
-          this.wrongOptionIndex = null;
-        } else {
-          this.wrongOptionIndex = restoredOptionIndex;
-          this.correctOptionIndex = question.options.findIndex(
-            (option: string) => option === correctAnswer
-          );
-        }
-      }
+      this.correctOptionIndex = this.correctOptionIndices[this.currentIndex];
+      this.wrongOptionIndex = this.wrongOptionIndices[this.currentIndex];
     }
   }
 
@@ -102,6 +93,8 @@ export class QuizComponent implements OnInit {
       subjectId: this.subject.id,
       currentIndex: this.currentIndex,
       selectedOptionIndices: this.selectedOptionIndices,
+      correctOptionIndices: this.correctOptionIndices,
+      wrongOptionIndices: this.wrongOptionIndices,
     };
 
     localStorage.setItem('quizState', JSON.stringify(quizState));
@@ -132,20 +125,23 @@ export class QuizComponent implements OnInit {
         this.currentIndex
       ].options.findIndex((option: string) => option === correctAnswer);
     }
+
+    this.correctOptionIndices[this.currentIndex] = this.correctOptionIndex;
+    this.wrongOptionIndices[this.currentIndex] = this.wrongOptionIndex;
+    this.saveQuizState();
   }
 
   goToNextQuestion() {
-    if (!this.selectedOption) {
+    if (this.correctOptionIndex === null && this.wrongOptionIndex === null) {
       this.showErrorMessage = true;
       return;
     }
 
     if (this.currentIndex < this.questions.length - 1) {
       this.currentIndex++;
-      this.saveQuizState();
       this.resetState();
-
       this.isLastQuestion = this.currentIndex === this.questions.length - 1;
+      this.saveQuizState();
     }
   }
 
@@ -158,6 +154,8 @@ export class QuizComponent implements OnInit {
 
     if (this.selectedOptionIndices[this.currentIndex] !== undefined) {
       this.selectedOptionIndex = this.selectedOptionIndices[this.currentIndex];
+      this.correctOptionIndex = this.correctOptionIndices[this.currentIndex];
+      this.wrongOptionIndex = this.wrongOptionIndices[this.currentIndex];
     }
   }
 
@@ -173,9 +171,6 @@ export class QuizComponent implements OnInit {
 
     if (this.correctOptionIndex === null && this.wrongOptionIndex === null) {
       this.checkAnswer();
-      if (this.currentIndex === this.questions.length - 1) {
-        this.isLastQuestion = true;
-      }
     } else {
       if (this.isLastQuestion) {
         this.showResult = true;
@@ -183,5 +178,7 @@ export class QuizComponent implements OnInit {
         this.goToNextQuestion();
       }
     }
+
+    this.selectedOption = false;
   }
 }
