@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { PLAN_OPTIONS } from '../../data/plan-options';
+import { ADD_ONS } from '../../data/addons';
 
 interface StepResults {
   title: string;
@@ -23,7 +24,9 @@ interface StepResults {
 })
 export class FormsComponent {
   currentStep: number = 1;
+  isYearly = false;
   plans = PLAN_OPTIONS;
+  addons = ADD_ONS;
 
   formFields = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -71,7 +74,7 @@ export class FormsComponent {
   }
 
   gotoNextStep() {
-    if (this.currentStep === 1) {
+    if (this.currentStep) {
       this.currentStep++;
     }
   }
@@ -84,5 +87,10 @@ export class FormsComponent {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
+  }
+
+  togglePlan(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.isYearly = checkbox.checked;
   }
 }

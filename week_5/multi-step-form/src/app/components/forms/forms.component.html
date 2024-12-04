@@ -74,19 +74,48 @@
         <!-- banner with switch and labels for monthly and yearly -->
         <div class="banner">
           <span class="switch-container">
-            <small class="monthly-plan">Monthly</small>
+            <small class="monthly-plan" [ngClass]="{ active: !isYearly }"
+              >Monthly</small
+            >
             <input
               type="checkbox"
               id="toggle-switch"
               class="switch-checkbox"
+              (change)="togglePlan($event)"
               id="toggle-switch"
             />
             <label for="toggle-switch" class="switch-label">
               <span class="switch-inner"></span>
               <span class="switch-slider"></span>
             </label>
-            <small class="yearly-plan">Yearly</small>
+            <small class="yearly-plan" [ngClass]="{ active: isYearly }"
+              >Yearly</small
+            >
           </span>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="currentStep === 3">
+      <div class="form-group">
+        <div class="addon-container">
+          <div class="addon-card" *ngFor="let addon of addons">
+            <label [for]="addon.title">
+              <input
+                [id]="addon.title"
+                type="checkbox"
+                [value]="addon.id"
+                class="addon-checkbox"
+              />
+              <div class="addon-content">
+                <div class="addon-text">
+                  <h3>{{ addon.title }}</h3>
+                  <p>{{ addon.description }}</p>
+                </div>
+                <span class="addon-price">+{{ addon.price }}/mo</span>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </ng-container>
