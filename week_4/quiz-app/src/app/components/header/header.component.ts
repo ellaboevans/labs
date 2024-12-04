@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubjectType } from '../../interface/quiz';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
