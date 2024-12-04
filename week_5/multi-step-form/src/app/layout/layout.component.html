@@ -1,0 +1,36 @@
+<main id="layout-container">
+  <aside class="side-bar">
+    <div class="side-bar-content">
+      <ng-container *ngFor="let item of sidebarItems">
+        <div class="side-bar-content-items">
+          <!-- circle -->
+          <div
+            class="side-bar-item-circle"
+            [ngStyle]="{
+              'background-color': item.active
+                ? 'var(--sky-blue)'
+                : 'transparent',
+              border: item.active ? 'none' : '1px solid var(--white)',
+              color: item.active ? 'var(--denim)' : 'var(--white)'
+            }"
+          >
+            <p>{{ item.step }}</p>
+          </div>
+          <!-- text content -->
+          <div class="side-bar-item-text">
+            <h3>Step {{ item.step }}</h3>
+            <p>{{ item.label }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <img
+      class="sidebar-image"
+      src="/assets/images/bg-sidebar-desktop.svg"
+      alt=""
+    />
+  </aside>
+  <section class="main-content">
+    <app-personal-info-form></app-personal-info-form>
+  </section>
+</main>

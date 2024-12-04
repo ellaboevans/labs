@@ -1,0 +1,104 @@
+<div id="form-wrapper">
+  <h1>{{ getHeadings(currentStep).title }}</h1>
+  <p>{{ getHeadings(currentStep).description }}</p>
+  <!-- Form -->
+  <form id="form-container" [formGroup]="formFields" (ngSubmit)="submitForm()">
+    <!-- form input -->
+    <ng-container *ngIf="currentStep === 1">
+      <div class="form-group">
+        <label for="name">
+          <span>Name</span>
+          <span class="error-message" *ngIf="formFields.hasError('required')"
+            >This field is required</span
+          >
+        </label>
+        <input
+          type="text"
+          id="name"
+          class="form-input"
+          placeholder="e.g Stephen King"
+          formControlName="name"
+          [ngStyle]="{
+            borderColor: formFields.hasError('required') ? 'var(--error)' : ''
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">
+          <span>Email</span>
+          <span class="error-message" *ngIf="formFields.hasError('required')"
+            >This field is required</span
+          >
+        </label>
+        <input
+          type="email"
+          id="email"
+          class="form-input"
+          placeholder="e.g stephenking@lorem.com"
+          formControlName="email"
+          [ngStyle]="{
+            borderColor: formFields.hasError('required') ? 'var(--error)' : ''
+          }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone-number">
+          <span>Phone Number</span>
+          <span class="error-message" *ngIf="formFields.hasError('required')"
+            >This field is required</span
+          >
+        </label>
+        <input
+          type="text"
+          id="phone-number"
+          class="form-input"
+          placeholder="e.g +1 234 567 890"
+          formControlName="phone"
+          [ngStyle]="{
+            borderColor: formFields.hasError('required') ? 'var(--error)' : ''
+          }"
+        />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentStep === 2">
+      <div class="form-group">
+        <div class="card-container">
+          <div class="card" *ngFor="let plan of plans">
+            <img [src]="plan.icon" [alt]="plan.type" />
+            <div class="card-texts">
+              <h3>{{ plan.type | titlecase }}</h3>
+              <p>{{ plan.price }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- banner with switch and labels for monthly and yearly -->
+        <div class="banner">
+          <span class="switch-container">
+            <small class="monthly-plan">Monthly</small>
+            <input
+              type="checkbox"
+              id="toggle-switch"
+              class="switch-checkbox"
+              id="toggle-switch"
+            />
+            <label for="toggle-switch" class="switch-label">
+              <span class="switch-inner"></span>
+              <span class="switch-slider"></span>
+            </label>
+            <small class="yearly-plan">Yearly</small>
+          </span>
+        </div>
+      </div>
+    </ng-container>
+    <!-- form buttons container -->
+    <div id="form-buttons">
+      <button type="button" class="back-btn" (click)="gotoPreviousStep()">
+        Go back
+      </button>
+
+      <button type="submit" class="submit-btn" (click)="gotoNextStep()">
+        Next Step
+      </button>
+    </div>
+  </form>
+</div>
