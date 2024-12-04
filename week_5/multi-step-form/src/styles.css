@@ -9,7 +9,7 @@
   --white: #ffffff;
   --grey: #9699aa;
   --very-light-grey: #f8f9ff;
-  --blue: #483eff;
+  --purple: #483eff;
   --light-blue: #abbcff;
   --sky-blue: #bee2fd;
   --denim: #022959;
@@ -22,11 +22,20 @@
   --font-medium: 14px;
   --font-small: 12px;
   --line-height: 1.5;
+  --spacing: 1px;
 
   /* Typography Weights */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+
+  /* Background image */
+  --bg-image-desktop: url("/assets/images/bg-sidebar-desktop.svg");
+  --bg-image-mobile: url("/assets/images/bg-sidebar-mobile.svg");
+
+  /* Borders */
+  --radius: 15px;
+  --input-radius: 8px;
 }
 
 * {
@@ -39,4 +48,10 @@ body {
   font-family: var(--font-family);
   background-color: var(--bg);
   color: var(--grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  width: 100dvw;
+  overflow: auto !important;
 }
