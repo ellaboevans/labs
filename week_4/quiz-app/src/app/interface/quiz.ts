@@ -12,9 +12,11 @@ export interface Question {
 }
 
 export interface QuizState {
-  subjectId: string | null;
+  subjectId: string;
   currentIndex: number;
   selectedOptionIndices: number[];
+  correctOptionIndices: (number | null)[];
+  wrongOptionIndices: (number | null)[];
 }
 
 export type SubjectType = Pick<Quiz, 'id' | 'title' | 'icon' | 'questions'>;
