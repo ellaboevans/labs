@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +9,7 @@ import {
 
 import { PLAN_OPTIONS } from '../../data/plan-options';
 import { ADD_ONS } from '../../data/addons';
+import { Addon, Plan } from '../../interface/addon';
 
 interface StepResults {
   title: string;
@@ -22,8 +23,9 @@ interface StepResults {
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.css',
 })
-export class FormsComponent {
+export class FormsComponent implements OnInit {
   isYearly = false;
+  isForward = false;
   plans = PLAN_OPTIONS;
   addons = ADD_ONS;
 
@@ -45,12 +47,15 @@ export class FormsComponent {
       type: new FormControl(''),
       price: new FormControl(''),
     }),
-    addons: new FormGroup({
-      type: new FormControl(''),
-      package: new FormControl(''),
-      price: new FormControl(''),
-    }),
+    addons: new FormControl<Addon[]>([]),
   });
+
+  ngOnInit(): void {
+    const savedData = localStorage.getItem('formData');
+    if (savedData) return this.formFields.setValue(JSON.parse(savedData));
+
+    this.summaryData();
+  }
 
   getHeadings(step: number): StepResults {
     switch (step) {
@@ -82,7 +87,13 @@ export class FormsComponent {
     }
   }
 
+  savedDataToLocalStorage() {
+    localStorage.setItem('formData', JSON.stringify(this.formFields.value));
+    console.log('Form data saved to local storage');
+  }
+
   gotoNextStep() {
+    this.isForward = true;
     if (this.currentStep === 1) {
       const name = this.formFields.get('name');
       const email = this.formFields.get('email');
@@ -95,6 +106,9 @@ export class FormsComponent {
         return;
       }
     }
+
+    this.savedDataToLocalStorage();
+
     if (this.currentStep < 4) {
       this.currentStep++;
       this.stepChanged.emit(this.currentStep);
@@ -102,10 +116,12 @@ export class FormsComponent {
   }
 
   submitForm() {
-    console.log(this.formFields);
+    console.log(this.formFields.value);
+    localStorage.removeItem('formData');
   }
 
   gotoPreviousStep() {
+    this.isForward = false;
     if (this.currentStep > 1) {
       this.currentStep--;
       this.stepChanged.emit(this.currentStep);
@@ -115,5 +131,47 @@ export class FormsComponent {
   togglePlan(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.isYearly = checkbox.checked;
+  }
+
+  selectPlan(plan: Plan) {
+    this.formFields.patchValue({
+      plan: {
+        type: plan.type,
+        price: plan.price,
+      },
+    });
+  }
+
+  selectAddon(addonValue: Addon) {
+    const selectedAddons = this.formFields.get('addons')?.value || [];
+
+    if (selectedAddons.some((addon: Addon) => addonValue.type === addon.type)) {
+      const updatedAddons = selectedAddons.filter(
+        (addon: Addon) => addonValue.type !== addon.type
+      );
+      this.formFields.patchValue({
+        addons: updatedAddons,
+      });
+    } else {
+      this.formFields.patchValue({
+        addons: [...selectedAddons, addonValue],
+      });
+    }
+
+    this.savedDataToLocalStorage();
+  }
+
+  isAddonSelected(selectedAddonValue: Addon): boolean {
+    const selectedAddons = this.formFields.get('addons')?.value || [];
+    return selectedAddons.some(
+      (a: Addon) => a.type === selectedAddonValue.type
+    );
+  }
+
+  summaryData() {
+    const data = localStorage.getItem('formData');
+    if (data) {
+      console.log(data);
+    }
   }
 }

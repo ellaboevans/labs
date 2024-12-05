@@ -2,7 +2,13 @@
   <h1>{{ getHeadings(currentStep).title }}</h1>
   <p>{{ getHeadings(currentStep).description }}</p>
   <!-- Form -->
-  <form id="form-container" [formGroup]="formFields" (ngSubmit)="submitForm()">
+  <form
+    id="form-container"
+    [formGroup]="formFields"
+    (ngSubmit)="submitForm()"
+    [class.slide-in]="isForward"
+    [class.slide-out]="!isForward"
+  >
     <!-- form input -->
     <ng-container *ngIf="currentStep === 1">
       <div class="form-group">
@@ -85,9 +91,20 @@
     </ng-container>
 
     <ng-container *ngIf="currentStep === 2">
-      <div class="form-group">
+      <div
+        class="form-group"
+        [class.slide-in]="isForward"
+        [class.slide-out]="!isForward"
+      >
         <div class="card-container">
-          <div class="card" *ngFor="let plan of plans">
+          <div
+            class="card"
+            *ngFor="let plan of plans"
+            (click)="selectPlan(plan)"
+            [ngClass]="{
+              'addon-selected': plan.type === formFields.get('plan.type')?.value
+            }"
+          >
             <img [src]="plan.icon" [alt]="plan.type" />
             <div class="card-texts">
               <h3>{{ plan.type | titlecase }}</h3>
@@ -121,15 +138,25 @@
     </ng-container>
 
     <ng-container *ngIf="currentStep === 3">
-      <div class="form-group">
+      <div
+        class="form-group"
+        [class.slide-in]="isForward"
+        [class.slide-out]="!isForward"
+      >
         <div class="addon-container">
-          <div class="addon-card" *ngFor="let addon of addons">
+          <div
+            class="addon-card"
+            *ngFor="let addon of addons"
+            [ngClass]="{ selected: isAddonSelected(addon) }"
+          >
             <label [for]="addon.title">
               <input
                 [id]="addon.title"
                 type="checkbox"
-                [value]="addon.id"
+                [value]="addon.type"
+                [checked]="isAddonSelected(addon)"
                 class="addon-checkbox"
+                (change)="selectAddon(addon)"
               />
               <div class="addon-content">
                 <div class="addon-text">
@@ -145,7 +172,11 @@
     </ng-container>
 
     <ng-container *ngIf="currentStep === 4">
-      <div class="form-group">
+      <div
+        class="form-group"
+        [class.slide-in]="isForward"
+        [class.slide-out]="!isForward"
+      >
         <div class="summary-card">
           <div class="plan-details">
             <div class="plan-header">
@@ -191,6 +222,7 @@
             currentStep !== 4 ? ' var(--denim)' : 'var(--purple)'
         }"
         (click)="gotoNextStep()"
+        [disabled]="formFields.invalid"
       >
         {{ currentStep === 4 ? "Confirm" : "Next Step" }}
       </button>
