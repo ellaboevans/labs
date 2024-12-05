@@ -15,14 +15,21 @@
         <div class="form-group">
           <label for="name">
             <span>Name</span>
-            <small
-              class="error-message"
-              *ngIf="
-                formFields.get('name')?.hasError('required') &&
-                formFields.get('name')?.touched
-              "
-              >This field is required</small
-            >
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('name')?.hasError('required') &&
+                  formFields.get('name')?.touched
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="formFields.get('name')?.hasError('pattern')"
+                >Name must contain only letters</small
+              >
+            </ng-container>
           </label>
           <input
             type="text"
@@ -42,14 +49,21 @@
         <div class="form-group">
           <label for="email">
             <span>Email</span>
-            <small
-              class="error-message"
-              *ngIf="
-                formFields.get('email')?.hasError('required') &&
-                formFields.get('email')?.touched
-              "
-              >This field is required</small
-            >
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('email')?.hasError('required') &&
+                  formFields.get('email')?.touched
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="formFields.get('email')?.hasError('email')"
+                >Please enter a valid email address</small
+              >
+            </ng-container>
           </label>
           <input
             type="email"
@@ -65,14 +79,22 @@
         <div class="form-group">
           <label for="phone-number">
             <span>Phone Number</span>
-            <small
-              class="error-message"
-              *ngIf="
-                formFields.get('phone')?.hasError('required') &&
-                formFields.get('phone')?.touched
-              "
-              >This field is required</small
-            >
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('phone')?.hasError('required') &&
+                  formFields.get('phone')?.touched
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="formFields.get('phone')?.hasError('pattern')"
+              >
+                Phone number must start with '+' and 10-14 digits
+              </small>
+            </ng-container>
           </label>
           <input
             type="text"
@@ -234,7 +256,7 @@
 </ng-container>
 <ng-container *ngIf="isDone">
   <div class="thank-you-wrapper">
-      <img src="assets/images/icon-thank-you.svg" alt="thank-you icon" />
+    <img src="assets/images/icon-thank-you.svg" alt="thank-you icon" />
     <h1>Thank you!</h1>
     <p>
       Thanks for confirming your subscription! We hope you have fun using our

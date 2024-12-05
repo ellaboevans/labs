@@ -42,7 +42,7 @@ export class FormsComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\d{10,15}$/),
+      Validators.pattern(/^\+(\d{1,3})\d{10,14}$/),
     ]),
     plan: new FormGroup({
       type: new FormControl(''),
