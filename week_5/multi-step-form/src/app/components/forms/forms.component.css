@@ -1,4 +1,7 @@
 #form-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
   color: var(--denim);
 
   h1 {
@@ -15,6 +18,7 @@
   #form-container {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 1.5rem;
     margin-top: 1.2rem;
     padding-right: 2.5rem;
@@ -52,7 +56,7 @@
 
         &:focus {
           outline: none;
-          border-color: var(--blue);
+          border-color: var(--purple);
         }
 
         &::placeholder {
@@ -63,6 +67,7 @@
     }
 
     #form-buttons {
+      margin-top: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -296,5 +301,83 @@
         }
       }
     }
+  }
+}
+
+.summary-card {
+  background-color: var(--very-light-grey);
+  border-radius: var(--input-radius);
+  padding: 1.5rem 1rem 0.5rem;
+  font-family: "Inter", sans-serif;
+
+  .plan-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .plan-header {
+      h3 {
+        font-size: var(--font-medium);
+        color: var(--denim);
+        margin: 0;
+      }
+
+      .change-link {
+        font-size: var(--font-small);
+        color: var(--grey);
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .plan-price {
+      font-size: var(--font-medium);
+      font-weight: var(--font-weight-bold);
+      color: var(--denim);
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1rem 0;
+  }
+
+  .summary-addons {
+    list-style: none;
+    margin-bottom: 1rem;
+
+    .summary-addon {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--font-small);
+      color: var(--grey);
+      margin-bottom: 1rem;
+
+      span:last-child {
+        color: var(--denim);
+      }
+    }
+  }
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-medium);
+  padding: 1rem;
+
+  span {
+    color: var(--grey);
+  }
+
+  .total-price {
+    font-weight: var(--font-weight-bold);
+    font-size: 20px;
+    color: var(--purple);
   }
 }

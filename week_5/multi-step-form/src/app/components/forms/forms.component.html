@@ -60,6 +60,7 @@
         />
       </div>
     </ng-container>
+
     <ng-container *ngIf="currentStep === 2">
       <div class="form-group">
         <div class="card-container">
@@ -116,6 +117,35 @@
               </div>
             </label>
           </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="currentStep === 4">
+      <div class="form-group">
+        <div class="summary-card">
+          <div class="plan-details">
+            <div class="plan-header">
+              <h3>Arcade (Monthly)</h3>
+              <p><a href="#" class="change-link">Change</a></p>
+            </div>
+            <p class="plan-price">$9/mo</p>
+          </div>
+          <hr />
+          <ul class="summary-addons">
+            <li class="summary-addon">
+              <span>Online service</span>
+              <span>+$1/mo</span>
+            </li>
+            <li class="addon">
+              <span>Larger storage</span>
+              <span>+$2/mo</span>
+            </li>
+          </ul>
+        </div>
+        <div class="total">
+          <span>Total (per month)</span>
+          <span class="total-price">+$12/mo</span>
         </div>
       </div>
     </ng-container>
