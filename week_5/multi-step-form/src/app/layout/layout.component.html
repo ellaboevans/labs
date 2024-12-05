@@ -2,7 +2,7 @@
   <aside class="side-bar">
     <div class="side-bar-content">
       <ng-container *ngFor="let item of sidebarItems">
-        <div class="side-bar-content-items">
+        <div class="side-bar-content-items" (click)="onSidebarClickStep(item.step)">
           <!-- circle -->
           <div
             class="side-bar-item-circle"
@@ -31,6 +31,6 @@
     />
   </aside>
   <section class="main-content">
-    <app-personal-info-form></app-personal-info-form>
+    <app-forms (stepChanged)="onStepChanged($event)" [currentStep]="currentStep"></app-forms>
   </section>
 </main>

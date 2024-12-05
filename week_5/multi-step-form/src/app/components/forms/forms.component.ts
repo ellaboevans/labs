@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,22 +16,31 @@ interface StepResults {
 }
 
 @Component({
-  selector: 'app-personal-info-form',
+  selector: 'app-forms',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.css',
 })
 export class FormsComponent {
-  currentStep: number = 1;
   isYearly = false;
   plans = PLAN_OPTIONS;
   addons = ADD_ONS;
 
+  @Output() stepChanged = new EventEmitter<number>();
+  @Input() currentStep: number = 1;
+
   formFields = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.pattern(/^[a-zA-Z\s]*$/),
+    ]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', Validators.required),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\d{10,15}$/),
+    ]),
     plan: new FormGroup({
       type: new FormControl(''),
       price: new FormControl(''),
@@ -74,18 +83,32 @@ export class FormsComponent {
   }
 
   gotoNextStep() {
-    if (this.currentStep) {
+    if (this.currentStep === 1) {
+      const name = this.formFields.get('name');
+      const email = this.formFields.get('email');
+      const phone = this.formFields.get('phone');
+
+      if (name?.invalid || email?.invalid || phone?.invalid) {
+        name?.markAsTouched();
+        email?.markAsTouched();
+        phone?.markAsTouched();
+        return;
+      }
+    }
+    if (this.currentStep < 4) {
       this.currentStep++;
+      this.stepChanged.emit(this.currentStep);
     }
   }
 
   submitForm() {
-    console.log(this.formFields.value);
+    console.log(this.formFields);
   }
 
   gotoPreviousStep() {
     if (this.currentStep > 1) {
       this.currentStep--;
+      this.stepChanged.emit(this.currentStep);
     }
   }
 

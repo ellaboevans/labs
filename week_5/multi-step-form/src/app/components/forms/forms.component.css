@@ -91,12 +91,14 @@
       }
 
       .submit-btn {
-        padding: 0.8rem 2rem;
-        background-color: var(--denim);
+        padding: 1rem 0;
+        width: 8rem;
         color: var(--white);
         font-weight: var(--font-weight-bold);
         cursor: pointer;
         border-radius: var(--input-radius);
+        margin-left: auto;
+        transition: background-color 0.4s ease;
       }
     }
 
@@ -233,8 +235,8 @@
 
         label {
           display: flex;
-          align-items: start;
-          gap: 0.5rem;
+          align-items: center;
+          gap: 1rem;
           width: 100%;
           cursor: pointer;
 
@@ -289,7 +291,7 @@
             p {
               font-size: var(--font-small);
               color: var(--grey);
-              margin-top: 0.2rem;
+              margin-top: 0.3rem;
             }
           }
 
