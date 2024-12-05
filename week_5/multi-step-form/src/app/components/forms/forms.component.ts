@@ -26,6 +26,7 @@ interface StepResults {
 export class FormsComponent implements OnInit {
   isYearly = false;
   isForward = false;
+  isDone = false;
   plans = PLAN_OPTIONS;
   addons = ADD_ONS;
 
@@ -118,6 +119,7 @@ export class FormsComponent implements OnInit {
   submitForm() {
     console.log(this.formFields.value);
     localStorage.removeItem('formData');
+    this.isDone = true;
   }
 
   gotoPreviousStep() {
