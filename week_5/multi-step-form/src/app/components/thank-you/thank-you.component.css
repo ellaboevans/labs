@@ -1,0 +1,36 @@
+.thank-you-wrapper {
+  color: var(--denim);
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  gap: 1rem;
+
+  img {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: var(--font-medium);
+    color: var(--grey);
+    text-align: center;
+  }
+
+  button {
+    font-size: var(--font-medium);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--input-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: var(--dark-purple);
+    }
+  }
+}
