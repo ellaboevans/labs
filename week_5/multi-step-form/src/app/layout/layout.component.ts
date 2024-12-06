@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SideBar } from '../interface/side-bar';
 import { FormsComponent } from '../components/forms/forms.component';
 import { SIDE_BAR } from '../data/side-bar';
@@ -9,26 +9,50 @@ import { SIDE_BAR } from '../data/side-bar';
   standalone: true,
   imports: [CommonModule, FormsComponent],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  styleUrls: ['./layout.component.css'],
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   sidebarItems: SideBar[] = SIDE_BAR;
-
   currentStep: number = 1;
+  isDone: boolean = false;
+
+  ngOnInit() {
+    const savedStep = localStorage.getItem('currentStep');
+    if (savedStep) {
+      this.currentStep = parseInt(savedStep, 10);
+      this.isDone = this.currentStep === 4;
+    }
+  }
 
   onStepChanged(currentStep: number) {
     this.updateSidebarSteps(currentStep);
     this.currentStep = currentStep;
+    this.saveCurrentStep();
   }
 
   onSidebarClickStep(step: number) {
+    if (this.isDone && this.currentStep === 4) return;
+
     this.updateSidebarSteps(step);
     this.currentStep = step;
+    this.saveCurrentStep();
   }
 
-  updateSidebarSteps(activeSteps: number) {
+  onFormSubmitted() {
+    this.isDone = true;
+    this.currentStep = 4;
+    this.saveCurrentStep();
+
+    localStorage.removeItem('currentStep');
+  }
+
+  updateSidebarSteps(activeStep: number) {
     this.sidebarItems.forEach(
-      (item) => (item.active = item.step === activeSteps)
+      (item) => (item.active = item.step === activeStep)
     );
+  }
+
+  saveCurrentStep() {
+    localStorage.setItem('currentStep', this.currentStep.toString());
   }
 }

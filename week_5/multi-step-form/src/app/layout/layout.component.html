@@ -5,6 +5,7 @@
         <button
           class="side-bar-content-items"
           (click)="onSidebarClickStep(item.step)"
+          [disabled]="currentStep === 4 && isDone"
         >
           <!-- circle -->
           <div
@@ -37,6 +38,7 @@
     <app-forms
       (stepChanged)="onStepChanged($event)"
       [currentStep]="currentStep"
+      (formSubmitted)="onFormSubmitted()"
     ></app-forms>
   </section>
 </main>

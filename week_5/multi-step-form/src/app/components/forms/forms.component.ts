@@ -39,6 +39,7 @@ export class FormsComponent implements OnInit {
   getHeadings = getFormHeadings;
 
   @Output() stepChanged = new EventEmitter<number>();
+  @Output() formSubmitted = new EventEmitter();
   @Input() currentStep: number = 1;
 
   formFields = new FormGroup({
@@ -129,6 +130,7 @@ export class FormsComponent implements OnInit {
     localStorage.setItem('payload', JSON.stringify(payload));
     localStorage.removeItem('formData');
     this.isDone = true;
+    this.formSubmitted.emit(); // this when emitted disables the click even on step tracker
   }
 
   gotoPreviousStep() {
