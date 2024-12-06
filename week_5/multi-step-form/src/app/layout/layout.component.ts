@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { SideBar } from '../interface/side-bar';
 import { FormsComponent } from '../components/forms/forms.component';
 import { SIDE_BAR } from '../data/side-bar';
+import { ThankYouComponent } from "../components/thank-you/thank-you.component";
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, FormsComponent],
+  imports: [CommonModule, FormsComponent, ThankYouComponent],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
 })

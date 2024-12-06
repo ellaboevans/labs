@@ -40,5 +40,8 @@
       [currentStep]="currentStep"
       (formSubmitted)="onFormSubmitted()"
     ></app-forms>
+    <ng-container *ngIf="isDone">
+      <app-thank-you></app-thank-you>
+    </ng-container>
   </section>
 </main>

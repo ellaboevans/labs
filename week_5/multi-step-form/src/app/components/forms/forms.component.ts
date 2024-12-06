@@ -22,7 +22,6 @@ import { SummaryComponent } from '../summary/summary.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ThankYouComponent,
     CapitalizePipe,
     SummaryComponent,
   ],
