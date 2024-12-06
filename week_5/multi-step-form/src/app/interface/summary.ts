@@ -7,16 +7,3 @@ export interface Summary {
   plan?: Plan;
   addons?: Addon[];
 }
-
-// interface Addon {
-//   description: string;
-//   price: string;
-//   title: string;
-//   type: string;
-// }
-
-// interface Plan {
-//   type: string;
-//   price: string;
-//   extras: string;
-// }
