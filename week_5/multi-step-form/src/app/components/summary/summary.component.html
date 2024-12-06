@@ -1,0 +1,27 @@
+<ng-container>
+  <div class="summary-card">
+    <div class="plan-details">
+      <div class="plan-header">
+        <h3>
+          {{ summary.plan?.type || "no data yet" | capitalize }}
+          ({{ isYearly ? "Yearly" : "Monthly" }})
+        </h3>
+        <p><a href="#" class="change-link">Change</a></p>
+      </div>
+      <p class="plan-price">
+        {{ summary.plan?.price }}
+      </p>
+    </div>
+    <hr />
+    <ul class="summary-addons">
+      <li class="summary-addon" *ngFor="let addon of summary.addons">
+        <span>{{ addon.title }}</span>
+        <span>+{{ addon.price }}/{{ isYearly ? "yr" : "mo" }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="total">
+    <span>Total ({{ isYearly ? "per year" : "per month" }})</span>
+    <span class="total-price">{{ totalPrice }}</span>
+  </div>
+</ng-container>
