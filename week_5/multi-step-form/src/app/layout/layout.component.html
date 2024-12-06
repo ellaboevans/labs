@@ -7,7 +7,6 @@
           (click)="onSidebarClickStep(item.step)"
           [disabled]="currentStep === 4 && isDone"
         >
-          <!-- circle -->
           <div
             class="side-bar-item-circle"
             [ngStyle]="{
@@ -20,7 +19,6 @@
           >
             <p>{{ item.step }}</p>
           </div>
-          <!-- text content -->
           <div class="side-bar-item-text">
             <h3>Step {{ item.step }}</h3>
             <p>{{ item.label }}</p>
@@ -28,11 +26,21 @@
         </button>
       </ng-container>
     </div>
-    <img
-      class="sidebar-image"
-      src="/assets/images/bg-sidebar-desktop.svg"
-      alt=""
-    />
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcset="/assets/images/bg-sidebar-mobile.svg"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset="/assets/images/bg-sidebar-desktop.svg"
+      />
+      <img
+        class="sidebar-image"
+        src="/assets/images/bg-sidebar-desktop.svg"
+        alt="Sidebar Background"
+      />
+    </picture>
   </aside>
   <section class="main-content">
     <app-forms
