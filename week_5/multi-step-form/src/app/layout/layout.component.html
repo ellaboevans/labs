@@ -2,7 +2,10 @@
   <aside class="side-bar">
     <div class="side-bar-content">
       <ng-container *ngFor="let item of sidebarItems">
-        <div class="side-bar-content-items" (click)="onSidebarClickStep(item.step)">
+        <button
+          class="side-bar-content-items"
+          (click)="onSidebarClickStep(item.step)"
+        >
           <!-- circle -->
           <div
             class="side-bar-item-circle"
@@ -21,7 +24,7 @@
             <h3>Step {{ item.step }}</h3>
             <p>{{ item.label }}</p>
           </div>
-        </div>
+        </button>
       </ng-container>
     </div>
     <img
@@ -31,6 +34,9 @@
     />
   </aside>
   <section class="main-content">
-    <app-forms (stepChanged)="onStepChanged($event)" [currentStep]="currentStep"></app-forms>
+    <app-forms
+      (stepChanged)="onStepChanged($event)"
+      [currentStep]="currentStep"
+    ></app-forms>
   </section>
 </main>
