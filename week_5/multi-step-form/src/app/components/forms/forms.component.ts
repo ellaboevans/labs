@@ -14,6 +14,7 @@ import { ThankYouComponent } from '../thank-you/thank-you.component';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { getFormHeadings } from '../../utils/get-form-headings';
 import { extractPrice } from '../../utils/extract-price';
+import { SummaryComponent } from '../summary/summary.component';
 
 @Component({
   selector: 'app-forms',
@@ -23,6 +24,7 @@ import { extractPrice } from '../../utils/extract-price';
     ReactiveFormsModule,
     ThankYouComponent,
     CapitalizePipe,
+    SummaryComponent,
   ],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.css',

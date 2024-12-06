@@ -209,34 +209,11 @@
           [class.slide-in]="isForward"
           [class.slide-out]="!isForward"
         >
-          <div class="summary-card">
-            <div class="plan-details">
-              <div class="plan-header">
-                <h3>
-                  {{ summaryData.plan?.type || "no data yet" | capitalize }}
-                  ({{ isYearly ? "Yearly" : "Monthly" }})
-                </h3>
-                <p><a href="#" class="change-link">Change</a></p>
-              </div>
-              <p class="plan-price">
-                {{ summaryData.plan?.price }}
-              </p>
-            </div>
-            <hr />
-            <ul class="summary-addons">
-              <li
-                class="summary-addon"
-                *ngFor="let addon of summaryData.addons"
-              >
-                <span>{{ addon.title }}</span>
-                <span>+{{ addon.price }}/{{ isYearly ? "yr" : "mo" }}</span>
-              </li>
-            </ul>
-          </div>
-          <div class="total">
-            <span>Total ({{ isYearly ? "per year" : "per month" }})</span>
-            <span class="total-price">{{ calculateTotalPrice }}</span>
-          </div>
+          <app-summary
+            [summary]="summaryData"
+            [isYearly]="isYearly"
+            [totalPrice]="calculateTotalPrice"
+          ></app-summary>
         </div>
       </ng-container>
       <!-- form buttons container -->
@@ -253,10 +230,7 @@
         <button
           [type]="currentStep === 4 ? 'submit' : 'button'"
           class="submit-btn"
-          [ngStyle]="{
-            'background-color':
-              currentStep !== 4 ? ' var(--denim)' : 'var(--purple)'
-          }"
+          [ngClass]="{ summary: currentStep === 4, form: currentStep !== 4 }"
           (click)="gotoNextStep()"
           [disabled]="formFields.invalid"
         >
