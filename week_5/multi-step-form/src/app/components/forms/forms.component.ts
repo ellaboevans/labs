@@ -201,7 +201,7 @@ export class FormsComponent implements OnInit {
   isAddonSelected(selectedAddonValue: Addon): boolean {
     const selectedAddons = this.formFields.get('addons')?.value || [];
     return selectedAddons.some(
-      (a: Addon) => a.type === selectedAddonValue.type
+      (addon: Addon) => addon.type === selectedAddonValue.type
     );
   }
 
