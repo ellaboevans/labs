@@ -3,6 +3,18 @@ export interface Addon {
   title: string;
   description: string;
   price: string;
+  yearly?: YearlyPlan;
 }
 
-export type Plan = Pick<Addon, 'type' | 'price'>;
+type monthlyPlan = {
+  price: string;
+};
+
+type YearlyPlan = {
+  price: string;
+  extras?: string;
+};
+
+export type Plan = Partial<
+  Pick<Addon, 'type' | 'yearly'> & YearlyPlan & monthlyPlan
+>;
