@@ -131,8 +131,11 @@
             >
               <img [src]="plan.icon" [alt]="plan.type" />
               <div class="card-texts">
-                <h3>{{ plan.type | titlecase }}</h3>
-                <p>{{ plan.price }}</p>
+                <h3>{{ plan.type | capitalize }}</h3>
+                <p>{{ !isYearly ? plan.price : plan.yearly.price }}</p>
+                <p [ngStyle]="{ color: 'var(--denim)' }" *ngIf="isYearly">
+                  {{ plan.yearly.extras }}
+                </p>
               </div>
             </div>
           </div>
@@ -146,6 +149,7 @@
                 type="checkbox"
                 id="toggle-switch"
                 class="switch-checkbox"
+                [checked]="isYearly"
                 (change)="togglePlan($event)"
                 id="toggle-switch"
               />
@@ -187,7 +191,11 @@
                     <h3>{{ addon.title }}</h3>
                     <p>{{ addon.description }}</p>
                   </div>
-                  <span class="addon-price">+{{ addon.price }}/mo</span>
+                  <span class="addon-price"
+                    >+{{ !isYearly ? addon.price : addon.yearly.price }}/{{
+                      !isYearly ? "mo" : "yr"
+                    }}</span
+                  >
                 </div>
               </label>
             </div>
@@ -204,26 +212,30 @@
           <div class="summary-card">
             <div class="plan-details">
               <div class="plan-header">
-                <h3>Arcade (Monthly)</h3>
+                <h3>
+                  {{ summaryData.plan?.type || "no data yet" | capitalize }}
+                  ({{ isYearly ? "Yearly" : "Monthly" }})
+                </h3>
                 <p><a href="#" class="change-link">Change</a></p>
               </div>
-              <p class="plan-price">$9/mo</p>
+              <p class="plan-price">
+                {{ summaryData.plan?.price }}
+              </p>
             </div>
             <hr />
             <ul class="summary-addons">
-              <li class="summary-addon">
-                <span>Online service</span>
-                <span>+$1/mo</span>
-              </li>
-              <li class="summary-addon">
-                <span>Larger storage</span>
-                <span>+$2/mo</span>
+              <li
+                class="summary-addon"
+                *ngFor="let addon of summaryData.addons"
+              >
+                <span>{{ addon.title }}</span>
+                <span>+{{ addon.price }}/{{ isYearly ? "yr" : "mo" }}</span>
               </li>
             </ul>
           </div>
           <div class="total">
-            <span>Total (per month)</span>
-            <span class="total-price">+$12/mo</span>
+            <span>Total ({{ isYearly ? "per year" : "per month" }})</span>
+            <span class="total-price">{{ calculateTotalPrice }}</span>
           </div>
         </div>
       </ng-container>
@@ -255,14 +267,5 @@
   </div>
 </ng-container>
 <ng-container *ngIf="isDone">
-  <div class="thank-you-wrapper">
-    <img src="assets/images/icon-thank-you.svg" alt="thank-you icon" />
-    <h1>Thank you!</h1>
-    <p>
-      Thanks for confirming your subscription! We hope you have fun using our
-      platform. If you ever need support, please feel free to email us at
-      support&#64;loremgaming.com.
-    </p>
-    <!-- <button type="button" class="back-btn">Return to Home</button> -->
-  </div>
+  <app-thank-you></app-thank-you>
 </ng-container>

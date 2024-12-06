@@ -10,16 +10,20 @@ import {
 import { PLAN_OPTIONS } from '../../data/plan-options';
 import { ADD_ONS } from '../../data/addons';
 import { Addon, Plan } from '../../interface/addon';
-
-interface StepResults {
-  title: string;
-  description: string;
-}
+import { ThankYouComponent } from '../thank-you/thank-you.component';
+import { CapitalizePipe } from '../../pipes/capitalize.pipe';
+import { getFormHeadings } from '../../utils/get-form-headings';
+import { extractPrice } from '../../utils/extract-price';
 
 @Component({
   selector: 'app-forms',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ThankYouComponent,
+    CapitalizePipe,
+  ],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.css',
 })
@@ -29,6 +33,8 @@ export class FormsComponent implements OnInit {
   isDone = false;
   plans = PLAN_OPTIONS;
   addons = ADD_ONS;
+
+  getHeadings = getFormHeadings;
 
   @Output() stepChanged = new EventEmitter<number>();
   @Input() currentStep: number = 1;
@@ -54,41 +60,9 @@ export class FormsComponent implements OnInit {
   ngOnInit(): void {
     const savedData = localStorage.getItem('formData');
     if (savedData) return this.formFields.setValue(JSON.parse(savedData));
-
-    this.summaryData();
   }
 
-  getHeadings(step: number): StepResults {
-    switch (step) {
-      case 1:
-        return {
-          title: 'Personal Information',
-          description: 'Please provide your personal details',
-        };
-      case 2:
-        return {
-          title: 'Select your plan',
-          description: 'You have the option of monthly or yearly billing.',
-        };
-      case 3:
-        return {
-          title: 'Pick add-ons',
-          description: 'Add-ons help enhance your gaming experience.',
-        };
-      case 4:
-        return {
-          title: 'Finishing up',
-          description: 'Double-check everything looks OK before confirming.',
-        };
-      default:
-        return {
-          title: '',
-          description: '',
-        };
-    }
-  }
-
-  savedDataToLocalStorage() {
+  savedDataToLocalStorage(): void {
     localStorage.setItem('formData', JSON.stringify(this.formFields.value));
     console.log('Form data saved to local storage');
   }
@@ -117,7 +91,40 @@ export class FormsComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.formFields.value);
+    const formData = this.formFields.value;
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      plan: {
+        type: formData.plan?.type,
+        price: this.isYearly
+          ? this.plans.find((plan) => plan.type === formData.plan?.type)?.yearly
+              .price
+          : formData.plan?.price,
+        extras: this.isYearly
+          ? this.plans.find((plan) => plan.type === formData.plan?.type)?.yearly
+              .extras
+          : null,
+      },
+      addons: formData.addons?.map((addon) => {
+        const addonDetails = this.addons.find(
+          (item) => item.type === addon.type
+        );
+        return {
+          type: addon.type,
+          description: addon.description,
+          title: addon.title,
+          price: this.isYearly
+            ? addonDetails?.yearly.price
+            : addonDetails?.price,
+        };
+      }),
+    };
+
+    console.log(payload);
+    localStorage.setItem('payload', JSON.stringify(payload));
     localStorage.removeItem('formData');
     this.isDone = true;
   }
@@ -133,13 +140,28 @@ export class FormsComponent implements OnInit {
   togglePlan(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.isYearly = checkbox.checked;
+
+    // Update plan prices in the form based on the toggle state
+    const currentPlanType = this.formFields.get('plan.type')?.value;
+    const currentPlan = this.plans.find(
+      (plan) => plan.type === currentPlanType
+    );
+    if (currentPlan) {
+      this.formFields.patchValue({
+        plan: {
+          price: this.isYearly ? currentPlan.yearly.price : currentPlan.price,
+        },
+      });
+    }
+
+    this.savedDataToLocalStorage();
   }
 
   selectPlan(plan: Plan) {
     this.formFields.patchValue({
       plan: {
         type: plan.type,
-        price: plan.price,
+        price: this.isYearly ? plan.yearly?.price : plan.price,
       },
     });
   }
@@ -152,11 +174,24 @@ export class FormsComponent implements OnInit {
         (addon: Addon) => addonValue.type !== addon.type
       );
       this.formFields.patchValue({
-        addons: updatedAddons,
+        addons: updatedAddons.map((addon) => ({
+          ...addon,
+          price: (this.isYearly ? addon.yearly?.price : addon.price) as string,
+        })),
       });
     } else {
       this.formFields.patchValue({
-        addons: [...selectedAddons, addonValue],
+        addons: [
+          ...selectedAddons,
+          {
+            description: addonValue.description,
+            title: addonValue.title,
+            type: addonValue.type,
+            price: (this.isYearly
+              ? addonValue.yearly?.price
+              : addonValue.price) as string,
+          },
+        ],
       });
     }
 
@@ -170,10 +205,22 @@ export class FormsComponent implements OnInit {
     );
   }
 
-  summaryData() {
+  get calculateTotalPrice(): string {
+    const planPrice = extractPrice(this.summaryData.plan?.price);
+    console.log(planPrice);
+    const addonPrices = this.summaryData.addons?.reduce(
+      (total: number, addon: Addon) => {
+        return total + extractPrice(addon.price);
+      },
+      0
+    );
+    console.log('addonPrices', addonPrices);
+    const total = planPrice + (addonPrices || 0);
+    return this.isYearly ? `$${total}/yr` : `$${total}/mo`;
+  }
+
+  get summaryData() {
     const data = localStorage.getItem('formData');
-    if (data) {
-      console.log(data);
-    }
+    if (data) return JSON.parse(data);
   }
 }
