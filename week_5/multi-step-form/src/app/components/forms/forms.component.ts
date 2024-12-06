@@ -10,7 +10,6 @@ import {
 import { PLAN_OPTIONS } from '../../data/plan-options';
 import { ADD_ONS } from '../../data/addons';
 import { Addon, Plan } from '../../interface/addon';
-import { ThankYouComponent } from '../thank-you/thank-you.component';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { getFormHeadings } from '../../utils/get-form-headings';
 import { extractPrice } from '../../utils/extract-price';
