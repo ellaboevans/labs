@@ -208,9 +208,9 @@ export class FormsComponent implements OnInit {
   }
 
   get calculateTotalPrice(): string {
-    const planPrice = extractPrice(this.summaryData.plan?.price);
+    const planPrice = extractPrice(this.summaryData?.plan?.price);
     console.log(planPrice);
-    const addonPrices = this.summaryData.addons?.reduce(
+    const addonPrices = this.summaryData?.addons?.reduce(
       (total: number, addon: Addon) => {
         return total + extractPrice(addon.price);
       },

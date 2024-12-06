@@ -19,4 +19,13 @@ describe('SummaryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have totalPrice property with @Input()', () => {
+    component.totalPrice = '100';
+    expect(component.totalPrice).toBe(String(100));
+  });
+
+  it('should have isYearly property with @Input()', () => {
+    expect(component.isYearly).toBeDefined();
+  });
 });
