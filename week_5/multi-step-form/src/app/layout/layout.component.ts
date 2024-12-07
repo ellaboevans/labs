@@ -33,8 +33,6 @@ export class LayoutComponent implements OnInit {
   }
 
   onSidebarClickStep(step: number) {
-    if (this.isDone && this.currentStep === 4) return;
-
     this.updateSidebarSteps(step);
     this.currentStep = step;
     this.saveCurrentStep();
