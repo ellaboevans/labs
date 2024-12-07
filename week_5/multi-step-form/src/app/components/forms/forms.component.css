@@ -164,6 +164,12 @@
         h3 {
           font-size: var(--font-medium);
         }
+
+        p {
+          color: var(--grey);
+          font-size: var(--font-size-medium);
+          margin-top: 0.25rem;
+        }
       }
     }
 
