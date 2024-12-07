@@ -381,7 +381,7 @@
     }
 
     .sub-heading {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     #form-container {
@@ -389,6 +389,10 @@
       flex: none;
       padding-inline: 0;
       gap: 0;
+
+      .addon-container {
+        width: 20rem;
+      }
 
       .card-container {
         flex-direction: column;
@@ -407,6 +411,10 @@
       .form-group {
         margin-block: 0.5rem;
         padding: 0;
+
+        .form-input {
+          width: 20rem;
+        }
       }
       #form-buttons {
         position: fixed;
