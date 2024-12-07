@@ -1,7 +1,7 @@
 <ng-container *ngIf="!isDone">
   <div id="form-wrapper">
     <h1>{{ getHeadings(currentStep).title }}</h1>
-    <p>{{ getHeadings(currentStep).description }}</p>
+    <p class="sub-heading">{{ getHeadings(currentStep).description }}</p>
     <!-- Form -->
     <form
       id="form-container"
