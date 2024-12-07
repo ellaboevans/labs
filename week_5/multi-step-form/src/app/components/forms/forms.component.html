@@ -213,6 +213,7 @@
             [summary]="summaryData"
             [isYearly]="isYearly"
             [totalPrice]="calculateTotalPrice"
+            (stepChange)="onStepChanged($event)"
           ></app-summary>
         </div>
       </ng-container>

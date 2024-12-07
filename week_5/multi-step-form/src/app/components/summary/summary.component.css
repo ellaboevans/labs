@@ -23,6 +23,7 @@
         text-decoration: underline;
         cursor: pointer;
         transition: color 0.4s ease-in-out;
+        margin-top: 0.3rem;
         &:hover {
           color: var(--purple);
         }

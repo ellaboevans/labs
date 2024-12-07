@@ -6,7 +6,7 @@
           {{ (summary && summary.plan?.type) || "no data yet" | capitalize }}
           ({{ isYearly ? "Yearly" : "Monthly" }})
         </h3>
-        <p><a href="#" class="change-link">Change</a></p>
+        <p (click)="goToStepTwo()" class="change-link">Change</p>
       </div>
       <p class="plan-price">
         {{ summary && summary.plan?.price }}

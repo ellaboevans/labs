@@ -209,14 +209,12 @@ export class FormsComponent implements OnInit {
 
   get calculateTotalPrice(): string {
     const planPrice = extractPrice(this.summaryData?.plan?.price);
-    console.log(planPrice);
     const addonPrices = this.summaryData?.addons?.reduce(
       (total: number, addon: Addon) => {
         return total + extractPrice(addon.price);
       },
       0
     );
-    console.log('addonPrices', addonPrices);
     const total = planPrice + (addonPrices || 0);
     return this.isYearly ? `$${total}/yr` : `$${total}/mo`;
   }
@@ -224,5 +222,9 @@ export class FormsComponent implements OnInit {
   get summaryData() {
     const data = localStorage.getItem('formData');
     if (data) return JSON.parse(data);
+  }
+
+  onStepChanged(step: number) {
+    this.stepChanged.emit(step);
   }
 }
