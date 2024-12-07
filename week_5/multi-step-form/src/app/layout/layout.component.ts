@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SideBar } from '../interface/side-bar';
 import { FormsComponent } from '../components/forms/forms.component';
 import { SIDE_BAR } from '../data/side-bar';
-import { ThankYouComponent } from "../components/thank-you/thank-you.component";
+import { ThankYouComponent } from '../components/thank-you/thank-you.component';
 
 @Component({
   selector: 'app-layout',
@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit {
     if (savedStep) {
       this.currentStep = parseInt(savedStep, 10);
       this.isDone = this.currentStep === 4;
+      this.updateSidebarSteps(this.currentStep);
     }
   }
 
