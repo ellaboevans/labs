@@ -1,7 +1,38 @@
 <ng-container *ngIf="!isDone">
   <div id="form-wrapper">
-    <h1>{{ getHeadings(currentStep).title }}</h1>
-    <p class="sub-heading">{{ getHeadings(currentStep).description }}</p>
+    <div class="form-heading-container">
+      <div>
+        <h1>{{ getHeadings(currentStep).title }}</h1>
+        <p class="sub-heading">{{ getHeadings(currentStep).description }}</p>
+      </div>
+      <!-- Reset form button -->
+      <div class="tooltip-container">
+        <button
+          type="button"
+          class="reset-btn"
+          (click)="resetForm()"
+          [disabled]="currentStep === 4"
+          [ngStyle]="{ display: currentStep === 4 ? 'none' : '' }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-rotate-ccw"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+        </button>
+        <span class="tooltip-text">Reset Form</span>
+      </div>
+    </div>
     <!-- Form -->
     <form
       id="form-container"

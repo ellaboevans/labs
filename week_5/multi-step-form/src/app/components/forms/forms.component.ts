@@ -126,9 +126,14 @@ export class FormsComponent implements OnInit {
 
     console.log(payload);
     localStorage.setItem('payload', JSON.stringify(payload));
-    localStorage.removeItem('formData');
+    this.removeItemFromStorage();
     this.isDone = true;
     this.formSubmitted.emit(); // this when emitted disables the click even on step tracker
+  }
+
+  removeItemFromStorage() {
+    localStorage.removeItem('formData');
+    localStorage.removeItem('currentStep');
   }
 
   gotoPreviousStep() {
@@ -226,5 +231,12 @@ export class FormsComponent implements OnInit {
 
   onStepChanged(step: number) {
     this.stepChanged.emit(step);
+  }
+
+  resetForm() {
+    this.formFields.reset();
+    this.currentStep = 1;
+    this.removeItemFromStorage();
+    this.stepChanged.emit(this.currentStep);
   }
 }

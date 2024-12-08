@@ -5,6 +5,56 @@
   overflow: hidden !important;
   color: var(--denim);
 
+  .form-heading-container {
+    display: flex;
+    justify-content: space-between;
+
+    .reset-btn {
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      margin-right: 2.5rem;
+      height: 2rem;
+      width: 2rem;
+      cursor: pointer;
+      border-radius: var(--input-radius);
+      transition: color 0.4s ease-in-out, background-color 0.4s ease;
+
+      &:hover {
+        color: var(--denim);
+        background-color: var(--border-color);
+      }
+    }
+  }
+
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip-text {
+    visibility: hidden;
+    width: 100px;
+    background-color: var(--purple);
+    color: #fff;
+    font-size: var(--font-small);
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 0.5%;
+    right: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
   h1 {
     font-size: var(--font-Heading);
     line-height: var(--line-height);
@@ -375,6 +425,12 @@
   #form-wrapper {
     height: fit-content;
     padding-inline: 1rem;
+
+    .form-heading-container {
+      .reset-btn {
+        margin-right: 0;
+      }
+    }
 
     h1 {
       font-size: 24px;
