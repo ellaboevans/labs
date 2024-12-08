@@ -1,9 +1,9 @@
-<ng-container>
+<ng-container *ngIf="summary">
   <div class="summary-card">
     <div class="plan-details">
       <div class="plan-header">
         <h3>
-          {{ (summary && summary.plan?.type) || "no data yet" | capitalize }}
+          {{ summary && summary.plan?.type | capitalize }}
           ({{ isYearly ? "Yearly" : "Monthly" }})
         </h3>
         <p (click)="goToStepTwo()" class="change-link">Change</p>
@@ -23,5 +23,12 @@
   <div class="total">
     <span>Total ({{ isYearly ? "per year" : "per month" }})</span>
     <span class="total-price">{{ totalPrice }}</span>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!summary">
+  <div class="empty-container">
+    <img src="assets/images/empty-state.png" alt="Empty state" />
+    <p>No summary available yet.</p>
   </div>
 </ng-container>

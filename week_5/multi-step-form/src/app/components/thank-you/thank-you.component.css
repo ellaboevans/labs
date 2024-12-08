@@ -20,17 +20,16 @@
   }
 
   button {
-    font-size: var(--font-medium);
-    font-weight: var(--font-weight-bold);
-    background-color: var(--purple);
-    color: var(--white);
+    font-size: var(--font-small);
+    background-color: transparent !important;
+    color: var(--grey);
     border: none;
+    text-decoration: underline;
     padding: 1rem 2rem;
-    border-radius: var(--input-radius);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s ease;
     &:hover {
-      background-color: var(--dark-purple);
+      color: var(--purple);
     }
   }
 }
