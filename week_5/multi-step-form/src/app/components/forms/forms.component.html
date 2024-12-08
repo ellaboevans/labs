@@ -6,7 +6,7 @@
         <p class="sub-heading">{{ getHeadings(currentStep).description }}</p>
       </div>
       <!-- Reset form button -->
-      <div class="tooltip-container">
+      <div class="tooltip-container" *ngIf="!formFields.invalid">
         <button
           type="button"
           class="reset-btn"
