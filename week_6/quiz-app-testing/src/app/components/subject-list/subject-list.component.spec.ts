@@ -13,9 +13,6 @@ describe('SubjectListComponent', () => {
   beforeEach(async () => {
     quizService = {
       getSubjects: jest.fn(),
-      setSubject: jest.fn(),
-      getSelectedSubject: jest.fn(),
-      clearSubject: jest.fn(),
     } as unknown as jest.Mocked<QuizService>;
 
     await TestBed.configureTestingModule({
