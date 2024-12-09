@@ -145,3 +145,9 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 884px) {
+  #layout-container {
+    width: 90dvw;
+  }
+}
