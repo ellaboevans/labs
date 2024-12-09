@@ -1,0 +1,47 @@
+functionsDirectory = "C:\\Users\\EvansElabo\\OneDrive - AmaliTech gGmbH\\labs\\week_5\\multi-step-form\\netlify\\functions"
+functionsDirectoryOrigin = "ui"
+headers = []
+
+[functions]
+
+[functions."*"]
+
+[[plugins]]
+origin = "default"
+package = "@netlify/angular-runtime"
+
+[plugins.inputs]
+
+[build]
+publish = "C:\\Users\\EvansElabo\\OneDrive - AmaliTech gGmbH\\labs\\week_5\\multi-step-form\\dist\\multi-step-form\\browser"
+publishOrigin = "ui"
+commandOrigin = "ui"
+base = "C:\\Users\\EvansElabo\\OneDrive - AmaliTech gGmbH\\labs\\week_5\\multi-step-form"
+command = "npm run build"
+functions = "C:\\Users\\EvansElabo\\OneDrive - AmaliTech gGmbH\\labs\\week_5\\multi-step-form\\netlify\\functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

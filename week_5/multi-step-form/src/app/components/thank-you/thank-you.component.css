@@ -1,0 +1,45 @@
+.thank-you-wrapper {
+  color: var(--denim);
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  gap: 1rem;
+
+  img {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: var(--font-medium);
+    color: var(--grey);
+    text-align: center;
+  }
+
+  button {
+    font-size: var(--font-small);
+    background-color: transparent !important;
+    color: var(--grey);
+    border: none;
+    text-decoration: underline;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--purple);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .thank-you-wrapper {
+    padding: 3.5rem 1.5rem;
+
+    img {
+      width: 4rem;
+    }
+  }
+}
