@@ -264,7 +264,10 @@
           class="submit-btn"
           [ngClass]="{ summary: currentStep === 4, form: currentStep !== 4 }"
           (click)="gotoNextStep()"
-          [disabled]="formFields.invalid"
+          [disabled]="
+            (currentStep === 1 && formFields.invalid) ||
+            (currentStep === 2 && !formFields.get('plan.type')?.value)
+          "
         >
           {{ currentStep === 4 ? "Confirm" : "Next Step" }}
         </button>
