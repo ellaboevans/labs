@@ -65,7 +65,6 @@ export class FormsComponent implements OnInit {
 
   savedDataToLocalStorage(): void {
     localStorage.setItem('formData', JSON.stringify(this.formFields.value));
-    console.log('Form data saved to local storage');
   }
 
   gotoNextStep() {
@@ -124,7 +123,6 @@ export class FormsComponent implements OnInit {
       }),
     };
 
-    console.log(payload);
     localStorage.setItem('payload', JSON.stringify(payload));
     this.removeItemFromStorage();
     this.isDone = true;
