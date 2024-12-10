@@ -1,0 +1,21 @@
+.app-container {
+  width: 100dvw;
+  max-width: 1350px;
+  padding: 0 4rem;
+  margin: 0 auto;
+}
+
+/* Tablet Screens (991px and below) */
+@media (max-width: 991px) {
+  .app-container {
+    width: 90dvw;
+  }
+}
+
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  .app-container {
+    width: 95dvw;
+    padding: 0;
+  }
+}

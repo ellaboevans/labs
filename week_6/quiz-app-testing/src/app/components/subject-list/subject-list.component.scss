@@ -1,0 +1,78 @@
+@import "../../../styles/variables";
+
+.subject__list {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  gap: 1rem;
+
+  .subject__card {
+    display: flex;
+    align-items: center;
+    width: 30rem;
+    padding: 0.9rem 1rem;
+    gap: 2.5rem;
+    border-radius: 20px;
+    background-color: $color-light;
+    box-shadow: $shadow-light;
+    color: #313e51;
+
+    &:hover {
+      color: #313e51;
+    }
+
+    .icon {
+      width: 3rem;
+    }
+
+    .text {
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .subject__list {
+    align-items: center;
+    gap: 1.5rem;
+
+    .subject__card {
+      width: 100%;
+      max-width: 25rem;
+      padding: 0.8rem 0.9rem;
+      gap: 2rem;
+
+      .icon {
+        width: 2.5rem;
+      }
+
+      .text {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  .subject__list {
+    padding: 0 1rem;
+    gap: 1rem;
+
+    .subject__card {
+      padding: 0.7rem 0.8rem;
+      gap: 1.5rem;
+      border-radius: 15px;
+
+      .icon {
+        width: 2rem;
+      }
+
+      .text {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

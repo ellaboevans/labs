@@ -1,0 +1,143 @@
+/* Global styles, importing variables, and mixins */
+@import "./styles/_variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: map-get($light-mode, bg-color);
+  color: map-get($light-mode, text-color);
+  font-family: $font-rubik;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100dvw;
+  overflow-x: hidden;
+  flex-direction: column;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.dark-mode {
+  background-color: map-get($dark-mode, bg-color);
+  color: map-get($dark-mode, text-color);
+
+  .hero__text {
+    h1 {
+      color: map-get($dark-mode, text-color);
+    }
+
+    p {
+      color: $color-light-bluish !important;
+    }
+  }
+
+  .subject__list {
+    .subject__card {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
+
+      .text {
+        color: $color-light;
+      }
+    }
+  }
+
+  .quiz {
+    .answer__option {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
+    }
+    .option__text {
+      color: $color-light !important;
+    }
+
+    p {
+      color: $color-light-bluish !important;
+    }
+  }
+
+  .error__message {
+    color: $color-light !important;
+  }
+
+  .results__board__containers {
+    .results__board {
+      background-color: $card-dark-bg !important;
+      box-shadow: $shadow-dark !important;
+      .results__score {
+        color: $color-light !important;
+      }
+      p {
+        color: $color-light-bluish !important;
+      }
+    }
+  }
+
+  .circle__1,
+  .circle__2 {
+    filter: invert(1) opacity(0.09);
+  }
+}
+
+.circle__1,
+.circle__2 {
+  position: absolute;
+  opacity: 1;
+  z-index: -1;
+}
+
+.circle__1 {
+  left: 0;
+  top: 0;
+  width: 20rem;
+}
+
+.circle__2 {
+  right: 0;
+  bottom: 0;
+  width: 20rem;
+}
+
+@media (max-width: 600px) {
+  .circle__1,
+  .circle__2 {
+    width: 15rem;
+  }
+
+  body {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .hero__text p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .circle__1,
+  .circle__2 {
+    width: 18rem;
+  }
+
+  .hero__text p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .circle__1,
+  .circle__2 {
+    width: 25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .circle__1,
+  .circle__2 {
+    width: 30rem;
+  }
+}
