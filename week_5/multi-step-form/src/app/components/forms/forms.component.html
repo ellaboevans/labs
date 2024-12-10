@@ -266,7 +266,7 @@
           (click)="gotoNextStep()"
           [disabled]="
             (currentStep === 1 && formFields.invalid) ||
-            (currentStep === 2 && !formFields.get('plan.type')?.value)
+            (currentStep === 2 && !formFields.get('plan.type')?.value) || formFields.invalid
           "
         >
           {{ currentStep === 4 ? "Confirm" : "Next Step" }}
