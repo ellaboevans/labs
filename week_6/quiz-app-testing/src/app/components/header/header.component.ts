@@ -15,8 +15,11 @@ export class HeaderComponent implements OnInit {
 
   onThemeToggle() {
     this.isDarkMode = !this.isDarkMode;
+    const themeClass = this.isDarkMode ? 'dark-mode' : 'light-mode';
+    document.body.className = themeClass;
     this.themeToggle.emit();
   }
+
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme') || 'light-mode';
     document.body.className = savedTheme;
