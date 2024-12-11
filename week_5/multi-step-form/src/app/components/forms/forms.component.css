@@ -136,6 +136,7 @@
         &:disabled {
           opacity: 0.5;
           cursor: not-allowed;
+          pointer-events: none;
         }
       }
 
@@ -158,6 +159,10 @@
         font-weight: var(--font-weight-bold);
         border-radius: var(--input-radius);
         margin-left: auto;
+
+        &:hover {
+          background-color: var(--hover-submit-btn-color);
+        }
       }
       .form {
         background-color: var(--denim);
