@@ -85,13 +85,18 @@
                 class="error-message"
                 *ngIf="
                   formFields.get('email')?.hasError('required') &&
-                  formFields.get('email')?.touched
+                  formFields.get('email')?.touched &&
+                  formFields.get('email')?.value === ''
                 "
                 >This field is required</small
               >
               <small
                 class="error-message"
-                *ngIf="formFields.get('email')?.hasError('email')"
+                *ngIf="
+                  formFields.get('email')?.hasError('invalidEmail') &&
+                  formFields.get('email')?.dirty &&
+                  formFields.get('email')?.value !== ''
+                "
                 >Please enter a valid email address</small
               >
             </ng-container>
@@ -266,7 +271,8 @@
           (click)="gotoNextStep()"
           [disabled]="
             (currentStep === 1 && formFields.invalid) ||
-            (currentStep === 2 && !formFields.get('plan.type')?.value) || formFields.invalid
+            (currentStep === 2 && !formFields.get('plan.type')?.value) ||
+            formFields.invalid
           "
         >
           {{ currentStep === 4 ? "Confirm" : "Next Step" }}
