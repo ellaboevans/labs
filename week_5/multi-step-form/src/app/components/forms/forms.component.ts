@@ -14,6 +14,7 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { getFormHeadings } from '../../utils/get-form-headings';
 import { extractPrice } from '../../utils/extract-price';
 import { SummaryComponent } from '../summary/summary.component';
+import { fullEmailValidator } from '../../validations/full-email-validator';
 
 @Component({
   selector: 'app-forms',
@@ -33,6 +34,7 @@ export class FormsComponent implements OnInit {
   isDone = false;
   plans = PLAN_OPTIONS;
   addons = ADD_ONS;
+  validEmailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
   getHeadings = getFormHeadings;
 
@@ -46,7 +48,10 @@ export class FormsComponent implements OnInit {
       Validators.minLength(2),
       Validators.pattern(/^[a-zA-Z\s]*$/),
     ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [
+      Validators.required,
+      fullEmailValidator(this.validEmailPattern),
+    ]),
     phone: new FormControl('', [
       Validators.required,
       Validators.pattern(/^\+(\d{1,3})\d{10,14}$/),
