@@ -74,7 +74,10 @@ export class FormsComponent implements OnInit {
       const email = this.formFields.get('email');
       const phone = this.formFields.get('phone');
 
-      if (name?.invalid || email?.invalid || phone?.invalid) {
+      const isAnyInputInvalid =
+        name?.invalid || email?.invalid || phone?.invalid;
+
+      if (isAnyInputInvalid) {
         name?.markAsTouched();
         email?.markAsTouched();
         phone?.markAsTouched();
