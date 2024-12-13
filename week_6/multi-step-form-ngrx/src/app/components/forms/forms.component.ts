@@ -39,8 +39,6 @@ import { Summary } from '../../interface/summary';
   styleUrl: './forms.component.css',
 })
 export class FormsComponent implements OnInit {
-  // public isYearly = false;
-
   private readonly store = inject(Store);
 
   public readonly plans = PLAN_OPTIONS;
