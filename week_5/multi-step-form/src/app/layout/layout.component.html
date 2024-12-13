@@ -1,0 +1,55 @@
+<main id="layout-container">
+  <aside class="side-bar">
+    <div class="side-bar-content">
+      <ng-container *ngFor="let item of sidebarItems">
+        <button
+          class="side-bar-content-items"
+          (click)="onSidebarClickStep(item.step)"
+          [disabled]="currentStep === 4 && isDone"
+        >
+          <div
+            class="side-bar-item-circle"
+            [ngStyle]="{
+              'background-color': item.active
+                ? 'var(--sky-blue)'
+                : 'transparent',
+              border: item.active ? 'none' : '1px solid var(--white)',
+              color: item.active ? 'var(--denim)' : 'var(--white)'
+            }"
+          >
+            <p>{{ item.step }}</p>
+          </div>
+          <div class="side-bar-item-text">
+            <h3>Step {{ item.step }}</h3>
+            <p>{{ item.label }}</p>
+          </div>
+        </button>
+      </ng-container>
+    </div>
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcset="/assets/images/bg-sidebar-mobile.svg"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset="/assets/images/bg-sidebar-desktop.svg"
+      />
+      <img
+        class="sidebar-image"
+        src="/assets/images/bg-sidebar-desktop.svg"
+        alt="Sidebar Background"
+      />
+    </picture>
+  </aside>
+  <section class="main-content">
+    <app-forms
+      (stepChanged)="onStepChanged($event)"
+      [currentStep]="currentStep"
+      (formSubmitted)="onFormSubmitted()"
+    ></app-forms>
+    <ng-container *ngIf="isDone">
+      <app-thank-you></app-thank-you>
+    </ng-container>
+  </section>
+</main>

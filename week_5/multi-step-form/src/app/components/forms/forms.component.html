@@ -1,0 +1,283 @@
+<ng-container *ngIf="!isDone">
+  <div id="form-wrapper">
+    <div class="form-heading-container">
+      <div>
+        <h1>{{ getHeadings(currentStep).title }}</h1>
+        <p class="sub-heading">{{ getHeadings(currentStep).description }}</p>
+      </div>
+      <!-- Reset form button -->
+      <div class="tooltip-container" *ngIf="!formFields.invalid">
+        <button
+          type="button"
+          class="reset-btn"
+          (click)="resetForm()"
+          [disabled]="currentStep === 4"
+          [ngStyle]="{ display: currentStep === 4 ? 'none' : '' }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-rotate-ccw"
+          >
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+        </button>
+        <span class="tooltip-text">Reset Form</span>
+      </div>
+    </div>
+    <!-- Form -->
+    <form
+      id="form-container"
+      [formGroup]="formFields"
+      (ngSubmit)="submitForm()"
+      [class.slide-in]="isForward"
+      [class.slide-out]="!isForward"
+    >
+      <!-- form input -->
+      <ng-container *ngIf="currentStep === 1">
+        <div class="form-group">
+          <label for="name">
+            <span>Name</span>
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('name')?.hasError('required') &&
+                  formFields.get('name')?.touched
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="formFields.get('name')?.hasError('pattern')"
+                >Name must contain only letters</small
+              >
+            </ng-container>
+          </label>
+          <input
+            type="text"
+            id="name"
+            class="form-input"
+            placeholder="e.g Stephen King"
+            formControlName="name"
+            [ngStyle]="{
+              borderColor:
+                formFields.get('name')?.hasError('required') &&
+                formFields.get('name')?.touched
+                  ? 'var(--error)'
+                  : ''
+            }"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">
+            <span>Email</span>
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('email')?.hasError('required') &&
+                  formFields.get('email')?.touched &&
+                  formFields.get('email')?.value === ''
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('email')?.hasError('invalidEmail') &&
+                  formFields.get('email')?.dirty &&
+                  formFields.get('email')?.value !== ''
+                "
+                >Please enter a valid email address</small
+              >
+            </ng-container>
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="form-input"
+            placeholder="e.g stephenking@lorem.com"
+            formControlName="email"
+            [ngStyle]="{
+            borderColor: formFields.get('email')?.hasError('required') && formFields.get('email')?.touched ? 'var(--error)': '', 
+          }"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone-number">
+            <span>Phone Number</span>
+            <ng-container>
+              <small
+                class="error-message"
+                *ngIf="
+                  formFields.get('phone')?.hasError('required') &&
+                  formFields.get('phone')?.touched
+                "
+                >This field is required</small
+              >
+              <small
+                class="error-message"
+                *ngIf="formFields.get('phone')?.hasError('pattern')"
+              >
+                Must start with '+' and be valid
+              </small>
+            </ng-container>
+          </label>
+          <input
+            type="text"
+            id="phone-number"
+            class="form-input"
+            placeholder="e.g +1 234 567 890"
+            formControlName="phone"
+            [ngStyle]="{
+              borderColor:
+                formFields.get('phone')?.hasError('required') &&
+                formFields.get('phone')?.touched
+                  ? 'var(--error)'
+                  : ''
+            }"
+          />
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentStep === 2">
+        <div
+          class="form-group"
+          [class.slide-in]="isForward"
+          [class.slide-out]="!isForward"
+        >
+          <div class="card-container">
+            <div
+              class="card"
+              *ngFor="let plan of plans"
+              (click)="selectPlan(plan)"
+              [ngClass]="{
+                'addon-selected':
+                  plan.type === formFields.get('plan.type')?.value
+              }"
+            >
+              <img [src]="plan.icon" [alt]="plan.type" />
+              <div class="card-texts">
+                <h3>{{ plan.type | capitalize }}</h3>
+                <p>{{ !isYearly ? plan.price : plan.yearly.price }}</p>
+                <p [ngStyle]="{ color: 'var(--denim)' }" *ngIf="isYearly">
+                  {{ plan.yearly.extras }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- banner with switch and labels for monthly and yearly -->
+          <div class="banner">
+            <span class="switch-container">
+              <small class="monthly-plan" [ngClass]="{ active: !isYearly }"
+                >Monthly</small
+              >
+              <input
+                type="checkbox"
+                id="toggle-switch"
+                class="switch-checkbox"
+                [checked]="isYearly"
+                (change)="togglePlan($event)"
+                id="toggle-switch"
+              />
+              <label for="toggle-switch" class="switch-label">
+                <span class="switch-inner"></span>
+                <span class="switch-slider"></span>
+              </label>
+              <small class="yearly-plan" [ngClass]="{ active: isYearly }"
+                >Yearly</small
+              >
+            </span>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentStep === 3">
+        <div
+          class="form-group"
+          [class.slide-in]="isForward"
+          [class.slide-out]="!isForward"
+        >
+          <div class="addon-container">
+            <div
+              class="addon-card"
+              *ngFor="let addon of addons"
+              [ngClass]="{ selected: isAddonSelected(addon) }"
+            >
+              <label [for]="addon.title">
+                <input
+                  [id]="addon.title"
+                  type="checkbox"
+                  [value]="addon.type"
+                  [checked]="isAddonSelected(addon)"
+                  class="addon-checkbox"
+                  (change)="selectAddon(addon)"
+                />
+                <div class="addon-content">
+                  <div class="addon-text">
+                    <h3>{{ addon.title }}</h3>
+                    <p>{{ addon.description }}</p>
+                  </div>
+                  <span class="addon-price"
+                    >+{{ !isYearly ? addon.price : addon.yearly.price }}/{{
+                      !isYearly ? "mo" : "yr"
+                    }}</span
+                  >
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentStep === 4">
+        <div
+          class="form-group"
+          [class.slide-in]="isForward"
+          [class.slide-out]="!isForward"
+        >
+          <app-summary
+            [summary]="summaryData"
+            [isYearly]="isYearly"
+            [totalPrice]="calculateTotalPrice"
+            (stepChange)="onStepChanged($event)"
+          ></app-summary>
+        </div>
+      </ng-container>
+      <!-- form buttons container -->
+      <div id="form-buttons">
+        <button
+          type="button"
+          class="back-btn"
+          (click)="gotoPreviousStep()"
+          *ngIf="currentStep > 1"
+        >
+          Go back
+        </button>
+
+        <button
+          [type]="currentStep === 4 ? 'submit' : 'button'"
+          class="submit-btn"
+          [ngClass]="{ summary: currentStep === 4, form: currentStep !== 4 }"
+          (click)="gotoNextStep()"
+          [disabled]="
+            (currentStep === 1 && formFields.invalid) ||
+            (currentStep === 2 && !formFields.get('plan.type')?.value) ||
+            formFields.invalid
+          "
+        >
+          {{ currentStep === 4 ? "Confirm" : "Next Step" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-container>
