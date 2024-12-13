@@ -68,5 +68,6 @@ export const {
   selectFormFields,
   selectIsDone,
   selectIsYearly,
+  selectFormState,
   selectIsForward,
 } = formFeature;

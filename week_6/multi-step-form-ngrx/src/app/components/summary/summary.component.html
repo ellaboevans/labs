@@ -4,7 +4,7 @@
       <div class="plan-header">
         <h3>
           {{ summary && summary.plan?.type | capitalize }}
-          ({{ isYearly ? "Yearly" : "Monthly" }})
+          ({{ isYearly() ? "Yearly" : "Monthly" }})
         </h3>
         <p (click)="goToStepTwo()" class="change-link">Change</p>
       </div>
@@ -16,12 +16,12 @@
     <ul class="summary-addons">
       <li class="summary-addon" *ngFor="let addon of summary?.addons">
         <span>{{ addon.title }}</span>
-        <span>+{{ addon.price }}/{{ isYearly ? "yr" : "mo" }}</span>
+        <span>+{{ addon.price }}/{{ isYearly() ? "yr" : "mo" }}</span>
       </li>
     </ul>
   </div>
   <div class="total">
-    <span>Total ({{ isYearly ? "per year" : "per month" }})</span>
+    <span>Total ({{ isYearly() ? "per year" : "per month" }})</span>
     <span class="total-price">{{ totalPrice }}</span>
   </div>
 </ng-container>

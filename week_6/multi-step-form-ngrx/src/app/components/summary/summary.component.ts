@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { Summary } from '../../interface/summary';
+import { Store } from '@ngrx/store';
+import { selectIsYearly } from '../../store/form/form.reducers';
 
 @Component({
   selector: 'app-summary',
@@ -11,12 +13,15 @@ import { Summary } from '../../interface/summary';
   styleUrl: './summary.component.css',
 })
 export class SummaryComponent {
-  @Input({ required: true }) summary!: Summary;
-  @Input({ required: true }) isYearly: boolean = false;
-  @Input({ required: true }) totalPrice: string = '';
-  @Output() stepChange = new EventEmitter<number>();
+  private readonly store = inject(Store);
 
-  goToStepTwo() {
+  @Input({ required: true }) public summary!: Summary;
+  @Input({ required: true }) public totalPrice: string = '';
+  @Output() public stepChange = new EventEmitter<number>();
+
+  public readonly isYearly = this.store.selectSignal(selectIsYearly);
+
+  public goToStepTwo(): void {
     this.stepChange.emit(2);
   }
 }
