@@ -252,7 +252,7 @@ export class FormsComponent implements OnInit {
     this.formFields.reset();
     this.store.dispatch(formActions.resetForm());
     this.store.dispatch(formActions.setCurrentStep({ step: 1 }));
-    // this.removeItemFromStorage();
+    this.removeItemFromStorage();
     this.stepChanged.emit(this.currentStep());
   }
 }

@@ -49,7 +49,7 @@ const formFeature = createFeature({
       ...state,
       currentStep: step,
     })),
-    on(formActions.resetForm, () => ({ ...initialState })),
+    on(formActions.resetForm, () => initialState),
     on(formActions.setIsDone, (state, { data }) => ({
       ...state,
       isDone: data,
