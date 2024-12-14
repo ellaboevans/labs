@@ -5,8 +5,13 @@ import { FormsComponent } from '../components/forms/forms.component';
 import { SIDE_BAR } from '../data/side-bar';
 import { ThankYouComponent } from '../components/thank-you/thank-you.component';
 import { Store } from '@ngrx/store';
-import { selectCurrentStep, selectIsDone } from '../state/form/form.selector';
+import {
+  selectCurrentStep,
+  selectFormState,
+  selectIsDone,
+} from '../state/form/form.selector';
 import { formActions } from '../state/form/form.actions';
+import { PersistenceService } from '../services/persistence.service';
 
 @Component({
   selector: 'app-layout',
@@ -16,17 +21,20 @@ import { formActions } from '../state/form/form.actions';
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  private store = inject(Store);
-  sidebarItems: SideBar[] = SIDE_BAR;
-  currentStep = this.store.selectSignal(selectCurrentStep);
-  isDone = this.store.selectSignal(selectIsDone);
+  public readonly sidebarItems: SideBar[] = SIDE_BAR;
+
+  private readonly store = inject(Store);
+  private readonly persistenceService = inject(PersistenceService);
+
+  public readonly currentStep = this.store.selectSignal(selectCurrentStep);
+  public readonly isDone = this.store.selectSignal(selectIsDone);
+
+  private readonly formState = this.store.selectSignal(selectFormState);
 
   ngOnInit() {
-    const savedStep = localStorage.getItem('currentStep');
+    const savedStep = this.persistenceService.get('formPayload').currentStep;
     if (savedStep) {
-      this.store.dispatch(
-        formActions.setCurrentStep({ step: parseInt(savedStep) })
-      );
+      this.store.dispatch(formActions.setCurrentStep({ step: savedStep }));
       this.updateSidebarSteps(this.currentStep());
     }
   }
@@ -48,7 +56,7 @@ export class LayoutComponent implements OnInit {
     this.store.dispatch(formActions.setCurrentStep({ step: 4 }));
     this.saveCurrentStep();
 
-    localStorage.removeItem('currentStep');
+    this.persistenceService.clear();
   }
 
   updateSidebarSteps(activeStep: number) {
@@ -58,6 +66,6 @@ export class LayoutComponent implements OnInit {
   }
 
   saveCurrentStep() {
-    localStorage.setItem('currentStep', this.currentStep().toString());
+    this.persistenceService.set('formPayload', this.formState());
   }
 }
