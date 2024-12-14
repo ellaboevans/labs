@@ -228,8 +228,8 @@
                     <p>{{ addon.description }}</p>
                   </div>
                   <span class="addon-price"
-                    >+{{ !isYearly ? addon.price : addon.yearly.price }}/{{
-                      !isYearly ? "mo" : "yr"
+                    >+{{ !isYearly() ? addon.price : addon.yearly.price }}/{{
+                      !isYearly() ? "mo" : "yr"
                     }}</span
                   >
                 </div>
@@ -245,11 +245,7 @@
           [class.slide-in]="isForward()"
           [class.slide-out]="!isForward()"
         >
-          <app-summary
-            [summary]="summaryData!"
-            [totalPrice]="calculateTotalPrice"
-            (stepChange)="onStepChanged($event)"
-          ></app-summary>
+          <app-summary (stepChange)="onStepChanged($event)"></app-summary>
         </div>
       </ng-container>
       <!-- form buttons container -->
