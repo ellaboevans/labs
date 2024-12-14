@@ -168,8 +168,8 @@
               <img [src]="plan.icon" [alt]="plan.type" />
               <div class="card-texts">
                 <h3>{{ plan.type | capitalize }}</h3>
-                <p>{{ !isYearly() ? plan.price : plan.yearly.price }}</p>
-                <p [ngStyle]="{ color: 'var(--denim)' }" *ngIf="isYearly()">
+                <p>{{ !isChecked ? plan.price : plan.yearly.price }}</p>
+                <p [ngStyle]="{ color: 'var(--denim)' }" *ngIf="isChecked">
                   {{ plan.yearly.extras }}
                 </p>
               </div>
@@ -178,14 +178,14 @@
           <!-- banner with switch and labels for monthly and yearly -->
           <div class="banner">
             <span class="switch-container">
-              <small class="monthly-plan" [ngClass]="{ active: !isYearly() }"
+              <small class="monthly-plan" [ngClass]="{ active: !isChecked }"
                 >Monthly</small
               >
               <input
                 type="checkbox"
                 id="toggle-switch"
                 class="switch-checkbox"
-                [checked]="isYearly()"
+                [checked]="isChecked"
                 (change)="togglePlan($event)"
                 id="toggle-switch"
               />
@@ -193,7 +193,7 @@
                 <span class="switch-inner"></span>
                 <span class="switch-slider"></span>
               </label>
-              <small class="yearly-plan" [ngClass]="{ active: isYearly() }"
+              <small class="yearly-plan" [ngClass]="{ active: isChecked }"
                 >Yearly</small
               >
             </span>
@@ -228,8 +228,8 @@
                     <p>{{ addon.description }}</p>
                   </div>
                   <span class="addon-price"
-                    >+{{ !isYearly() ? addon.price : addon.yearly.price }}/{{
-                      !isYearly() ? "mo" : "yr"
+                    >+{{ !isChecked ? addon.price : addon.yearly.price }}/{{
+                      !isChecked ? "mo" : "yr"
                     }}</span
                   >
                 </div>

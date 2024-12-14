@@ -19,10 +19,11 @@ import { formActions } from '../../state/form/form.actions';
 import { FormPayload, StepPayload } from '../../interface/form-payload';
 import {
   selectCurrentStep,
+  selectFormState,
   selectIsDone,
   selectIsForward,
-  selectIsYearly,
 } from '../../state/form/form.selector';
+import { PersistenceService } from '../../services/persistence.service';
 
 @Component({
   selector: 'app-forms',
@@ -37,10 +38,11 @@ import {
   styleUrl: './forms.component.css',
 })
 export class FormsComponent implements OnInit {
-  private readonly store = inject(Store);
-
   public readonly plans = PLAN_OPTIONS;
   public readonly addons = ADD_ONS;
+
+  private readonly store = inject(Store);
+  private readonly persistenceService = inject(PersistenceService);
 
   private readonly validEmailPattern =
     /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -53,7 +55,7 @@ export class FormsComponent implements OnInit {
   public readonly currentStep = this.store.selectSignal(selectCurrentStep);
   public isForward = this.store.selectSignal(selectIsForward);
   public isDone = this.store.selectSignal(selectIsDone);
-  public isYearly = this.store.selectSignal(selectIsYearly);
+  private formState = this.store.selectSignal(selectFormState);
 
   readonly formFields = new FormGroup({
     name: new FormControl('', [
@@ -78,23 +80,23 @@ export class FormsComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const savedData = localStorage.getItem('formData');
-    if (savedData) return this.formFields.setValue(JSON.parse(savedData));
-  }
-
-  private savedDataToLocalStorage(): void {
-    localStorage.setItem('formData', JSON.stringify(this.formFields.value));
+    const savedData = this.persistenceService.get('formPayload');
+    if (savedData) {
+      this.formFields.patchValue(savedData.formFields);
+      this.store.dispatch(
+        formActions.setIsYearly({ data: savedData.isYearly })
+      );
+    }
   }
 
   public gotoNextStep(): void {
     this.isForward();
 
-    this.savedDataToLocalStorage();
-
     const stepPayload = this.formFields.getRawValue() as StepPayload;
 
     if (this.currentStep() < 4) {
       this.store.dispatch(formActions.goToNextStep({ stepPayload }));
+      this.persistenceService.set('formPayload', this.formState());
       this.stepChanged.emit(this.currentStep());
     }
   }
@@ -108,11 +110,11 @@ export class FormsComponent implements OnInit {
       phone: formData.phone!,
       plan: {
         type: formData.plan?.type!,
-        price: this.isYearly()
+        price: this.isChecked
           ? this.plans.find((plan) => plan.type === formData.plan?.type)?.yearly
               .price
           : formData.plan?.price!,
-        extras: this.isYearly()
+        extras: this.isChecked
           ? this.plans.find((plan) => plan.type === formData.plan?.type)?.yearly
               .extras
           : null!,
@@ -125,7 +127,7 @@ export class FormsComponent implements OnInit {
           type: addon.type,
           description: addon.description,
           title: addon.title,
-          price: this.isYearly()
+          price: this.isChecked
             ? (addonDetails?.yearly.price as string)
             : (addonDetails?.price as string),
         };
@@ -135,12 +137,7 @@ export class FormsComponent implements OnInit {
     this.store.dispatch(formActions.submitForm({ payload }));
 
     this.formSubmitted.emit(); // this when emitted disables the click even on step tracker
-    this.removeItemFromStorage();
-  }
-
-  private removeItemFromStorage(): void {
-    localStorage.removeItem('formData');
-    localStorage.removeItem('currentStep()');
+    this.persistenceService.clear();
   }
 
   public gotoPreviousStep(): void {
@@ -153,8 +150,10 @@ export class FormsComponent implements OnInit {
 
   public togglePlan(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
-    this.isYearly();
     this.store.dispatch(formActions.setIsYearly({ data: checkbox.checked }));
+
+    this.persistenceService.set('formPayload', this.formState());
+    this.isChecked;
 
     // Update plan prices in the form based on the toggle state
     const currentPlanType = this.formFields.get('plan.type')?.value;
@@ -164,19 +163,17 @@ export class FormsComponent implements OnInit {
     if (currentPlan) {
       this.formFields.patchValue({
         plan: {
-          price: this.isYearly() ? currentPlan.yearly.price : currentPlan.price,
+          price: this.isChecked ? currentPlan.yearly.price : currentPlan.price,
         },
       });
     }
-
-    this.savedDataToLocalStorage();
   }
 
   public selectPlan(plan: Plan): void {
     this.formFields.patchValue({
       plan: {
         type: plan.type,
-        price: this.isYearly() ? plan.yearly?.price : plan.price,
+        price: this.isChecked ? plan.yearly?.price : plan.price,
       },
     });
   }
@@ -191,9 +188,7 @@ export class FormsComponent implements OnInit {
       this.formFields.patchValue({
         addons: updatedAddons.map((addon) => ({
           ...addon,
-          price: (this.isYearly()
-            ? addon.yearly?.price
-            : addon.price) as string,
+          price: (this.isChecked ? addon.yearly?.price : addon.price) as string,
         })),
       });
     } else {
@@ -204,15 +199,13 @@ export class FormsComponent implements OnInit {
             description: addonValue.description,
             title: addonValue.title,
             type: addonValue.type,
-            price: (this.isYearly()
+            price: (this.isChecked
               ? addonValue.yearly?.price
               : addonValue.price) as string,
           },
         ],
       });
     }
-
-    this.savedDataToLocalStorage();
   }
 
   public isAddonSelected(selectedAddonValue: Addon): boolean {
@@ -230,7 +223,12 @@ export class FormsComponent implements OnInit {
     this.formFields.reset();
     this.store.dispatch(formActions.resetForm());
     this.store.dispatch(formActions.setCurrentStep({ step: 1 }));
-    this.removeItemFromStorage();
+    this.persistenceService.remove('formPayload');
+    this.persistenceService.remove('currentStep');
     this.stepChanged.emit(this.currentStep());
+  }
+
+  public get isChecked(): boolean {
+    return this.persistenceService.get('formPayload').isYearly;
   }
 }
