@@ -1,20 +1,20 @@
-<ng-container *ngIf="summary">
+<ng-container *ngIf="summaryData?.name && summaryData?.email">
   <div class="summary-card">
     <div class="plan-details">
       <div class="plan-header">
         <h3>
-          {{ summary && summary.plan?.type | capitalize }}
+          {{ summaryData && summaryData.plan?.type | capitalize }}
           ({{ isYearly() ? "Yearly" : "Monthly" }})
         </h3>
         <p (click)="goToStepTwo()" class="change-link">Change</p>
       </div>
       <p class="plan-price">
-        {{ summary && summary.plan?.price }}
+        {{ summaryData && summaryData.plan?.price }}
       </p>
     </div>
     <hr />
     <ul class="summary-addons">
-      <li class="summary-addon" *ngFor="let addon of summary?.addons">
+      <li class="summary-addon" *ngFor="let addon of summaryData?.addons">
         <span>{{ addon.title }}</span>
         <span>+{{ addon.price }}/{{ isYearly() ? "yr" : "mo" }}</span>
       </li>
@@ -22,11 +22,11 @@
   </div>
   <div class="total">
     <span>Total ({{ isYearly() ? "per year" : "per month" }})</span>
-    <span class="total-price">{{ totalPrice }}</span>
+    <span class="total-price">{{ calculateTotalPrice }}</span>
   </div>
 </ng-container>
 
-<ng-container *ngIf="!summary">
+<ng-container *ngIf="!summaryData?.name && !summaryData?.email">
   <div class="empty-container">
     <img src="assets/images/empty-state.png" alt="Empty state" />
     <p>No summary available yet.</p>
