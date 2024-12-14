@@ -7,3 +7,7 @@ export interface FormPayload {
   plan: Plan;
   addons: Addon[];
 }
+
+export type StepPayload = Partial<FormPayload>;
+
+
