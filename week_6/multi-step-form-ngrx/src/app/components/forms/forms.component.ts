@@ -12,19 +12,17 @@ import { ADD_ONS } from '../../data/addons';
 import { Addon, Plan } from '../../interface/addon';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { getFormHeadings } from '../../utils/get-form-headings';
-import { extractPrice } from '../../utils/extract-price';
 import { SummaryComponent } from '../summary/summary.component';
 import { fullEmailValidator } from '../../validations/full-email-validator';
 import { Store } from '@ngrx/store';
-import { formActions } from '../../store/form/form.actions';
-import { FormPayload } from '../../interface/form-payload';
+import { formActions } from '../../state/form/form.actions';
+import { FormPayload, StepPayload } from '../../interface/form-payload';
 import {
   selectCurrentStep,
   selectIsDone,
   selectIsForward,
   selectIsYearly,
-} from '../../store/form/form.reducers';
-import { Summary } from '../../interface/summary';
+} from '../../state/form/form.selector';
 
 @Component({
   selector: 'app-forms',
@@ -93,8 +91,10 @@ export class FormsComponent implements OnInit {
 
     this.savedDataToLocalStorage();
 
+    const stepPayload = this.formFields.getRawValue() as StepPayload;
+
     if (this.currentStep() < 4) {
-      this.store.dispatch(formActions.goToNextStep());
+      this.store.dispatch(formActions.goToNextStep({ stepPayload }));
       this.stepChanged.emit(this.currentStep());
     }
   }
@@ -147,9 +147,6 @@ export class FormsComponent implements OnInit {
     this.isForward();
     if (this.currentStep() > 1) {
       this.store.dispatch(formActions.goToPreviousStep());
-      this.store.dispatch(
-        formActions.setCurrentStep({ step: this.currentStep() })
-      );
       this.stepChanged.emit(this.currentStep());
     }
   }
@@ -175,7 +172,7 @@ export class FormsComponent implements OnInit {
     this.savedDataToLocalStorage();
   }
 
-  public selectPlan(plan: Plan) {
+  public selectPlan(plan: Plan): void {
     this.formFields.patchValue({
       plan: {
         type: plan.type,
@@ -184,7 +181,7 @@ export class FormsComponent implements OnInit {
     });
   }
 
-  public selectAddon(addonValue: Addon) {
+  public selectAddon(addonValue: Addon): void {
     const selectedAddons = this.formFields.get('addons')?.value || [];
 
     if (selectedAddons.some((addon: Addon) => addonValue.type === addon.type)) {
@@ -223,23 +220,6 @@ export class FormsComponent implements OnInit {
     return selectedAddons.some(
       (addon: Addon) => addon.type === selectedAddonValue.type
     );
-  }
-
-  public get calculateTotalPrice(): string {
-    const planPrice = extractPrice(this.summaryData?.plan?.price);
-    const addonPrices = this.summaryData?.addons?.reduce(
-      (total: number, addon: Addon) => {
-        return total + extractPrice(addon.price);
-      },
-      0
-    );
-    const total = planPrice + (addonPrices || 0);
-    return this.isYearly() ? `$${total}/yr` : `$${total}/mo`;
-  }
-
-  public get summaryData(): Summary | undefined {
-    const data = localStorage.getItem('formData');
-    return data ? JSON.parse(data) : undefined;
   }
 
   public onStepChanged(step: number): void {
