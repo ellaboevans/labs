@@ -5,8 +5,8 @@ import { FormsComponent } from '../components/forms/forms.component';
 import { SIDE_BAR } from '../data/side-bar';
 import { ThankYouComponent } from '../components/thank-you/thank-you.component';
 import { Store } from '@ngrx/store';
-import { selectCurrentStep, selectIsDone } from '../store/form/form.reducers';
-import { formActions } from '../store/form/form.actions';
+import { selectCurrentStep, selectIsDone } from '../state/form/form.selector';
+import { formActions } from '../state/form/form.actions';
 
 @Component({
   selector: 'app-layout',
