@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { formFeatureKey, formReducer } from './store/form/form.reducers';
+import { formFeatureKey, formReducer } from './state/form/form.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
