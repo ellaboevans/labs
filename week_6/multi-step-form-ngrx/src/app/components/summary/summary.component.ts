@@ -9,7 +9,8 @@ import {
   selectIsYearly,
 } from '../../state/form/form.selector';
 import { extractPrice } from '../../utils/extract-price';
-import { Addon, Plan } from '../../interface/addon';
+import { Addon } from '../../interface/addon';
+import { PersistenceService } from '../../services/persistence.service';
 
 @Component({
   selector: 'app-summary',
@@ -19,9 +20,10 @@ import { Addon, Plan } from '../../interface/addon';
   styleUrl: './summary.component.css',
 })
 export class SummaryComponent {
-  private readonly store = inject(Store);
-
   @Output() public stepChange = new EventEmitter<number>();
+
+  private readonly store = inject(Store);
+  private readonly persistenceService = inject(PersistenceService);
 
   protected totalPrice!: string;
 
@@ -50,6 +52,9 @@ export class SummaryComponent {
   }
 
   public get summaryData(): Summary | undefined {
+    if (this.formFields().name === '' || this.formFields().email === '') {
+      return this.persistenceService.get('formPayload').formFields;
+    }
     return this.formFields();
   }
 }
