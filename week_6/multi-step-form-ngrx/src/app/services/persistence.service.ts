@@ -5,7 +5,7 @@ import { FormState } from '../state/form/form.state';
   providedIn: 'root',
 })
 export class PersistenceService {
-  set(key: string, data: FormState): void {
+  public set(key: string, data: FormState): void {
     try {
       localStorage.setItem(key, JSON.stringify(data));
     } catch (error) {
@@ -13,7 +13,7 @@ export class PersistenceService {
     }
   }
 
-  get(key: string): FormState {
+  public get(key: string): FormState {
     try {
       const localStorageItem = localStorage.getItem(key);
       return localStorageItem
@@ -25,7 +25,7 @@ export class PersistenceService {
     }
   }
 
-  remove(key: string): void {
+  public remove(key: string): void {
     try {
       localStorage.removeItem(key);
     } catch (error) {
@@ -33,7 +33,7 @@ export class PersistenceService {
     }
   }
 
-  clear(): void {
+  public clear(): void {
     try {
       localStorage.clear();
     } catch (error) {
