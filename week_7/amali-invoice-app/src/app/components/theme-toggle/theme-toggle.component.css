@@ -1,0 +1,13 @@
+.theme-toggler {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .theme-toggler-icon {
+    height: 40px;
+    width: 40px;
+  }
+}
