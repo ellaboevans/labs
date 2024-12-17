@@ -9,8 +9,12 @@
   --tertiary-color: ##7e88c3;
   --base-black: #0c0e16;
 
+  --sidebar-bg-color: #373b53;
+
   --error-color: #ec5757;
   --error-color-light: #ff9797;
+
+  --divider-color: #494e6e;
 
   /* Theming */
   --light-bg-color: #f8f8fb;
