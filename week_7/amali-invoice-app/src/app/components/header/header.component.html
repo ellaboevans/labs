@@ -1,0 +1,32 @@
+<header class="header-container">
+  <div class="header-headline">
+    <app-headline
+      [label]="'Invoices'"
+      [level]="1"
+      color="var(--heading-text)"
+    ></app-headline>
+    <app-headline
+      [label]="'There are 7 total invoices'"
+      [level]="6"
+      color="var(--heading-subtext)"
+    ></app-headline>
+  </div>
+  <div class="header-actions">
+    <!-- Filter by custom select -->
+    <button class="header-filter">
+      <app-headline
+        label="Filter by status"
+        [level]="4"
+        color="var(--filter-label)"
+      ></app-headline>
+      <img src="/assets/icon-arrow-down.svg" alt="chevron-down" />
+    </button>
+    <app-button
+      variant="primary"
+      [icon]="buttonIcon"
+      label="New Invoice"
+      (clicked)="newInvoice()"
+      >Create Invoice</app-button
+    >
+  </div>
+</header>
