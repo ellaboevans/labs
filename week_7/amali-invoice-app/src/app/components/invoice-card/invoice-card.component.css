@@ -1,0 +1,57 @@
+.invoice-card {
+  background-color: var(--bg-invoice-card);
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  height: 5rem;
+  box-shadow: var(--invoice-card-shadow);
+  border-radius: 0.5rem;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-block: 2rem;
+  cursor: pointer;
+
+  .invoice-code {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--text-base);
+    font-size: var(--heading-large);
+    font-weight: 700;
+
+    .marker {
+      color: var(--marker);
+    }
+  }
+
+  .invoice-dueDate {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--date-text);
+    font-size: var(--heading-small);
+    gap: 0.5rem;
+  }
+
+  .invoice-username {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--name-text);
+  }
+
+  .invoice-amount {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--card-amount-text);
+    font-size: var(--heading-large);
+    font-weight: 700;
+  }
+
+  .badge-arrow img {
+    width: 0.65rem;
+  }
+}

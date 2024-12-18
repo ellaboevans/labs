@@ -1,0 +1,24 @@
+<article
+  class="invoice-card"
+  role="button"
+  tabindex="0"
+  (click)="navigateToInvoice(invoice.id)"
+>
+  <p class="invoice-code">
+    <span class="marker">#</span>
+    <span>{{ invoice.id }}</span>
+  </p>
+  <p class="invoice-dueDate">
+    <span>Due</span>
+    <span>{{ invoice.paymentDue | date : "dd MMM yyyy" }}</span>
+  </p>
+  <p class="invoice-username">{{ invoice.clientName }}</p>
+  <p class="invoice-amount">
+    {{ invoice.total | currency : "GBP" : "symbol" }}
+  </p>
+  <app-badge [invoiceStatus]="invoice.status">
+    <span class="badge-arrow">
+      <img src="/assets/icon-arrow-right.svg" alt="arrow" />
+    </span>
+  </app-badge>
+</article>
