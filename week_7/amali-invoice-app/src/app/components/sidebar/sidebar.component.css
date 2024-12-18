@@ -1,7 +1,8 @@
 .sidebar {
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--bg-sidebar);
   height: 100vh;
   width: 8rem;
+  max-width: 5rem;
   padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
@@ -14,6 +15,7 @@
 
   .sidebar-header {
     height: 8rem;
+    max-height: 5rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -24,8 +26,8 @@
 
     .inner-shape {
       width: 100%;
-      height: 4rem;
-      background-color: var(--primary-color-light);
+      height: 2.5rem;
+      background-color: var(--primary-hover);
       position: absolute;
       left: 0;
       right: 0;
@@ -35,8 +37,8 @@
   }
 
   .sidebar-logo {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     z-index: 10;
   }
 
