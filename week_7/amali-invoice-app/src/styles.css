@@ -1,29 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+
 :root {
   /* Colors */
   --primary-color: #7c5dfa;
-  --primary-color-light: #9277ff;
-  --secondary-color: #1e2139;
-  --secondary-color-light: #252945;
-  --grey: #dfe3fa;
-  --slightly-grey: #888eb0;
-  --tertiary-color: ##7e88c3;
-  --base-black: #0c0e16;
-  --sidebar-bg-color: #373b53;
-  --error-color: #ec5757;
-  --error-color-light: #ff9797;
+  --primary-hover: #9277ff;
+  --bg-danger: #ec5757;
+  --bg-danger-hover: #ff9797;
   --divider-color: #494e6e;
 
-  /* Theming */
-  --light-bg-color: #f8f8fb;
-  --dark-bg-color: #141625;
+  --text-paid: #33d69f;
+  --text-pending: #ff8f00;
+  --white: #ffffff;
+
+  --bg-paid: rgba(51, 214, 160, 0.233);
+  --bg-pending: rgba(255, 143, 0, 0.233);
+  --bg-draft: rgba(55, 59, 83, 0.233);
 
   /* Border */
   --sidebar-radius: 0 20px 20px 0;
   --sidebar-inner-radius: 20px 0 20px 0;
+  --invoice-card-radius: 0.5rem;
+
+  /* Typography */
+  --spartan-font: "League Spartan", serif;
+  --heading-xl: 2rem;
+  --heading-large: 1.25rem;
+  --heading-medium: 1rem;
+  ---small-text-1: 0.75rem;
+  ---small-text-2: 0.688rem;
+
+  ---heading-xl-line: 2.25rem;
+  ---heading-large-line: 1.375rem;
+  ---heading-medium-line: 1.5rem;
+  --heading-small-line: 0.938rem;
+  --small-text-2-line: 1.125rem;
+
+  ---heading-xl-spacing: -1;
+  ---heading-large-spacing: -0.63;
+  --heading-medium-spacing: -0.8;
+  ---heading-small-spacing: -0.25;
+  --small-text-2-spacing: -0.23;
+
+  /* Shadows */
+  --invoice-card-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grey);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slightly-grey);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--spartan-font);
+}
+
+html[data-theme="light"] {
+  --bg-primary: #f8f8fb;
+  --bg-sidebar: #373b53;
+  --bg-invoice-card: ##ffffff;
+  --secondary-color: #f9fafe;
+  --secondary-hover: #dfe3fa;
+
+  --marker: #7e88c3;
+  --text-base: #0c0e16;
+  --date-text: #888eb0;
+  --name-text: #858bb2;
+  --card-amount-text: #0c0e16;
+  --heading-text: #0c0e16;
+  --heading-subtext: #888eb0;
+  --filter-label: #0c0e16;
+  --btn-secondary-text: #7e88c3;
+  --text-draft: #373b53;
+}
+
+html[data-theme="dark"] {
+  --bg-primary: #141625;
+  --bg-sidebar: #1e2139;
+  --bg-invoice-card: #1e2139;
+  --secondary-color: #1e2139;
+  --secondary-hover: #ffffff;
+
+  --marker: #7e88c3;
+  --text-base: #ffffff;
+  --date-text: #dfe3fa;
+  --name-text: #ffffff;
+  --card-amount-text: #ffffff;
+  --heading-text: #ffffff;
+  --heading-subtext: #dfe3fa;
+  --filter-label: #ffffff;
+  --btn-secondary-text: #7e88c3;
+  --text-draft: #dfe3fa;
+}
+
+html,
+body {
+  font-family: var(--spartan-font);
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-family: var(--spartan-font);
 }
