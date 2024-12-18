@@ -1,0 +1,20 @@
+<button
+  class="button"
+  [ngClass]="
+    variant === 'primary'
+      ? 'primary'
+      : variant === 'secondary'
+      ? 'secondary'
+      : variant === 'tertiary'
+      ? 'tertiary'
+      : variant === 'destructive'
+      ? 'destructive'
+      : ''
+  "
+  (click)="onClick()"
+>
+  <span class="button-icon-wrapper" *ngIf="icon">
+    <img [src]="icon" [alt]="altText" class="button-icon"
+  /></span>
+  <span class="button-label">{{ label }}</span>
+</button>

@@ -1,0 +1,56 @@
+<ng-container [ngSwitch]="level">
+  <h1
+    *ngSwitchCase="1"
+    [ngStyle]="{
+      color: color,
+      'text-align': align,
+      'font-size': 'var(--heading-xl)'
+    }"
+  >
+    {{ label }}
+  </h1>
+  <h2
+    *ngSwitchCase="2"
+    [ngStyle]="{
+      color: color,
+      'text-align': align,
+      'font-size': 'var(--heading-large)'
+    }"
+  >
+    {{ label }}
+  </h2>
+  <h3
+    *ngSwitchCase="3"
+    [ngStyle]="{
+      color: color,
+      'text-align': align,
+      'font-size': 'var(--heading-medium)',
+      'line-height': 'var(--heading-medium-line)'
+    }"
+  >
+    {{ label }}
+  </h3>
+  <h4
+    *ngSwitchCase="4"
+    [ngStyle]="{
+      color: color,
+      'text-align': align,
+      'font-size': 'var(--heading-small)',
+      'line-height': 'var(--heading-small-line)'
+    }"
+  >
+    {{ label }}
+  </h4>
+  <p
+    *ngSwitchCase="6"
+    [ngStyle]="{
+      color: color,
+      'text-align': align,
+      'font-size': 'var(--small-text-2)',
+      'line-height': 'var(--small-text-2-line)',
+      'font-weight': weight
+    }"
+  >
+    {{ label }}
+  </p>
+</ng-container>

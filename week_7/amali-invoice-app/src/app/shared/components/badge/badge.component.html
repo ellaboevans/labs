@@ -1,0 +1,47 @@
+<ng-container>
+  <div class="badge-container">
+    <div
+      class="badge"
+      [ngStyle]="{
+        'background-color':
+          invoiceStatus === 'paid'
+            ? 'var(--bg-paid)'
+            : invoiceStatus === 'draft'
+            ? 'var(--bg-draft)'
+            : invoiceStatus === 'pending'
+            ? 'var(--bg-pending)'
+            : ''
+      }"
+    >
+      <div
+        class="dot"
+        [ngStyle]="{
+          'background-color':
+            invoiceStatus === 'paid'
+              ? 'var( --text-paid)'
+              : invoiceStatus === 'draft'
+              ? 'var(--text-draft)'
+              : invoiceStatus === 'pending'
+              ? 'var(--text-pending)'
+              : ''
+        }"
+      ></div>
+      <p
+        class="text"
+        [ngStyle]="{
+          color:
+            invoiceStatus === 'paid'
+              ? 'var( --text-paid)'
+              : invoiceStatus === 'draft'
+              ? 'var(--text-draft)'
+              : invoiceStatus === 'pending'
+              ? 'var(--text-pending)'
+              : ''
+        }"
+      >
+        {{ invoiceStatus | titlecase }}
+      </p>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</ng-container>

@@ -1,0 +1,27 @@
+.badge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-radius: var(--invoice-card-radius);
+    width: 9rem;
+
+    .text {
+      font-size: var(--heading-large);
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+    }
+  }
+}
