@@ -1,5 +1,11 @@
 <ng-container>
   <main class="app-container">
     <app-sidebar></app-sidebar>
+    <app-content class="content-container">
+      <app-header></app-header>
+      @for (invoice of invoices; track $index) {
+      <app-invoice-card [invoice]="invoice"></app-invoice-card>
+      }
+    </app-content>
   </main>
 </ng-container>
