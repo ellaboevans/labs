@@ -13,6 +13,6 @@ export const invoiceActions = createActionGroup({
     'Delete Invoice': props<{ id: string }>(),
     'Create Invoice': props<{ invoice: Invoice }>(),
     'Set Invoice Status Filter': props<{ status: string }>(),
-    'Clear Invoice Filter': emptyProps(),
+    'Clear Invoice Filter': props<{ status: string }>(),
   },
 });
