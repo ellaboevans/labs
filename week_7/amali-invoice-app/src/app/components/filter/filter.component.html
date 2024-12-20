@@ -1,0 +1,29 @@
+<ng-container>
+  <div class="filter-container">
+    <button class="header-filter" (click)="toggleDropdown()">
+      <app-headline
+        label="Filter by status"
+        [level]="4"
+        color="var(--filter-label)"
+      ></app-headline>
+      <img
+        src="/assets/icon-arrow-down.svg"
+        alt="chevron-down"
+        [ngStyle]="{ transform: isOpen() ? 'rotate(180deg)' : 'rotate(0deg)' }"
+      />
+    </button>
+    <!-- Filter by custom select -->
+    <div class="filter-dropdown" *ngIf="isOpen()">
+      <div class="filter-dropdown-container" *ngFor="let status of statuses">
+        <input
+          type="checkbox"
+          [name]="status"
+          [id]="status"
+          (change)="onStatusChange(status, $event)"
+          [checked]="isStatusSelected(status)"
+        />
+        <label [for]="status">{{ status | titlecase }}</label>
+      </div>
+    </div>
+  </div>
+</ng-container>
