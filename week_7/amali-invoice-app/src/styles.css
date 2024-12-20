@@ -20,6 +20,7 @@
   --sidebar-radius: 0 20px 20px 0;
   --sidebar-inner-radius: 20px 0 20px 0;
   --invoice-card-radius: 0.5rem;
+  --checkbox-radius: 0.125rem;
 
   /* Typography */
   --spartan-font: "League Spartan", serif;
@@ -43,6 +44,7 @@
 
   /* Shadows */
   --invoice-card-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
+  --filter-dropdown-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar {
@@ -75,6 +77,8 @@ html[data-theme="light"] {
   --bg-invoice-card: #ffffff;
   --secondary-color: #f9fafe;
   --secondary-hover: #dfe3fa;
+  --bg-filter-dropdown: #ffffff;
+  --bg-checkbox: #dfe3fa;
 
   --marker: #7e88c3;
   --text-base: #0c0e16;
@@ -86,6 +90,7 @@ html[data-theme="light"] {
   --filter-label: #0c0e16;
   --btn-secondary-text: #7e88c3;
   --text-draft: #373b53;
+  --checked-text: #1e2139;
 }
 
 html[data-theme="dark"] {
@@ -94,6 +99,8 @@ html[data-theme="dark"] {
   --bg-invoice-card: #1e2139;
   --secondary-color: #1e2139;
   --secondary-hover: #ffffff;
+  --bg-filter-dropdown: #252945;
+  --bg-checkbox: #1e2139;
 
   --marker: #7e88c3;
   --text-base: #ffffff;
@@ -105,6 +112,7 @@ html[data-theme="dark"] {
   --filter-label: #ffffff;
   --btn-secondary-text: #7e88c3;
   --text-draft: #dfe3fa;
+  --checked-text: #ffffff;
 }
 
 html,
