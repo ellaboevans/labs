@@ -6,7 +6,7 @@ export interface AppState {
   loading: boolean;
   invoices: Invoice[];
   filteredInvoices: Invoice[];
-  selectedStatus: string | null;
+  selectedStatus: string;
 }
 
 export const initialState: AppState = {
@@ -15,5 +15,5 @@ export const initialState: AppState = {
   loading: false,
   invoices: [],
   filteredInvoices: [],
-  selectedStatus: null,
+  selectedStatus: '',
 };
