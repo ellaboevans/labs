@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { QuizComponent } from './quiz.component';
 import { QuizService } from '../../service/quiz.service';
-import { QuizState, SubjectType } from '../../interface/quiz';
+import { QuizState } from '../../interface/quiz';
 import { of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { mockSubject } from '../../data/mock-data';
 
 describe('QuizComponent', () => {
   let component: QuizComponent;
@@ -28,33 +29,6 @@ describe('QuizComponent', () => {
     fixture = TestBed.createComponent(QuizComponent);
     component = fixture.componentInstance;
 
-    const mockSubject: SubjectType = {
-      id: '1',
-      title: 'HTML',
-      icon: 'html-icon',
-      questions: [
-        {
-          question: 'What does HTML stand for?',
-          options: [
-            'Hyper Trainer Marking Language',
-            'Hyper Text Marketing Language',
-            'Hyper Text Markup Language',
-            'Hyper Text Markup Leveler',
-          ],
-          answer: 'Hyper Text Markup Language',
-        },
-        {
-          question: 'What does CSS stand for?',
-          options: [
-            'Colorful Style Sheets',
-            'Computer Style Sheets',
-            'Cascading Style Sheets',
-            'Creative Style Sheets',
-          ],
-          answer: 'Cascading Style Sheets',
-        },
-      ],
-    };
     quizServiceMock.getSelectedSubject.mockReturnValue(of(mockSubject));
     component.ngOnInit();
     fixture.detectChanges();
@@ -88,70 +62,12 @@ describe('QuizComponent', () => {
   });
 
   it('should fetch selected subject and questions on initialization', () => {
-    expect(component.subject).toEqual({
-      id: '1',
-      title: 'HTML',
-      icon: 'html-icon',
-      questions: [
-        {
-          question: 'What does HTML stand for?',
-          options: [
-            'Hyper Trainer Marking Language',
-            'Hyper Text Marketing Language',
-            'Hyper Text Markup Language',
-            'Hyper Text Markup Leveler',
-          ],
-          answer: 'Hyper Text Markup Language',
-        },
-        {
-          question: 'What does CSS stand for?',
-          options: [
-            'Colorful Style Sheets',
-            'Computer Style Sheets',
-            'Cascading Style Sheets',
-            'Creative Style Sheets',
-          ],
-          answer: 'Cascading Style Sheets',
-        },
-      ],
-    });
-    expect(component.questions).toEqual([
-      {
-        question: 'What does HTML stand for?',
-        options: [
-          'Hyper Trainer Marking Language',
-          'Hyper Text Marketing Language',
-          'Hyper Text Markup Language',
-          'Hyper Text Markup Leveler',
-        ],
-        answer: 'Hyper Text Markup Language',
-      },
-      {
-        question: 'What does CSS stand for?',
-        options: [
-          'Colorful Style Sheets',
-          'Computer Style Sheets',
-          'Cascading Style Sheets',
-          'Creative Style Sheets',
-        ],
-        answer: 'Cascading Style Sheets',
-      },
-    ]);
+    expect(component.subject).toEqual(mockSubject);
+    expect(component.questions).toEqual(mockSubject.questions);
   });
 
   it('should select an option and save state', () => {
-    const mockQuestion = {
-      question: 'What does HTML stand for?',
-      options: [
-        'Hyper Trainer Marking Language',
-        'Hyper Text Marketing Language',
-        'Hyper Text Markup Language',
-        'Hyper Text Markup Leveler',
-      ],
-      answer: 'Hyper Text Markup Language',
-    };
-
-    component.questions = [mockQuestion];
+    component.questions = [mockSubject.questions[0]];
     component.currentIndex = 0;
 
     component.selectOption(2);
@@ -166,28 +82,7 @@ describe('QuizComponent', () => {
   });
 
   it('should navigate to the next question', () => {
-    component.questions = [
-      {
-        question: 'What does HTML stand for?',
-        options: [
-          'Hyper Trainer Marking Language',
-          'Hyper Text Marketing Language',
-          'Hyper Text Markup Language',
-          'Hyper Text Markup Leveler',
-        ],
-        answer: 'Hyper Text Markup Language',
-      },
-      {
-        question: 'What does CSS stand for?',
-        options: [
-          'Colorful Style Sheets',
-          'Computer Style Sheets',
-          'Cascading Style Sheets',
-          'Creative Style Sheets',
-        ],
-        answer: 'Cascading Style Sheets',
-      },
-    ];
+    component.questions = mockSubject.questions;
     component.currentIndex = 0;
     component.correctOptionIndex = 2;
 
@@ -200,18 +95,7 @@ describe('QuizComponent', () => {
   });
 
   it('should handle quiz submission correctly', () => {
-    component.questions = [
-      {
-        question: 'What does HTML stand for?',
-        options: [
-          'Hyper Trainer Marking Language',
-          'Hyper Text Marketing Language',
-          'Hyper Text Markup Language',
-          'Hyper Text Markup Leveler',
-        ],
-        answer: 'Hyper Text Markup Language',
-      },
-    ];
+    component.questions = [mockSubject.questions[0]];
     component.currentIndex = 0;
     component.selectedOptionIndex = 2;
     component.correctOptionIndex = 2;
