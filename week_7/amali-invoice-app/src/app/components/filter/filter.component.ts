@@ -14,6 +14,7 @@ import { invoiceActions } from '../../states/invoice/invoice.actions';
 export class FilterComponent {
   public isOpen = signal(false);
   private readonly store = inject(Store);
+  public readonly statuses: string[] = ['draft', 'pending', 'paid'];
 
   public toggleDropdown(): void {
     this.isOpen.set(!this.isOpen());
@@ -24,7 +25,14 @@ export class FilterComponent {
     if (isChecked) {
       this.store.dispatch(invoiceActions.setInvoiceStatusFilter({ status }));
     } else {
-      this.store.dispatch(invoiceActions.clearInvoiceFilter());
+      this.store.dispatch(invoiceActions.clearInvoiceFilter({ status }));
     }
+  }
+
+  public isStatusSelected(status: string): boolean {
+    const selectedStatuses = this.store.selectSignal(
+      (state) => state.invoice.selectedStatuses
+    );
+    return selectedStatuses().includes(status);
   }
 }
