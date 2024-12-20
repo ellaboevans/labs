@@ -92,7 +92,7 @@ export class FormsComponent implements OnInit {
   public gotoNextStep(): void {
     this.isForward();
 
-    const stepPayload = this.formFields.getRawValue() as StepPayload;
+    const stepPayload = this.formFields.value as StepPayload;
 
     if (this.currentStep() < 4) {
       this.store.dispatch(formActions.goToNextStep({ stepPayload }));
@@ -102,7 +102,7 @@ export class FormsComponent implements OnInit {
   }
 
   public submitForm(): void {
-    const formData = this.formFields.getRawValue();
+    const formData = this.formFields.value;
 
     const payload: FormPayload = {
       name: formData.name!,
