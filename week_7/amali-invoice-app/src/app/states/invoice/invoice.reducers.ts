@@ -49,22 +49,37 @@ const invoiceFeature = createFeature({
       invoices: [...state.invoices, invoice],
     })),
     on(invoiceActions.setInvoiceStatusFilter, (state, { status }) => {
-      const filteredInvoices = status
-        ? state.invoices.filter((invoice) => invoice.status === status)
-        : state.invoices;
+      const updatedStatuses = state.selectedStatuses.includes(status)
+        ? state.selectedStatuses
+        : [...state.selectedStatuses, status];
+
+      const filteredInvoices = state.invoices.filter((invoice) =>
+        updatedStatuses.includes(invoice.status)
+      );
+
       return {
         ...state,
-        selectedStatus: status,
+        selectedStatuses: updatedStatuses,
         filteredInvoices,
         invoiceCount: filteredInvoices.length,
       };
     }),
-    on(invoiceActions.clearInvoiceFilter, (state) => {
+    on(invoiceActions.clearInvoiceFilter, (state, { status }) => {
+      const updatedStatuses = state.selectedStatuses.filter(
+        (selectedStatus) => selectedStatus !== status
+      );
+
+      const filteredInvoices = updatedStatuses.length
+        ? state.invoices.filter((invoice) =>
+            updatedStatuses.includes(invoice.status)
+          )
+        : state.invoices;
+
       return {
         ...state,
-        selectedStatus: '',
-        filteredInvoices: state.invoices,
-        invoiceCount: state.invoices.length,
+        selectedStatuses: updatedStatuses,
+        filteredInvoices,
+        invoiceCount: filteredInvoices.length,
       };
     })
   ),
@@ -77,6 +92,6 @@ export const {
   selectInvoices,
   selectInvoiceState,
   selectError,
-  selectSelectedStatus,
+  selectSelectedStatuses,
   selectFilteredInvoices,
 } = invoiceFeature;
