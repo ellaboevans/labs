@@ -1,0 +1,118 @@
+@font-face {
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+}
+main {
+  padding: 2.5rem 0;
+  margin: 0 auto;
+}
+
+.header__wrapper {
+  display: flex;
+  margin-bottom: 4rem;
+  align-items: center;
+  gap: 20px;
+  margin: 0 auto;
+}
+.header__wrapper .header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.header__wrapper .header__logo img {
+  width: 35px;
+}
+.header__wrapper .theme__switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header__wrapper #toggle__menu {
+  display: none;
+}
+.header__wrapper .toggle__menu__icon {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  padding: 0.5rem;
+  background-color: #a729f5;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.header__wrapper .toggle__menu__icon .slider {
+  position: absolute;
+  top: 3.5px;
+  left: 2.5px;
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+.header__wrapper #toggle__menu:checked + .toggle__menu__icon {
+  background-color: #a729f5;
+}
+.header__wrapper #toggle__menu:checked + .toggle__menu__icon .slider {
+  transform: translateX(20px);
+}
+.header__wrapper .moon__icon,
+.header__wrapper .sun__icon {
+  width: 20px;
+  height: 20px;
+}
+.header__wrapper #toggle__menu:checked ~ .moon__icon {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+.header__wrapper body.dark__theme {
+  background-color: black;
+}
+
+@media (max-width: 768px) {
+  .header__wrapper {
+    gap: 15px;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .header__wrapper .theme__switch {
+    justify-content: center;
+  }
+  .circles .circle__1,
+  .circles .circle__2 {
+    width: 100px;
+  }
+}
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  main {
+    padding: 2rem 0;
+  }
+  .header__wrapper {
+    gap: 10px;
+  }
+  .header__wrapper .header__logo img {
+    width: 30px;
+  }
+  .header__wrapper .header__logo h2 {
+    font-size: 1.2rem;
+  }
+  .header__wrapper .toggle__menu__icon .slider {
+    top: 2px;
+  }
+  .header__wrapper .theme__switch .toggle__menu__icon {
+    height: 15px;
+  }
+  .header__wrapper .theme__switch .toggle__menu__icon .slider {
+    width: 12px;
+    height: 12px;
+  }
+  #toggle__menu:checked + .header__wrapper .theme__switch .toggle__menu__icon .slider {
+    transform: translateX(15px);
+  }
+  .header__wrapper .moon__icon,
+  .header__wrapper .sun__icon {
+    width: 16px;
+    height: 16px;
+  }
+}/*# sourceMappingURL=header.component.css.map */

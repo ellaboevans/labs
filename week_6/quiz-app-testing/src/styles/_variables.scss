@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Rubik";
+  src: url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+}
+
+$color-light: #f9f9f9;
+$color-light-bluish: #abc1e1;
+$color-dark: #313e51;
+$card-dark-bg: #3b4d66;
+$color-dark-secondary: #626c7f;
+$success-color: #26d782;
+$error-color: #ee5454;
+$primary-color: #a729f5;
+$primary-color_hover: #c76eff;
+$shadow-light-color: #8fa0c12c;
+$shadow-light: 0 16px 40px 0px $shadow-light-color;
+$shadow-dark: 0 16px 40px 0px $color_dark;
+$bg-light: #f4f6fa;
+$letter-hover: #f6e7ff;
+
+// Fonts
+$font-rubik: "Rubik", sans-serif;
+
+// Mode-specific
+$light-mode: (
+  bg-color: $bg-light,
+  text-color: $color-dark,
+);
+
+$dark-mode: (
+  bg-color: $color-dark,
+  text-color: $color-light,
+);
