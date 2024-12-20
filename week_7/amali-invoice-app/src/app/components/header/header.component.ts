@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import {
   selectError,
   selectInvoiceCount,
-  selectSelectedStatus,
+  selectSelectedStatuses,
 } from '../../states/invoice/invoice.reducers';
 import { FilterComponent } from '../filter/filter.component';
 
@@ -22,8 +22,9 @@ export class HeaderComponent {
   private readonly store = inject(Store);
 
   public readonly invoiceCount = this.store.selectSignal(selectInvoiceCount);
-  private readonly selectedStatus =
-    this.store.selectSignal(selectSelectedStatus);
+  private readonly selectedStatus = this.store.selectSignal(
+    selectSelectedStatuses
+  );
 
   public readonly error = this.store.selectSignal(selectError);
 
@@ -33,8 +34,16 @@ export class HeaderComponent {
   }
 
   get invoiceLabel(): string {
-    return this.invoiceCount() > 0
-      ? `There are ${this.invoiceCount()} ${this.selectedStatus()} invoices`
-      : 'No invoices';
+    const selectedStatuses = this.selectedStatus()?.length || 0;
+
+    if (this.invoiceCount() === 0) {
+      return 'No invoices';
+    }
+
+    if (selectedStatuses === 1) {
+      return `There are ${this.invoiceCount()} ${this.selectedStatus()} invoices`;
+    }
+
+    return `There are ${this.invoiceCount()} total invoices`;
   }
 }
