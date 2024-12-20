@@ -5,21 +5,32 @@
   height: 5rem;
   box-shadow: var(--invoice-card-shadow);
   border-radius: 0.5rem;
-  padding: 1rem 0;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   gap: 2rem;
   margin-block: 2rem;
   cursor: pointer;
 
-  .invoice-code {
+  &:hover {
+    outline: 1px solid var(--primary-color);
+  }
+
+  .invoice-code,
+  .invoice-dueDate,
+  .invoice-username,
+  .invoice-amount {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    color: var(--text-base);
+    justify-content: flex-start;
+  }
+
+  .invoice-code {
     font-size: var(--heading-large);
     font-weight: 700;
+    color: var(--text-base);
+    flex: 1;
 
     .marker {
       color: var(--marker);
@@ -27,31 +38,33 @@
   }
 
   .invoice-dueDate {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: var(--date-text);
     font-size: var(--heading-small);
+    color: var(--date-text);
     gap: 0.5rem;
+    flex: 1;
   }
 
   .invoice-username {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     color: var(--name-text);
+    flex: 1;
   }
 
   .invoice-amount {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: var(--card-amount-text);
     font-size: var(--heading-large);
     font-weight: 700;
+    color: var(--card-amount-text);
+    flex: 1;
+  }
+
+  .app-badge {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
   }
 
   .badge-arrow img {
     width: 0.65rem;
+    height: auto;
   }
 }
