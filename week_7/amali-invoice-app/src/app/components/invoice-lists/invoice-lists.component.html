@@ -1,0 +1,8 @@
+<ng-container>
+  <app-header></app-header>
+  @for (invoice of invoices(); track $index) {
+  <app-invoice-card [invoice]="invoice"></app-invoice-card>
+  }@empty {
+  <app-empty-invoice></app-empty-invoice>
+  }
+</ng-container>
