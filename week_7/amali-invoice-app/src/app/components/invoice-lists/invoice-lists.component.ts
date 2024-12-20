@@ -3,7 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { InvoiceCardComponent } from '../invoice-card/invoice-card.component';
 import { EmptyInvoiceComponent } from '../empty-invoice/empty-invoice.component';
 import { Store } from '@ngrx/store';
-import { selectInvoices } from '../../states/invoice/invoice.reducers';
+import { selectFilteredInvoices, selectInvoices } from '../../states/invoice/invoice.reducers';
 import { invoiceActions } from '../../states/invoice/invoice.actions';
 
 @Component({
@@ -16,7 +16,7 @@ import { invoiceActions } from '../../states/invoice/invoice.actions';
 export class InvoiceListsComponent implements OnInit {
   private readonly store = inject(Store);
 
-  public readonly invoices = this.store.selectSignal(selectInvoices);
+  public readonly invoices = this.store.selectSignal(selectFilteredInvoices);
 
   ngOnInit(): void {
     this.store.dispatch(invoiceActions.getInvoices());
