@@ -13,14 +13,7 @@
   </div>
   <div class="header-actions">
     <!-- Filter by custom select -->
-    <button class="header-filter">
-      <app-headline
-        label="Filter by status"
-        [level]="4"
-        color="var(--filter-label)"
-      ></app-headline>
-      <img src="/assets/icon-arrow-down.svg" alt="chevron-down" />
-    </button>
+    <app-filter></app-filter>
     <app-button
       variant="primary"
       [icon]="buttonIcon"

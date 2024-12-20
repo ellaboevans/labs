@@ -16,12 +16,5 @@
     gap: 2rem;
     align-items: center;
     justify-content: flex-end;
-
-    .header-filter {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: var(--small-text-2);
-    }
   }
 }

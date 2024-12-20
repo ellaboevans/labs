@@ -6,11 +6,12 @@ import {
   selectError,
   selectInvoiceCount,
 } from '../../states/invoice/invoice.reducers';
+import { FilterComponent } from "../filter/filter.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [HeadlineComponent, ButtonComponent],
+  imports: [HeadlineComponent, ButtonComponent, FilterComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
