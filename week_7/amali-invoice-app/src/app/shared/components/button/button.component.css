@@ -82,3 +82,17 @@ button {
     margin-left: 0.5rem;
   }
 }
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-base);
+
+  .button-label {
+    margin-left: -1rem;
+    font-size: var(--heading-medium);
+  }
+
+  &:hover {
+    color: var(--back-button-hover);
+  }
+}
