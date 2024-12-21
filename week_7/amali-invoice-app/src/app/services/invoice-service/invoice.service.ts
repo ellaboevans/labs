@@ -7,12 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class InvoiceService {
-  private readonly baseUrl = 'http://localhost:3000/invoices';
+  private readonly baseUrl = 'http://localhost:3000';
   private readonly http = inject(HttpClient);
 
   constructor() {}
 
   public getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(this.baseUrl);
+    return this.http.get<Invoice[]>(`${this.baseUrl}/invoices`);
+  }
+
+  public getInvoice(id: string): Observable<Invoice> {
+    return this.http.get<Invoice>(`${this.baseUrl}/invoices/${id}`);
   }
 }
