@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+@font-face {
+  font-family: "League Spartan";
+  src: url("/assets/fonts/LeagueSpartan-VariableFont_wght.ttf");
+}
 
 :root {
   /* Colors */
@@ -91,13 +94,15 @@ html[data-theme="light"] {
   --btn-secondary-text: #7e88c3;
   --text-draft: #373b53;
   --checked-text: #1e2139;
+  --status-label: #858bb2;
+  --back-button-hover: #7e88c3;
 }
 
 html[data-theme="dark"] {
   --bg-primary: #141625;
   --bg-sidebar: #1e2139;
   --bg-invoice-card: #1e2139;
-  --secondary-color: #1e2139;
+  --secondary-color: #252945;
   --secondary-hover: #ffffff;
   --bg-filter-dropdown: #252945;
   --bg-checkbox: #1e2139;
@@ -113,6 +118,8 @@ html[data-theme="dark"] {
   --btn-secondary-text: #7e88c3;
   --text-draft: #dfe3fa;
   --checked-text: #ffffff;
+  --status-label: #dfe3fa;
+  --back-button-hover: #888eb0;
 }
 
 html,
@@ -127,6 +134,7 @@ button {
   background-color: transparent;
   outline: none;
   font-family: var(--spartan-font);
+  user-select: none;
 }
 
 a {
