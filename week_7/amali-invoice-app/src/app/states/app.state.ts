@@ -4,6 +4,7 @@ export interface AppState {
   invoiceCount: number;
   error: string | null;
   loading: boolean;
+  selectedInvoice: Invoice | null;
   invoices: Invoice[];
   filteredInvoices: Invoice[];
   selectedStatuses: string[];
@@ -14,6 +15,7 @@ export const initialState: AppState = {
   error: null,
   loading: false,
   invoices: [],
+  selectedInvoice: null,
   filteredInvoices: [],
   selectedStatuses: [],
 };

@@ -9,7 +9,7 @@
   <article class="invoice-actions-card">
     <div class="status-wrapper">
       <span class="status-label">Status</span>
-      <app-badge [invoiceStatus]="invoice()?.status"></app-badge>
+      <app-badge [invoiceStatus]="invoice()!.status"></app-badge>
     </div>
     <div class="invoice-actions">
       <app-button
