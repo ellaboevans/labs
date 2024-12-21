@@ -1,0 +1,27 @@
+.invoice-actions-card {
+  background-color: var(--bg-invoice-card);
+  box-shadow: var(--invoice-card-shadow);
+  border-radius: var(--invoice-card-radius);
+  padding: 1.3rem 2rem;
+  margin-block: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .status-label {
+      color: var(--status-label);
+      font-size: var(--heading-medium);
+    }
+  }
+
+  .invoice-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}

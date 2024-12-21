@@ -1,1 +1,34 @@
-<p>invoice-details works!</p>
+<ng-container>
+  @if(invoice()){
+  <app-button
+    label="Go Back"
+    [icon]="buttonIcon"
+    variant="ghost"
+    (clicked)="goBack()"
+  ></app-button>
+  <article class="invoice-actions-card">
+    <div class="status-wrapper">
+      <span class="status-label">Status</span>
+      <app-badge [invoiceStatus]="invoice()?.status"></app-badge>
+    </div>
+    <div class="invoice-actions">
+      <app-button
+        label="Edit"
+        variant="secondary"
+        (clicked)="updateInvoice()"
+      ></app-button>
+      <app-button
+        label="Delete"
+        variant="destructive"
+        (clicked)="deleteInvoice()"
+      ></app-button>
+      <app-button
+        label="Mark as Paid"
+        variant="primary"
+        (clicked)="markInvoiceAsPaid()"
+      ></app-button>
+    </div>
+  </article>
+  <section class="invoice-details-container"></section>
+  }
+</ng-container>
