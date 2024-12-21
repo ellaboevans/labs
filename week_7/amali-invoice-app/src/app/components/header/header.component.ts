@@ -29,8 +29,7 @@ export class HeaderComponent {
   public readonly error = this.store.selectSignal(selectError);
 
   public newInvoice() {
-    console.log('New Invoice');
-    console.log(this.error());
+    alert('Slide in new invoice form');
   }
 
   get invoiceLabel(): string {
