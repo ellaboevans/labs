@@ -26,6 +26,7 @@
         label="Mark as Paid"
         variant="primary"
         (clicked)="markInvoiceAsPaid()"
+        [isDisabled]="disableButton"
       ></app-button>
     </div>
   </article>

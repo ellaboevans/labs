@@ -23,6 +23,12 @@ button {
     background-color: var(--primary-hover);
   }
 
+  &:disabled {
+    background-color: var(--primary-color);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
   .button-icon-wrapper {
     display: flex;
     align-items: center;

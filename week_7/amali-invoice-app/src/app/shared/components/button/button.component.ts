@@ -11,7 +11,7 @@ import { ButtonType } from '../../types/button.types';
 })
 export class ButtonComponent {
   @Input({ required: true }) public label: string = '';
-  @Input() public altText: string = '';
+  @Input() public altText: string = 'button-icon';
   @Input() public icon: string = '';
   @Input() public isDisabled: boolean = false;
   @Input() public variant: ButtonType = 'primary';

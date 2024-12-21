@@ -15,7 +15,7 @@ import { BadgeComponent } from '../../shared/components/badge/badge.component';
   styleUrl: './invoice-details.component.css',
 })
 export class InvoiceDetailsComponent implements OnInit {
-  public readonly invoiceId: string = '';
+  public invoiceId: string = '';
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly location = inject(Location);
 
@@ -23,11 +23,8 @@ export class InvoiceDetailsComponent implements OnInit {
   public readonly buttonIcon = '/assets/icon-arrow-left.svg';
   public readonly invoice = this.store.selectSignal(selectSelectedInvoice);
 
-  constructor() {
-    this.invoiceId = this.activatedRoute.snapshot.params['id'];
-  }
-
   ngOnInit(): void {
+    this.invoiceId = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(invoiceActions.getInvoice({ id: this.invoiceId }));
   }
 
@@ -45,5 +42,9 @@ export class InvoiceDetailsComponent implements OnInit {
 
   public markInvoiceAsPaid(): void {
     alert(`Mark Invoice ${this.invoiceId} as Paid`);
+  }
+
+  public get disableButton(): boolean {
+    return this.invoice() ? this.invoice()?.status === 'draft' : false;
   }
 }
