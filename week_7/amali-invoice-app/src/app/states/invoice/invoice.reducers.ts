@@ -20,6 +20,7 @@ const invoiceFeature = createFeature({
       ...state,
       invoices,
       filteredInvoices: invoices,
+      invoiceCount: invoices.length,
       loading: false,
       error: null,
     })),

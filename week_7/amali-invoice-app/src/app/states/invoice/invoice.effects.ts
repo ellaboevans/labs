@@ -37,14 +37,4 @@ export class InvoiceEffects {
       )
     )
   );
-
-  invoicesCount$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(invoiceActions.getInvoicesSuccess),
-      map((action) => action.invoices),
-      map((invoices) =>
-        invoiceActions.setInvoiceCount({ count: invoices.length })
-      )
-    )
-  );
 }
