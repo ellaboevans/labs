@@ -41,8 +41,9 @@
     background-color: var(--bg-checkbox);
     border-radius: var(--checkbox-radius);
     outline: none;
-    border: none;
+    border: 1px solid transparent;
     position: relative;
+    transition: border 0.3s ease-in-out;
 
     &:checked {
       background-color: var(--primary-color);
@@ -63,7 +64,7 @@
     }
 
     &:hover {
-      border: 1px solid var(--primary-color);
+      border-color: var(--primary-color);
     }
   }
 
