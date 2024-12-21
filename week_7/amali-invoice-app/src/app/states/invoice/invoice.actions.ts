@@ -9,6 +9,8 @@ export const invoiceActions = createActionGroup({
     'Get Invoices Success': props<{ invoices: Invoice[] }>(),
     'Get Invoices Failure': props<{ error: string }>(),
     'Get Invoice': props<{ id: string }>(),
+    'Get Invoice Success': props<{ invoice: Invoice }>(),
+    'Get Invoice Failure': props<{ error: string }>(),
     'Update Invoice': props<{ invoice: Invoice }>(),
     'Delete Invoice': props<{ id: string }>(),
     'Create Invoice': props<{ invoice: Invoice }>(),
