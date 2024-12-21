@@ -3,7 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { InvoiceCardComponent } from '../invoice-card/invoice-card.component';
 import { EmptyInvoiceComponent } from '../empty-invoice/empty-invoice.component';
 import { Store } from '@ngrx/store';
-import { selectFilteredInvoices, selectInvoices } from '../../states/invoice/invoice.reducers';
+import { selectFilteredInvoices } from '../../states/invoice/invoice.reducers';
 import { invoiceActions } from '../../states/invoice/invoice.actions';
 
 @Component({
