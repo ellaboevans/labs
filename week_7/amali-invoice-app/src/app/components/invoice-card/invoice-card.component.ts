@@ -2,7 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { BadgeComponent } from '../../shared/components/badge/badge.component';
 import { Invoice } from '../../shared/interface/invoice.interface';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-card',

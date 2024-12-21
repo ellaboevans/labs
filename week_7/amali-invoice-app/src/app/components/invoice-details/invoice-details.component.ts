@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { invoiceActions } from '../../states/invoice/invoice.actions';
@@ -15,7 +15,7 @@ import { BadgeComponent } from '../../shared/components/badge/badge.component';
   styleUrl: './invoice-details.component.css',
 })
 export class InvoiceDetailsComponent implements OnInit {
-  public invoiceId: string = '';
+  public invoiceId = signal<string>('');
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly location = inject(Location);
 
@@ -24,8 +24,8 @@ export class InvoiceDetailsComponent implements OnInit {
   public readonly invoice = this.store.selectSignal(selectSelectedInvoice);
 
   ngOnInit(): void {
-    this.invoiceId = this.activatedRoute.snapshot.params['id'];
-    this.store.dispatch(invoiceActions.getInvoice({ id: this.invoiceId }));
+    this.invoiceId.set(this.activatedRoute.snapshot.params['id']);
+    this.store.dispatch(invoiceActions.getInvoice({ id: this.invoiceId() }));
   }
 
   public goBack(): void {
@@ -33,18 +33,20 @@ export class InvoiceDetailsComponent implements OnInit {
   }
 
   public updateInvoice(): void {
-    alert(`Update Invoice ${this.invoiceId}`);
+    alert(`Update Invoice ${this.invoiceId()}`);
   }
 
   public deleteInvoice(): void {
-    alert(`Delete Invoice ${this.invoiceId}`);
+    alert(`Delete Invoice ${this.invoiceId()}`);
   }
 
   public markInvoiceAsPaid(): void {
-    alert(`Mark Invoice ${this.invoiceId} as Paid`);
+    alert(`Mark Invoice ${this.invoiceId()} ${this.invoice()?.status} as Paid`);
   }
 
-  public get disableButton(): boolean {
-    return this.invoice() ? this.invoice()?.status === 'draft' : false;
+  protected get disableButton(): boolean {
+    return this.invoice()
+      ? this.invoice()?.status === 'draft' || this.invoice()?.status === 'paid'
+      : false;
   }
 }
