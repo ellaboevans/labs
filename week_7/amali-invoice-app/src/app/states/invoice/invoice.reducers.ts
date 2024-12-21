@@ -28,11 +28,21 @@ const invoiceFeature = createFeature({
       loading: false,
       error,
     })),
-    on(invoiceActions.getInvoice, (state, action) => ({
+    on(invoiceActions.getInvoice, (state) => ({
       ...state,
-      invoices: state.invoices.map((invoice) =>
-        invoice.id === action.id ? { ...invoice, id: action.id } : invoice
-      ),
+      loading: true,
+      error: null,
+    })),
+    on(invoiceActions.getInvoiceSuccess, (state, { invoice }) => ({
+      ...state,
+      selectedInvoice: invoice,
+      loading: false,
+      error: null,
+    })),
+    on(invoiceActions.getInvoiceFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
     })),
     on(invoiceActions.updateInvoice, (state, { invoice }) => ({
       ...state,
@@ -89,9 +99,9 @@ export const {
   name: invoiceReducerName,
   reducer: invoiceReducer,
   selectInvoiceCount,
-  selectInvoices,
   selectInvoiceState,
   selectError,
   selectSelectedStatuses,
   selectFilteredInvoices,
+  selectSelectedInvoice,
 } = invoiceFeature;

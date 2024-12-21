@@ -24,6 +24,20 @@ export class InvoiceEffects {
     )
   );
 
+  loadInvoice$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(invoiceActions.getInvoice),
+      switchMap((action) =>
+        this.invoiceService.getInvoice(action.id).pipe(
+          map((invoice) => invoiceActions.getInvoiceSuccess({ invoice })),
+          catchError((error: HttpErrorResponse) =>
+            of(invoiceActions.getInvoiceFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
   invoicesCount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(invoiceActions.getInvoicesSuccess),
